@@ -11,9 +11,16 @@ public class Result {
         this.data = data;
     }
 
+    public static Result success( Object data){
+        return new Result("操作成功！",200,data);
+    }
 
     public static Result success(String msg, Object data){
             return new Result(msg,200,data);
+    }
+
+    public static Result fail(Object data){
+        return new Result("操作失败",500,data);
     }
 
     public static Result fail(String msg, Object data){
