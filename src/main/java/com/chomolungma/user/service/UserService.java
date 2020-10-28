@@ -8,4 +8,6 @@ public interface UserService{
 
     IPage<User> queryUser(Page<User> page, User user);
 
+    void addUser(User user);
+
 }

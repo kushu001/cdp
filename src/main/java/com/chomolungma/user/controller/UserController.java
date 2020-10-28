@@ -5,13 +5,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.user.mapper.UserMapper;
+import com.chomolungma.user.param.UserParam;
 import com.chomolungma.user.param.UserSearchParam;
 import com.chomolungma.user.pojo.User;
 import com.chomolungma.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -35,6 +34,27 @@ public class UserController {
 
         return Result.success(userList);
 
+    }
+
+
+    @PostMapping
+    public Result addUser(@RequestBody UserParam userParam){
+
+        User user = new User();
+
+        user.setName(userParam.getName());
+
+        user.setGender(userParam.getGender());
+
+        user.setTel(userParam.getTel());
+
+        user.setAddr(userParam.getAddr());
+
+        user.setCompany(userParam.getCompany());
+
+        userService.addUser(user);
+
+        return Result.success();
     }
 
 }

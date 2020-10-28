@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectPageVo(page,user);
     }
 
+    @Override
+    public void addUser(User user) {
+        userMapper.insert(user);
+    }
+
 }

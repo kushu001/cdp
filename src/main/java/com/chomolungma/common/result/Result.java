@@ -11,6 +11,9 @@ public class Result {
         this.data = data;
     }
 
+    public static Result success( ){
+        return new Result("操作成功！",200,null);
+    }
     public static Result success( Object data){
         return new Result("操作成功！",200,data);
     }
