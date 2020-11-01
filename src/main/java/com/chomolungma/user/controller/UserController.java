@@ -52,6 +52,8 @@ public class UserController {
 
         user.setCompany(userParam.getCompany());
 
+        user.setStatus(userParam.getStatus());
+
         userService.addUser(user);
 
         return Result.success();

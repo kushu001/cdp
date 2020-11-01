@@ -9,6 +9,5 @@ public class UserParam {
     public String tel;
     public String addr;
     public String company;
-
-
+    public String status;
 }
