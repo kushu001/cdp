@@ -59,4 +59,11 @@ public class UserController {
         return Result.success();
     }
 
+
+    @DeleteMapping("/{id}")
+    public Result deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        return Result.success();
+    }
+
 }
