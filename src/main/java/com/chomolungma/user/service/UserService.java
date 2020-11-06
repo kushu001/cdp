@@ -10,6 +10,8 @@ public interface UserService{
 
     void addUser(User user);
 
-    void deleteUser(Long id);
+    void deleteUser(String ids);
+
+    void updateUser(User user);
 
 }

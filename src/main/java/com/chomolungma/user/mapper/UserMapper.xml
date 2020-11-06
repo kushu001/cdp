@@ -8,6 +8,18 @@
             <if test="user.name != null and user.name !=''">
                 and name like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
             </if>
+            <if test="user.gender != null and user.gender !=''">
+                and gender = #{user.gender,jdbcType=VARCHAR}
+            </if>
+            <if test="user.tel != null and user.tel !=''">
+                and tel like  CONCAT('%',#{user.tel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user.company != null and user.company !=''">
+                and company like  CONCAT('%',#{user.company,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user.status != null and user.status !=''">
+                and status = #{user.status,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 

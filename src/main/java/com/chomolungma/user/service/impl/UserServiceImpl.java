@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
     public IPage<User> queryUser(Page<User> page, User user) {
         return userMapper.selectPageVo(page,user);
@@ -28,8 +29,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
-        userMapper.deleteBatchIds(Collections.singletonList(id));
+    public void deleteUser(String ids) {
+        userMapper.deleteBatchIds(Arrays.asList(ids.split(",")));
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateById(user);
     }
 
 }
