@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.dict.mapper.DictMapper">
+    <!-- 根据用户名密码查询用户 -->
+    <select id="selectPageVo" parameterType="com.chomolungma.dict.pojo.Dict" resultType="com.chomolungma.dict.pojo.Dict">
+        select * from sys_dict
+    </select>
+
+</mapper>
