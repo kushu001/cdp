@@ -13,8 +13,11 @@ import java.util.Arrays;
 @RequestMapping("/api/v1/dict")
 public class DictController{
 
-    @Autowired
     private DictMapper dictMapper;
+
+    public DictController(DictMapper dictMapper){
+        this.dictMapper = dictMapper;
+    }
 
     @PostMapping
     public Result addDict(@RequestBody DictParam dictParam){
@@ -40,8 +43,8 @@ public class DictController{
         return Result.success();
     }
 
-    @DeleteMapping
-    public Result deleteDict(String ids){
+    @DeleteMapping("/{ids}")
+    public Result deleteDict(@PathVariable String ids){
         dictMapper.deleteBatchIds(Arrays.asList(ids.split(",").clone()));
         return Result.success();
     }
