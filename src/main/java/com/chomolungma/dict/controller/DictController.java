@@ -4,6 +4,7 @@ import com.chomolungma.common.result.Result;
 import com.chomolungma.dict.mapper.DictMapper;
 import com.chomolungma.dict.param.DictParam;
 import com.chomolungma.dict.pojo.Dict;
+import com.chomolungma.dict.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,17 @@ public class DictController{
 
     private DictMapper dictMapper;
 
-    public DictController(DictMapper dictMapper){
+    private DictService dictService;
+
+    public DictController(DictMapper dictMapper,DictService dictService){
         this.dictMapper = dictMapper;
+        this.dictService = dictService;
+    }
+
+
+    @GetMapping
+    public Result queryDict(){
+        return Result.success(dictService.queryDictTree());
     }
 
     @PostMapping

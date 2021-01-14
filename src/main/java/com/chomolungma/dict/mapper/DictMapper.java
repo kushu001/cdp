@@ -7,7 +7,9 @@ import com.chomolungma.dict.pojo.Dict;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface DictMapper extends BaseMapper<Dict> {
-    IPage<Dict> selectPageVo(Page<?> page, @Param("dict") Dict dict);
+    List<Dict> selectList(@Param("dict") Dict dict);
 }

@@ -9,5 +9,5 @@ public class DictParam {
     private String code;
     private String desc;
     private Integer sorter;
-    private Boolean status;
+    private Integer status;
 }

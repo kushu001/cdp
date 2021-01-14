@@ -1,5 +1,8 @@
 package com.chomolungma.common.result;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(value= JsonInclude.Include.NON_NULL)
 public class Result {
     private String msg;
     private int code;
