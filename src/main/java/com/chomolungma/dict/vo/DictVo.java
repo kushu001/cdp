@@ -16,7 +16,7 @@ public class DictVo extends BaseVo {
     private String code;
     private String desc;
     private Integer sorter;
-    private Integer status;
+    private Boolean status;
     @JsonProperty("isLeaf")
     private Boolean isLeaf;
     private DictVo parent;

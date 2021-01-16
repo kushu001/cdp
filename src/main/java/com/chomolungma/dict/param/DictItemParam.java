@@ -3,8 +3,9 @@ package com.chomolungma.dict.param;
 import lombok.Data;
 
 @Data
-public class DictParam {
+public class DictItemParam{
     private Long id;
+    private Long dictId;
     private String name;
     private String code;
     private String desc;

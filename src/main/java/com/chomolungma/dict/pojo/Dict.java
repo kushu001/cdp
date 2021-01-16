@@ -16,7 +16,7 @@ public class Dict extends BaseEntity {
     @TableField("`desc`")
     private String desc;
     private Integer sorter;
-    private Integer status;
+    private Boolean status;
 
     private List<DictItem> children;
 }

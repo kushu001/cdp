@@ -2,10 +2,10 @@ package com.chomolungma.dict.controller;
 
 import com.chomolungma.common.result.Result;
 import com.chomolungma.dict.mapper.DictMapper;
+import com.chomolungma.dict.param.DictItemParam;
 import com.chomolungma.dict.param.DictParam;
 import com.chomolungma.dict.pojo.Dict;
 import com.chomolungma.dict.service.DictService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -56,6 +56,27 @@ public class DictController{
     @DeleteMapping("/{ids}")
     public Result deleteDict(@PathVariable String ids){
         dictMapper.deleteBatchIds(Arrays.asList(ids.split(",").clone()));
+        return Result.success();
+    }
+
+
+    @PostMapping("/item")
+    public Result createDictItem(@RequestBody DictItemParam dictItemParam){
+        dictService.createDictItem(dictItemParam);
+        return Result.success();
+    }
+
+
+    @PutMapping("/item")
+    public Result updateDictItem(@RequestBody DictItemParam dictItemParam){
+        dictService.updateDictItem(dictItemParam);
+        return Result.success();
+    }
+
+
+    @DeleteMapping("/item/{ids}")
+    public Result deleteDictItem(@PathVariable String ids){
+        dictService.deleteDictItem(Arrays.asList(ids.split(",").clone()));
         return Result.success();
     }
 }

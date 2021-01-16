@@ -1,12 +1,13 @@
 package com.chomolungma.dict.service.impl;
 
+import com.chomolungma.dict.mapper.DictItemMapper;
 import com.chomolungma.dict.mapper.DictMapper;
+import com.chomolungma.dict.param.DictItemParam;
 import com.chomolungma.dict.pojo.Dict;
 import com.chomolungma.dict.pojo.DictItem;
 import com.chomolungma.dict.service.DictService;
 import com.chomolungma.dict.vo.DictVo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,9 +16,15 @@ import java.util.List;
 @Service
 public class DictServiceImpl implements DictService {
 
-
-    @Autowired
     private DictMapper dictMapper;
+
+    private DictItemMapper dictItemMapper;
+
+
+    public DictServiceImpl(DictMapper dictMapper, DictItemMapper dictItemMapper){
+        this.dictMapper = dictMapper;
+        this.dictItemMapper = dictItemMapper;
+    }
 
     @Override
     public List<DictVo> queryDictTree() {
@@ -59,5 +66,36 @@ public class DictServiceImpl implements DictService {
 
 
         return dictVoList;
+    }
+
+    @Override
+    public void createDictItem(DictItemParam dictItemParam) {
+        DictItem dictItem = new DictItem();
+        dictItem.setDictId(dictItemParam.getDictId());
+        dictItem.setName(dictItemParam.getName());
+        dictItem.setCode(dictItemParam.getCode());
+        dictItem.setDesc(dictItemParam.getDesc());
+        dictItem.setSorter(dictItemParam.getSorter());
+
+        dictItemMapper.insert(dictItem);
+    }
+
+    @Override
+    public void updateDictItem(DictItemParam dictItemParam) {
+        DictItem dictItem = new DictItem();
+        dictItem.setId(dictItemParam.getId());
+        dictItem.setDictId(dictItemParam.getDictId());
+        dictItem.setName(dictItemParam.getName());
+        dictItem.setCode(dictItemParam.getCode());
+        dictItem.setDesc(dictItemParam.getDesc());
+        dictItem.setSorter(dictItemParam.getSorter());
+        dictItem.setStatus(dictItemParam.getStatus());
+
+        dictItemMapper.updateById(dictItem);
+    }
+
+    @Override
+    public void deleteDictItem(List<String> ids) {
+        dictItemMapper.deleteBatchIds(ids);
     }
 }
