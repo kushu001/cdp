@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Data
 public class BaseEntity {
-
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Instant createTime;

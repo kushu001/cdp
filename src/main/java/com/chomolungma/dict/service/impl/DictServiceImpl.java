@@ -76,6 +76,7 @@ public class DictServiceImpl implements DictService {
         dictItem.setCode(dictItemParam.getCode());
         dictItem.setDesc(dictItemParam.getDesc());
         dictItem.setSorter(dictItemParam.getSorter());
+        dictItem.setStatus(dictItemParam.getStatus());
 
         dictItemMapper.insert(dictItem);
     }
