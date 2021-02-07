@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.org.mapper.OrgMapper">
+    <!-- 查询部门 -->
+    <select id="selectPageVo" parameterType="com.chomolungma.org.pojo.Org" resultType="com.chomolungma.org.pojo.Org">
+        select * from sys_org
+        <where>
+            <if test="org.name != null and org.name !=''">
+                and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.manager != null and org.manager !=''">
+                and manager like  CONCAT('%', #{org.manager,jdbcType=VARCHAR}
+            </if>
+            <if test="org.managerId != null and org.managerId !=''">
+                and manager_id =  #{org.managerId,jdbcType=BIGINT}
+            </if>
+            <if test="org.tel != null and org.tel !=''">
+                and tel like  CONCAT('%',#{org.tel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.status != null and org.status !=''">
+                and status = #{org.status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectVo" parameterType="com.chomolungma.org.pojo.Org" resultType="com.chomolungma.org.pojo.Org">
+        select * from sys_org
+        <where>
+            <if test="name != null and name !=''">
+                and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="manager != null and manager !=''">
+                and manager like  CONCAT('%', #{manager,jdbcType=VARCHAR}
+            </if>
+            <if test="managerId != null and managerId !=''">
+                and manager_id =  #{managerId,jdbcType=BIGINT}
+            </if>
+            <if test="tel != null and tel !=''">
+                and tel like  CONCAT('%',#{tel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
