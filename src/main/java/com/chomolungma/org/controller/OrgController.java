@@ -67,6 +67,7 @@ public class OrgController {
 
     @DeleteMapping("/{ids}")
     public Result deleteOrg(@PathVariable("ids") String ids){
+        orgService.deleteOrg(ids);
         return Result.success();
     }
 }
