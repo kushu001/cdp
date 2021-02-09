@@ -1,6 +1,6 @@
 package com.chomolungma.org.assembler;
 
-import com.chomolungma.common.tree.Utils.TreeEntity;
+import com.chomolungma.common.tree.utils.TreeEntity;
 import com.chomolungma.org.dto.OrgTreeDto;
 import com.chomolungma.org.mapstruct.OrgEntityMapStruct;
 import com.chomolungma.org.param.OrgParam;

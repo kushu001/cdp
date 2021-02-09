@@ -1,4 +1,4 @@
-package com.chomolungma.common.tree.Utils;
+package com.chomolungma.common.tree.utils;
 
 import com.chomolungma.common.tree.annotation.Children;
 import com.chomolungma.common.tree.annotation.Id;
@@ -85,7 +85,7 @@ public final class TreeEntity {
                                 }
 
                             }
-                        }else{
+                        }else if(pid == null || pid <=0){
                             treeList.add(t);
                         }
                         break;
