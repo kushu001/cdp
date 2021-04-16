@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,8 +18,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public IPage<User> queryUser(Page<User> page, User user) {
-        return userMapper.selectPageVo(page,user);
+    public IPage<User> queryUser(Page<User> page, User user,Long orgId) {
+        return userMapper.selectPageVo(page,user,orgId);
     }
 
     @Override

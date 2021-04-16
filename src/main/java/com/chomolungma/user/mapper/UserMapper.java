@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    IPage<User> selectPageVo(Page<?> page,@Param("user") User user);
+    IPage<User> selectPageVo(Page<?> page,@Param("user") User user,@Param("orgId") Long orgId);
 }

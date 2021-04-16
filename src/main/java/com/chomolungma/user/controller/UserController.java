@@ -4,7 +4,6 @@ package com.chomolungma.user.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
-import com.chomolungma.user.mapper.UserMapper;
 import com.chomolungma.user.param.UserParam;
 import com.chomolungma.user.param.UserSearchParam;
 import com.chomolungma.user.pojo.User;
@@ -19,8 +18,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public Result queryUser(UserSearchParam userSearchParam){
+    @GetMapping("/{orgId}")
+    public Result queryUser(UserSearchParam userSearchParam,@PathVariable("orgId") Long orgId){
 
         Page<User> page = new Page<>(userSearchParam.getCurrent(), userSearchParam.getPageSize());
 
@@ -38,7 +37,7 @@ public class UserController {
 
         user.setStatus(userSearchParam.getStatus());
 
-        IPage<User> userList = userService.queryUser(page,user);
+        IPage<User> userList = userService.queryUser(page,user,orgId);
 
         return Result.success(userList);
 

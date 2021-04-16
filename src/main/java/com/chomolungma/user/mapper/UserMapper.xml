@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.chomolungma.user.mapper.UserMapper">
-    <!-- 根据用户名密码查询用户 -->
+    <!-- 根据条件查询用户 -->
     <select id="selectPageVo" resultType="com.chomolungma.user.pojo.User">
-        select * from sys_user
+        select * from sys_user user right join sys_org_user_rel rel on user.id = rel.user_id
         <where>
             <if test="user.name != null and user.name !=''">
-                and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+                and user.`name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
             </if>
             <if test="user.gender != null and user.gender !=''">
-                and gender = #{user.gender,jdbcType=VARCHAR}
+                and user.gender = #{user.gender,jdbcType=VARCHAR}
             </if>
             <if test="user.tel != null and user.tel !=''">
-                and tel like  CONCAT('%',#{user.tel,jdbcType=VARCHAR},'%')
+                and user.tel like  CONCAT('%',#{user.tel,jdbcType=VARCHAR},'%')
             </if>
             <if test="user.company != null and user.company !=''">
-                and company like  CONCAT('%',#{user.company,jdbcType=VARCHAR},'%')
+                and user.company like  CONCAT('%',#{user.company,jdbcType=VARCHAR},'%')
             </if>
             <if test="user.status != null and user.status !=''">
-                and status = #{user.status,jdbcType=VARCHAR}
+                and user.status = #{user.status,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId != null and orgId !=''">
+                and rel.org_id = #{orgId,jdbcType=BIGINT}
             </if>
         </where>
     </select>
