@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.dict.mapper.DictMapper">
+    <resultMap id="dictResultMap" type="com.chomolungma.system.dict.pojo.Dict">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="desc" property="desc" jdbcType="VARCHAR" />
+        <result column="sorter" property="sorter" jdbcType="CHAR" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <collection property="children" column="id" javaType="java.util.ArrayList" ofType="com.chomolungma.system.dict.mapper.DictItemMapper.dictItemResultMap"
+            select="com.chomolungma.system.dict.mapper.DictItemMapper.selectList"
+        />
+
+    </resultMap>
+
+    <!-- 根据条件查询字典 -->
+    <select id="selectList" parameterType="com.chomolungma.system.dict.pojo.Dict" resultMap="dictResultMap">
+        select * from sys_dict
+    </select>
+
+</mapper>

@@ -1,0 +1,24 @@
+package com.chomolungma.system.dict.vo;
+
+import com.chomolungma.system.common.vo.BaseVo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
+
+@Data
+@ToString(callSuper = true)
+public class DictVo extends BaseVo {
+    private String title;
+    private Long key;
+    private String name;
+    private String code;
+    private String desc;
+    private Integer sorter;
+    private Boolean status;
+    @JsonProperty("isLeaf")
+    private Boolean isLeaf;
+    private DictVo parent;
+    private List<DictVo> children;
+}

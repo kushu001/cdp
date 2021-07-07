@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.user.mapper.UserMapper">
+    <!-- 根据条件查询用户 -->
+    <select id="selectPageVo" resultType="com.chomolungma.system.user.pojo.User">
+        select * from sys_user user right join sys_org_user_rel rel on user.id = rel.user_id
+        <where>
+            <if test="user.name != null and user.name !=''">
+                and user.`name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user.gender != null and user.gender !=''">
+                and user.gender = #{user.gender,jdbcType=VARCHAR}
+            </if>
+            <if test="user.tel != null and user.tel !=''">
+                and user.tel like  CONCAT('%',#{user.tel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user.company != null and user.company !=''">
+                and user.company like  CONCAT('%',#{user.company,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user.status != null and user.status !=''">
+                and user.status = #{user.status,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId != null and orgId !=''">
+                and rel.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="code != null and code !=''">
+                and rel.code like CONCAT(#{code,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
