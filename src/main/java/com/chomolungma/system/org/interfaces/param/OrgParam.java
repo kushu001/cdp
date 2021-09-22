@@ -1,4 +1,4 @@
-package com.chomolungma.system.org.param;
+package com.chomolungma.system.org.interfaces.param;
 
 import lombok.Data;
 

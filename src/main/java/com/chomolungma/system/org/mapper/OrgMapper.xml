@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.orgEntity//DTD Mapper 3.0//EN" "http://mybatis.orgEntity/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.chomolungma.system.org.mapper.OrgMapper">
     <!-- 查询部门 -->
-    <select id="selectPageVo" parameterType="com.chomolungma.system.org.pojo.Org" resultType="com.chomolungma.system.org.pojo.Org">
+    <select id="selectPageVo" parameterType="com.chomolungma.system.org.domain.entity.OrgEntity" resultType="com.chomolungma.system.org.domain.entity.OrgEntity">
         select * from sys_org
         <where>
-            <if test="org.name != null and org.name !=''">
+            <if test="orgEntity.name != null and orgEntity.name !=''">
                 and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
             </if>
-            <if test="org.manager != null and org.manager !=''">
-                and manager like  CONCAT('%', #{org.manager,jdbcType=VARCHAR},'%')
+            <if test="orgEntity.manager != null and orgEntity.manager !=''">
+                and manager like  CONCAT('%', #{orgEntity.manager,jdbcType=VARCHAR},'%')
             </if>
-            <if test="org.managerId != null and org.managerId !=''">
-                and manager_id =  #{org.managerId,jdbcType=BIGINT}
+            <if test="orgEntity.managerId != null and orgEntity.managerId !=''">
+                and manager_id =  #{orgEntity.managerId,jdbcType=BIGINT}
             </if>
-            <if test="org.tel != null and org.tel !=''">
-                and tel like  CONCAT('%',#{org.tel,jdbcType=VARCHAR},'%')
+            <if test="orgEntity.tel != null and orgEntity.tel !=''">
+                and tel like  CONCAT('%',#{orgEntity.tel,jdbcType=VARCHAR},'%')
             </if>
-            <if test="org.status != null and org.status !=''">
-                and status = #{org.status,jdbcType=VARCHAR}
+            <if test="orgEntity.status != null and orgEntity.status !=''">
+                and status = #{orgEntity.status,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 
 
-    <select id="selectVo" parameterType="com.chomolungma.system.org.pojo.Org" resultType="com.chomolungma.system.org.pojo.Org">
+    <select id="selectVo" parameterType="com.chomolungma.system.org.domain.entity.OrgEntity" resultType="com.chomolungma.system.org.domain.entity.OrgEntity">
         select * from sys_org
         <where>
             <if test="name != null and name !=''">

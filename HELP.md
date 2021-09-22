@@ -3,10 +3,10 @@
 ### Reference Documentation
 For further reference, please consider the following sections:
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
+* [Official Apache Maven documentation](https://maven.apache.orgEntity/guides/index.html)
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.1.17.RELEASE/maven-plugin/)
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.3.4.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-* [MyBatis Framework](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
+* [MyBatis Framework](https://mybatis.orgEntity/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
 
 ### Guides
 The following guides illustrate how to use some features concretely:

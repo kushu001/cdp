@@ -1,4 +1,4 @@
-package com.chomolungma.system.org.dto;
+package com.chomolungma.system.org.interfaces.dto;
 
 import com.chomolungma.system.common.tree.annotation.Children;
 import com.chomolungma.system.common.tree.annotation.Id;

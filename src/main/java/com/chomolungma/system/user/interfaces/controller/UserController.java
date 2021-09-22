@@ -1,4 +1,4 @@
-package com.chomolungma.system.user.controller;
+package com.chomolungma.system.user.interfaces.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;

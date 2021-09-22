@@ -1,4 +1,4 @@
-package com.chomolungma.system.org.pojo;
+package com.chomolungma.system.org.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @TableName("sys_org")
-public class Org extends BaseBean {
+public class OrgEntity extends BaseBean {
 
     private Long pid;
     private String name;

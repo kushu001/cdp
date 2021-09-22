@@ -32,10 +32,10 @@ public class CdpApplicationTests {
 	@Test
 	public void testTree() throws JsonProcessingException {
 		List<Org> orgList = new ArrayList<>();
-		Org org = new Org();
-		org.setId(1L);
-		org.setPid(null);
-		org.setName("珠峰科技");
+		Org orgEntity = new Org();
+		orgEntity.setId(1L);
+		orgEntity.setPid(null);
+		orgEntity.setName("珠峰科技");
 		Org org2 = new Org();
 		org2.setId(2L);
 		org2.setPid(1L);
@@ -57,7 +57,7 @@ public class CdpApplicationTests {
 
 
 		orgList.add(org2);
-		orgList.add(org);
+		orgList.add(orgEntity);
 		orgList.add(org4);
 		orgList.add(org3);
 		orgList.add(org5);
@@ -72,23 +72,23 @@ public class CdpApplicationTests {
 	}
 
 	public List<Org> buildTree(List<Org> oldList){
-		Map<Long,Org> listMap = oldList.stream().collect(Collectors.toMap(Org::getId,org->org));
+		Map<Long,Org> listMap = oldList.stream().collect(Collectors.toMap(Org::getId,orgEntity->orgEntity));
 
 		List<Org> result = new ArrayList<>();
 
-		for (Org org: oldList) {
-			Org parent = listMap.get(org.getPid());
+		for (Org orgEntity: oldList) {
+			Org parent = listMap.get(orgEntity.getPid());
 			if (parent != null){
 				List<Org> ch;
 				if (parent.getChildren()==null){
 					ch = new ArrayList<>();
 				}else{
-					ch = org.getChildren();
+					ch = orgEntity.getChildren();
 				}
-				ch.add(org);
+				ch.add(orgEntity);
 				parent.setChildren(ch);
 			}else{
-				result.add(org);
+				result.add(orgEntity);
 			}
 		}
 
