@@ -1,10 +1,10 @@
 package com.chomolungma.user.param;
 
-import com.chomolungma.common.param.PageParam;
+import com.chomolungma.common.param.PageBO;
 import lombok.Data;
 
 @Data
-public class UserSearchParam extends PageParam {
+public class UserSearchBO extends PageBO {
 
     private String name;
     private String gender;

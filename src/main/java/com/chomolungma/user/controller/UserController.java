@@ -4,9 +4,8 @@ package com.chomolungma.user.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
-import com.chomolungma.user.mapper.UserMapper;
 import com.chomolungma.user.param.UserParam;
-import com.chomolungma.user.param.UserSearchParam;
+import com.chomolungma.user.param.UserSearchBO;
 import com.chomolungma.user.pojo.User;
 import com.chomolungma.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public Result queryUser(UserSearchParam userSearchParam){
+    public Result queryUser(UserSearchBO userSearchParam){
 
-        Page<User> page = new Page<>(userSearchParam.getCurrent(), userSearchParam.getPageSize());
+        Page<User> page = new Page<>(userSearchParam.getPage(), userSearchParam.getLimit());
 
         User user = new User();
 
