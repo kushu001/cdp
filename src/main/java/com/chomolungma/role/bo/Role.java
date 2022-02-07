@@ -9,7 +9,8 @@ import java.util.Date;
 public class Role {
     private String id;
     private String name;
-    private String status;
+    private String code;
+    private Integer status;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 }

@@ -6,6 +6,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class OutRoleBO extends PageBO {
+public class OutRoleSearchBO extends PageBO {
     private List<Role> records;
 }

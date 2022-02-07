@@ -6,9 +6,10 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class InRoleBO extends PageBO {
+public class InRoleSearchBO extends PageBO {
     public String name;
     public String code;
+    public Integer status;
     public Date startTime;
     public Date endTime;
 
