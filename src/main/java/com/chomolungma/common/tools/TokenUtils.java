@@ -4,10 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.chomolungma.account.entity.AccountEntity;
 import com.chomolungma.common.exception.BusinessRuntimeException;
+import com.chomolungma.system.account.entity.AccountEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +26,7 @@ public class TokenUtils {
                     .withHeader(header)
                     .withClaim("userid", accountEntity.getId())
                     .withClaim("username", accountEntity.getUsername())
+                    .withClaim("roleIds", accountEntity.getRoleIds())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             exception.printStackTrace();
@@ -43,8 +43,9 @@ public class TokenUtils {
             jwt = verifier.verify(token);
             accountEntity.setId(jwt.getClaim("userid").asLong());
             accountEntity.setUsername(jwt.getClaim("username").asString());
+            accountEntity.setRoleIds(jwt.getClaim("roleIds").asList(Long.class));
         }catch (Exception e){
-            throw new RuntimeException("凭证已过期，请重新登录");
+            throw new BusinessRuntimeException("凭证已过期，请重新登录");
         }
         return accountEntity;
     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.menu//DTD Mapper 3.0//EN" "http://mybatis.menu/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.menu.mapper.MenuMapper">
+    <!-- 查询部门 -->
+    <select id="selectPageVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
+        select * from sys_menu
+        <where>
+            <if test="menu.name != null and menu.name !=''">
+                and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="menu.icon != null and menu.icon !=''">
+                and icon =  #{menu.icon,jdbcType=VARCHAR}
+            </if>
+            <if test="menu.status != null and menu.status !=''">
+                and status = #{menu.status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
+        select * from sys_menu
+        <where>
+            <if test="name != null and name !=''">
+                and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="icon != null and icon !=''">
+                and icon =  #{icon,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <delete id="deleteMenus" parameterType="java.lang.Long">
+        delete from sys_menu where id in (
+            select id from (
+                select t1.id,
+                       if(find_in_set(pid, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild
+                from ( select id,pid from sys_menu t  order by pid, id ) t1,
+                (select @pids := #{id,jdbcType=BIGINT} ) t2
+            ) t3 where ischild != 0 or id = #{id,jdbcType=BIGINT}
+        )
+    </delete>
+
+    <delete id="deleteRoleMenuRelByMenuId" parameterType="java.lang.Long">
+        delete from sys_role_menu where menu_id = #{menuId, jdbcType=BIGINT}
+    </delete>
+</mapper>

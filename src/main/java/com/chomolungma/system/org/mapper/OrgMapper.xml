@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.org.mapper.OrgMapper">
+    <!-- 查询部门 -->
+    <select id="selectPageVo" parameterType="com.chomolungma.system.org.pojo.Org" resultType="com.chomolungma.system.org.pojo.Org">
+        select * from sys_org
+        <where>
+            <if test="org.name != null and org.name !=''">
+                and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.code != null and org.code !=''">
+                and `code` like  CONCAT('%',#{user.code,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.manager != null and org.manager !=''">
+                and manager like  CONCAT('%', #{org.manager,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.managerId != null and org.managerId !=''">
+                and manager_id =  #{org.managerId,jdbcType=BIGINT}
+            </if>
+            <if test="org.tel != null and org.tel !=''">
+                and tel like  CONCAT('%',#{org.tel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="org.status != null and org.status !=''">
+                and status = #{org.status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectVo" parameterType="com.chomolungma.system.org.domain.entity.OrgEntity" resultType="com.chomolungma.system.org.domain.entity.OrgEntity">
+        select 	so.id, so.create_time, so.pid, so.name, so.code, so.manager_id, so.status, su.name as manager  from sys_org so left join sys_user su  on so.manager_id = su.id
+        <where>
+            <if test="name != null and name !=''">
+                and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="manager != null and manager !=''">
+                and su.name like  CONCAT('%', #{manager,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
