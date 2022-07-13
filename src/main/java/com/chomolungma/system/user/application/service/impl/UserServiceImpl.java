@@ -1,11 +1,13 @@
 package com.chomolungma.system.user.application.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.role.domain.service.GetMenuDomainService;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.UserEntity;
+import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
 import com.chomolungma.system.user.domain.service.*;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
@@ -19,8 +21,10 @@ import java.util.List;
 public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private GetMenuDomainService getMenuDomainService;
+    @Autowired
+    private UserMapper userMapper;
     @Override
-    public PageUserDTO getUsers(String code, Page<UserEntity> page, UserEntity userEntity) {
+    public PageUserDTO getUsersByOrg(String code, Page<UserEntity> page, UserEntity userEntity) {
         Page<UserEntity> pageUsers  = execute(new PageUsersDomainService(code, page, userEntity));
         return UserAssembler.toPageUserDTO(pageUsers);
     }
@@ -49,5 +53,10 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public List<MenuDTO> getMenus(List<Long> roleIds) {
         return getMenuDomainService.getMenusByRoleIds(roleIds);
+    }
+
+    @Override
+    public PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity) {
+        return UserAssembler.toPageUserDTO(userMapper.selectPage(page, new QueryWrapper<UserEntity>().like(userEntity.getName() !=null,"name",userEntity.getName())));
     }
 }

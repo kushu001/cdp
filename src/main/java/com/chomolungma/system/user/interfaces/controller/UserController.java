@@ -1,7 +1,6 @@
 package com.chomolungma.system.user.interfaces.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.core.CurrentProfileHolder;
@@ -26,16 +25,22 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+//    @GetMapping
+//    public Result list(){
+//        List<UserEntity> users = userMapper.selectList(new QueryWrapper<>());
+//        return Result.success(users);
+//    }
+
     @GetMapping
-    public Result list(){
-        List<UserEntity> users = userMapper.selectList(new QueryWrapper<>());
-        return Result.success(users);
+    public Result pageList(UserSearchDTO userSearchDTO){
+        Page<UserEntity> page = new Page<>(userSearchDTO.getPage(), userSearchDTO.getLimit());
+        return Result.success(userService.getUsers(page, UserAssembler.toUserEntity(userSearchDTO)));
     }
 
     @GetMapping("/org/{code}")
     public Result pageList(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
         Page<UserEntity> page = new Page<>(userSearchDTO.getPage(), userSearchDTO.getLimit());
-        return Result.success(userService.getUsers(code, page, UserAssembler.toUserEntity(userSearchDTO)));
+        return Result.success(userService.getUsersByOrg(code, page, UserAssembler.toUserEntity(userSearchDTO)));
     }
 
     @GetMapping("/{id}")

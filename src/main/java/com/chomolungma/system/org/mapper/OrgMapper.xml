@@ -31,7 +31,7 @@
         select 	so.id, so.create_time, so.pid, so.name, so.code, so.manager_id, so.status, su.name as manager  from sys_org so left join sys_user su  on so.manager_id = su.id
         <where>
             <if test="name != null and name !=''">
-                and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+                and so.name like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
             </if>
             <if test="manager != null and manager !=''">
                 and su.name like  CONCAT('%', #{manager,jdbcType=VARCHAR},'%')

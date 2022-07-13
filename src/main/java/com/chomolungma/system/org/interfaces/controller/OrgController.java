@@ -75,7 +75,7 @@ public class OrgController {
     @GetMapping("/{code}/user")
     public Result getUsersByOrgId(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
         Page<UserEntity> page = new Page<>(userSearchDTO.getPage(), userSearchDTO.getLimit());
-        return Result.success(userService.getUsers(code, page, UserAssembler.toUserEntity(userSearchDTO)));
+        return Result.success(userService.getUsersByOrg(code, page, UserAssembler.toUserEntity(userSearchDTO)));
     }
 
     @DeleteMapping("/{code}/user/{ids}")

@@ -9,7 +9,7 @@ import com.chomolungma.system.user.interfaces.dto.UserDTO;
 import java.util.List;
 
 public interface UserService {
-    PageUserDTO getUsers(String code, Page<UserEntity> page, UserEntity userEntity);
+    PageUserDTO getUsersByOrg(String code, Page<UserEntity> page, UserEntity userEntity);
 
     UserDTO getUser(Long id);
 
@@ -20,4 +20,6 @@ public interface UserService {
     void deleteUsers(String code, List<String> ids);
 
     List<MenuDTO> getMenus(List<Long> roleIds);
+
+    PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity);
 }
