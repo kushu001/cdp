@@ -30,7 +30,6 @@
     <select id="selectMenusByRoleId" resultType="com.chomolungma.system.role.interfaces.dto.RoleMenuDTO">
         select menu_id, is_half_key from sys_role_menu
         <where>
-            is_half_key = 0 and
             role_id = #{roleId, jdbcType=BIGINT}
         </where>
     </select>
