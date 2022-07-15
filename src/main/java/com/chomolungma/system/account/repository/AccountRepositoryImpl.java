@@ -81,4 +81,10 @@ public class AccountRepositoryImpl implements IAccountRepository{
         return accountEntity;
     }
 
+    @Override
+    public AccountEntity queryAccount(String username) {
+        AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
+        return AccountConverter.INSTANCE.toEntity(accountDO);
+    }
+
 }

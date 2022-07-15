@@ -2,6 +2,7 @@ package com.chomolungma.system.account.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.system.account.assembler.AccountAssembler;
 import com.chomolungma.system.account.dto.Account;
 import com.chomolungma.system.account.dto.AccountPageDTO;
@@ -50,6 +51,10 @@ public class AccountServiceImpl implements AccountService{
     @Override
     @Transactional
     public Void createAccount(AccountEntity account) {
+        AccountEntity accountEntity = iAccountRepository.queryAccount(account.getUsername());
+        if (accountEntity != null){
+            throw new BusinessRuntimeException("账号名称已存在，请重新尝试！");
+        }
         iAccountRepository.save(account);
         iAccountRoleRepository.remove(account.getId());
         for (Long roleId: account.getRoleIds()) {
