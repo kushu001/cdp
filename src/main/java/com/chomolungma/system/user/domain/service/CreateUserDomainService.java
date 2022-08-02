@@ -1,5 +1,7 @@
 package com.chomolungma.system.user.domain.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.core.domain.service.DomainService;
 import com.chomolungma.system.user.domain.entity.OrgUserEntity;
 import com.chomolungma.system.user.domain.entity.UserEntity;
@@ -24,5 +26,14 @@ public class CreateUserDomainService implements DomainService<Void> {
         orgUserEntity.setUserId(userEntity.getId());
         context.getBean(OrgUserMapper.class).insert(orgUserEntity);
         return null;
+    }
+
+    @Override
+    public boolean check(ApplicationContext context) {
+        UserEntity user = context.getBean(UserMapper.class).selectOne(new QueryWrapper<UserEntity>().eq("id_number", userEntity.getIdNumber()));
+        if (user != null) {
+            throw new BusinessRuntimeException("用户身份证号已存在，请查证后再建！");
+        }
+        return true;
     }
 }

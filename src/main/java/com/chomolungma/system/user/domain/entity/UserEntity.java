@@ -9,6 +9,7 @@ import lombok.Data;
 public class UserEntity extends BaseEntity {
     private String name;
     private Integer gender;
+    private String idNumber;
     private String tel;
     private String phone;
     private String address;

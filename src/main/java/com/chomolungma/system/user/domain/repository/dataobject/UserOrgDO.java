@@ -1,13 +1,12 @@
-package com.chomolungma.system.user.interfaces.dto;
+package com.chomolungma.system.user.domain.repository.dataobject;
 
-import com.chomolungma.core.interfaces.dto.BaseDTO;
+import com.chomolungma.core.dataobject.BaseDO;
 import lombok.Data;
 
 @Data
-public class User extends BaseDTO {
+public class UserOrgDO extends BaseDO {
     private String name;
-    private Integer gender;
-    private String idNumber;
+    private String gender;
     private String tel;
     private String phone;
     private String address;

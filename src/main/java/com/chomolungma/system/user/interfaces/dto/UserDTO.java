@@ -7,6 +7,7 @@ import lombok.Data;
 public class UserDTO extends BaseDTO {
     private String name;
     private Integer gender;
+    private String idNumber;
     private String tel;
     private String address;
     private String company;

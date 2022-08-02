@@ -7,6 +7,7 @@ import lombok.Data;
 public class UserSearchDTO extends PageDTO {
     private String name;
     private Integer gender;
+    private String idNumber;
     private String tel;
     private String address;
     private String company;

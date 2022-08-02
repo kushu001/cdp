@@ -4,9 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
+import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.mapper.OrgMapper;
 import com.chomolungma.system.role.domain.service.GetMenuDomainService;
 import com.chomolungma.system.user.application.service.UserService;
+import com.chomolungma.system.user.domain.entity.OrgUserEntity;
 import com.chomolungma.system.user.domain.entity.UserEntity;
+import com.chomolungma.system.user.domain.repository.IUserRepository;
+import com.chomolungma.system.user.domain.repository.mapper.OrgUserMapper;
 import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
 import com.chomolungma.system.user.domain.service.*;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
@@ -16,17 +21,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private GetMenuDomainService getMenuDomainService;
+
+    @Autowired
+    private IUserRepository iUserRepository;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private OrgMapper orgMapper;
+
+    @Autowired
+    private OrgUserMapper orgUserMapper;
     @Override
     public PageUserDTO getUsersByOrg(String code, Page<UserEntity> page, UserEntity userEntity) {
-        Page<UserEntity> pageUsers  = execute(new PageUsersDomainService(code, page, userEntity));
-        return UserAssembler.toPageUserDTO(pageUsers);
+        List<OrgEntity> orgEntities = orgMapper.selectList(new QueryWrapper<OrgEntity>().likeRight("code", code));
+        List<OrgUserEntity> orgUserEntities = orgUserMapper.selectList(new QueryWrapper<OrgUserEntity>().in("org_id", orgEntities.stream().map(OrgEntity::getId).collect(Collectors.toList())));
+        List<Long> userIds = orgUserEntities.stream().map(OrgUserEntity::getUserId).collect(Collectors.toList());
+        return iUserRepository.getUserByIds(userIds, (int)page.getCurrent(), (int)page.getSize());
+        //return execute(new PageUsersDomainService(code, page, userEntity));
     }
 
     @Override

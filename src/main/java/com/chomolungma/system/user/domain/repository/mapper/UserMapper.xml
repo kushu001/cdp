@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.user.domain.repository.mapper.UserMapper">
+<!--  分页查询部门人员  -->
+    <select id="pageUsersByIds" parameterType="java.util.List" resultType="com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO">
+        select
+            su.*,
+            so.id as dept_id,
+            so.name as dept_name
+        from
+            sys_user su
+        left join sys_org_user sou on su.id = sou.user_id
+        left join sys_org so on sou.org_id = so.id
+        where su.id in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
