@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class UserOrgDO extends BaseDO {
     private String name;
+    private String idNumber;
     private String gender;
     private String tel;
     private String phone;
