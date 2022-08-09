@@ -30,7 +30,7 @@ public class MenuController {
 
     @GetMapping
     public Result queryMenu(){
-        List<MenuEntity> menuList = menuMapper.selectList(new QueryWrapper<>());
+        List<MenuEntity> menuList = menuMapper.selectList(new QueryWrapper<MenuEntity>().orderByAsc("sort"));
         return Result.success(MenuAssembler.convertToDto(menuList));
 
     }

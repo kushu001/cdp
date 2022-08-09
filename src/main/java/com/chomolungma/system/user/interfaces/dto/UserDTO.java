@@ -9,6 +9,7 @@ public class UserDTO extends BaseDTO {
     private Integer gender;
     private String idNumber;
     private String tel;
+    private String phone;
     private String address;
     private String company;
 }
