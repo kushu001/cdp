@@ -1,6 +1,7 @@
 package com.chomolungma.system.login.controller;
 
 import com.chomolungma.common.result.Result;
+import com.chomolungma.system.log.application.service.LoginLogService;
 import com.chomolungma.system.login.param.LoginForm;
 import com.chomolungma.system.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,14 @@ public class LoginController {
     @Autowired
     private HttpServletResponse response;
 
+    @Autowired
+    private LoginLogService loginLogService;
+
     @PostMapping("/login")
     public Result login(@RequestBody LoginForm loginForm){
         String token = loginService.login(loginForm.getUsername(),loginForm.getPassword());
         response.addHeader("Authorization","Bearer " + token);
+        loginLogService.generateLoginLog(loginForm.getUsername());
         return Result.success();
     }
 }

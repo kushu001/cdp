@@ -21,6 +21,7 @@ public class UserRepositoryImpl implements IUserRepository{
         PageHelper.startPage(current, size);
         List<UserOrgDO> userOrgDOS = userIds.size()==0? new ArrayList<>() : userMapper.pageUsersByIds(userIds);
         PageInfo<UserOrgDO> pageInfo = new PageInfo<>(userOrgDOS);
+        PageHelper.clearPage();
         return UserAssembler.toPageUserDTO(pageInfo);
     }
 }

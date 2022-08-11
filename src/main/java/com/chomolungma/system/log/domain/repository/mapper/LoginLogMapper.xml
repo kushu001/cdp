@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.log.domain.repository.mapper.LoginLogMapper">
+<!--  分页查询登录日志  -->
+    <select id="selectList" resultType="com.chomolungma.system.log.domain.repository.dataobject.LoginLogDO">
+        select * from sys_login_log sll
+        <where>
+            <if test="user != null and user !=''">
+                sll.user like  CONCAT('%',#{user,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="user != null and user !=''">
+                sll.client like  CONCAT('%',#{client,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+
+<!--  新增登录日志  -->
+    <insert id="insert" parameterType="com.chomolungma.system.log.domain.repository.dataobject.LoginLogDO">
+        insert into sys_login_log (ip, user, address, client, status) values (
+            #{ip, jdbcType=VARCHAR},
+            #{user, jdbcType=VARCHAR},
+            #{address, jdbcType=VARCHAR},
+            #{client, jdbcType=VARCHAR},
+            '1'
+        )
+    </insert>
+</mapper>
