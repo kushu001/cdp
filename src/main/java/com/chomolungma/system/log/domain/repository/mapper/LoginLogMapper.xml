@@ -12,15 +12,17 @@
                 sll.client like  CONCAT('%',#{client,jdbcType=VARCHAR},'%')
             </if>
         </where>
+        order by create_time desc
     </select>
 
 <!--  新增登录日志  -->
     <insert id="insert" parameterType="com.chomolungma.system.log.domain.repository.dataobject.LoginLogDO">
-        insert into sys_login_log (ip, user, address, client, status) values (
+        insert into sys_login_log (ip, user, address, client, os, status) values (
             #{ip, jdbcType=VARCHAR},
             #{user, jdbcType=VARCHAR},
             #{address, jdbcType=VARCHAR},
             #{client, jdbcType=VARCHAR},
+            #{os, jdbcType=VARCHAR},
             '1'
         )
     </insert>

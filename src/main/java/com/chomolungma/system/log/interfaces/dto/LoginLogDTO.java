@@ -8,5 +8,6 @@ public class LoginLogDTO extends PageDTO {
     private String user;
     private String address;
     private String client;
+    private String os;
     private String ip;
 }

@@ -8,5 +8,6 @@ public class LoginLogDO extends BaseDO {
     private String user;
     private String address;
     private String client;
+    private String os;
     private String ip;
 }

@@ -9,4 +9,5 @@ public class LoginLogEntity extends BaseEntity {
     private String address;
     private String ip;
     private String client;
+    private String os;
 }
