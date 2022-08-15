@@ -3,6 +3,8 @@ package com.chomolungma.system.log.application.service;
 import com.alibaba.fastjson.JSONObject;
 import com.chomolungma.common.tools.AddressUtils;
 import com.chomolungma.common.tools.IpUtils;
+import com.chomolungma.core.CurrentProfileHolder;
+import com.chomolungma.system.account.entity.AccountEntity;
 import com.chomolungma.system.log.domain.repository.ILoginLogRepository;
 import com.chomolungma.system.log.interfaces.dto.LoginLogDTO;
 import eu.bitwalker.useragentutils.Browser;
@@ -25,14 +27,16 @@ public class LoginLogServiceImpl implements LoginLogService{
     private HttpServletRequest request;
 
     @Override
-    public Void generateLoginLog(String username) {
+    public Void generateLoginLog() {
         String agent = request.getHeader("User-Agent");
         UserAgent userAgent = UserAgent.parseUserAgentString(agent);
         Browser browser = userAgent.getBrowser();
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
+
+        AccountEntity accountEntity = CurrentProfileHolder.getProfile();
         String ip = IpUtils.getIpAddress(request);
         LoginLogDTO loginLogDTO = new LoginLogDTO();
-        loginLogDTO.setUser(username);
+        loginLogDTO.setUser(accountEntity.getUsername());
         loginLogDTO.setIp(ip);
         loginLogDTO.setClient(browser.getName());
         loginLogDTO.setOs(operatingSystem.getName());

@@ -28,7 +28,6 @@ public class LoginController {
     public Result login(@RequestBody LoginForm loginForm){
         String token = loginService.login(loginForm.getUsername(),loginForm.getPassword());
         response.addHeader("Authorization","Bearer " + token);
-        loginLogService.generateLoginLog(loginForm.getUsername());
         return Result.success();
     }
 }
