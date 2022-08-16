@@ -8,7 +8,7 @@
             <if test="user != null and user !=''">
                 sll.user like  CONCAT('%',#{user,jdbcType=VARCHAR},'%')
             </if>
-            <if test="user != null and user !=''">
+            <if test="client != null and client !=''">
                 sll.client like  CONCAT('%',#{client,jdbcType=VARCHAR},'%')
             </if>
         </where>

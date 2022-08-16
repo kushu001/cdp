@@ -4,6 +4,8 @@ import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.common.tools.TokenUtils;
 import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.system.account.entity.AccountEntity;
+import com.chomolungma.system.log.application.service.OperateLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class AuthenticationInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private OperateLogService operateLogService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String bearerToken = request.getHeader("Authorization");
@@ -22,6 +27,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         String[] tokenArray = bearerToken.split(" ");
         AccountEntity accountEntity = TokenUtils.decode(tokenArray[1]);
         CurrentProfileHolder.setContext(accountEntity);
+        operateLogService.generateOperateLog();
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
@@ -30,4 +36,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         CurrentProfileHolder.remove();
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
+
+
 }
