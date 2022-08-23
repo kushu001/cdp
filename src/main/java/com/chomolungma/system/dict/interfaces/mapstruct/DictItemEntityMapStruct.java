@@ -8,6 +8,8 @@ import com.chomolungma.system.dict.interfaces.param.DictItemParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface DictItemEntityMapStruct {
     DictItemEntityMapStruct INSTANCE = Mappers.getMapper(DictItemEntityMapStruct.class);
@@ -16,4 +18,6 @@ public interface DictItemEntityMapStruct {
     DictItemPageDTO covertToDTO(IPage<DictItemEntity> iPage);
 
     DictItemDTO convertToDictDTO(DictItemEntity dictItemEntity);
+
+    List<DictItemDTO> convertToDictDTO(List<DictItemEntity> dictItemEntities);
 }

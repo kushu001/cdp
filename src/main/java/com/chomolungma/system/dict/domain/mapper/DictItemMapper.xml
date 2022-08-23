@@ -18,4 +18,16 @@
     <select id="selectList" resultMap="dictItemResultMap">
         select * from sys_dict_item where dict_id=#{dictId,jdbcType=BIGINT}
     </select>
+
+    <select id="selectListByDictCode" resultType="com.chomolungma.system.dict.domain.entity.DictItemEntity">
+        select
+            sdi.*
+        from
+            sys_dict sd
+        left join sys_dict_item sdi on
+            sd.id = sdi.dict_id
+        where
+            sd.code = #{dictCode,jdbcType=VARCHAR}
+        order by sdi.sort asc
+    </select>
 </mapper>

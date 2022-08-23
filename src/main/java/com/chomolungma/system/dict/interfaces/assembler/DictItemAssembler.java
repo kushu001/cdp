@@ -7,6 +7,8 @@ import com.chomolungma.system.dict.interfaces.dto.DictItemPageDTO;
 import com.chomolungma.system.dict.interfaces.mapstruct.DictItemEntityMapStruct;
 import com.chomolungma.system.dict.interfaces.param.DictItemParam;
 
+import java.util.List;
+
 public class DictItemAssembler {
     public static DictItemEntity covertToEntity(DictItemParam dictItemParam){
         return DictItemEntityMapStruct.INSTANCE.covertToEntity(dictItemParam);
@@ -19,5 +21,9 @@ public class DictItemAssembler {
 
     public static DictItemDTO covertToDTO(DictItemEntity dictItem){
         return DictItemEntityMapStruct.INSTANCE.convertToDictDTO(dictItem);
+    }
+
+    public static List<DictItemDTO> covertToDTO(List<DictItemEntity> dictItemEntities){
+        return DictItemEntityMapStruct.INSTANCE.convertToDictDTO(dictItemEntities);
     }
 }

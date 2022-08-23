@@ -37,7 +37,6 @@ public class AccountController {
 
     @GetMapping
     public Result getPageList(AccountDTO accountDTO){
-
         return Result.success(accountService.getAccounts(new Page<>(accountDTO.getPage(), accountDTO.getLimit()), AccountAssembler.toEntity(accountDTO)));
     }
 
@@ -75,6 +74,12 @@ public class AccountController {
     @PutMapping("/{id}/user/{userId}")
     public Result bindUser(@PathVariable("id") Long id, @PathVariable("userId") Long userId){
         accountService.bindUser(id, userId);
+        return Result.success();
+    }
+
+    @GetMapping("/export")
+    public Result export(){
+        
         return Result.success();
     }
 }

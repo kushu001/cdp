@@ -44,4 +44,8 @@ public class DictItemController {
         dictItemService.deleteDictItem(Arrays.asList(ids.split(",")));
         return Result.success();
     }
+    @GetMapping("/dict/{dictCode}")
+    public Result getItems(@PathVariable("dictCode") String dictCode){
+        return Result.success(DictItemAssembler.covertToDTO(dictItemService.getDictItems(dictCode)));
+    }
 }
