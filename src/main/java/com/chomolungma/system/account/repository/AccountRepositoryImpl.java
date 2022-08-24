@@ -57,7 +57,7 @@ public class AccountRepositoryImpl implements IAccountRepository{
     @Override
     public IPage<AccountEntity> queryPageList(Page<AccountEntity> page,AccountEntity accountEntity) {
         AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(accountEntity);
-        IPage<AccountUserRoleDO> accountUsers = accountUserRoleMapper.selectPageList(page, accountUserRoleDO);
+        IPage<AccountUserRoleDO> accountUsers = accountUserRoleMapper.selectList(page, accountUserRoleDO);
         return AccountUserConverter.INSTANCE.toIPage(accountUsers);
     }
 
@@ -85,6 +85,13 @@ public class AccountRepositoryImpl implements IAccountRepository{
     public AccountEntity queryAccount(String username) {
         AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
         return AccountConverter.INSTANCE.toEntity(accountDO);
+    }
+
+    @Override
+    public List<AccountEntity> queryAccounts(AccountEntity accountEntity) {
+        AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(accountEntity);
+        List<AccountUserRoleDO> accountUserRoleDOS = accountUserRoleMapper.selectList(accountUserRoleDO);
+        return AccountUserConverter.INSTANCE.toEntity(accountUserRoleDOS);
     }
 
 }

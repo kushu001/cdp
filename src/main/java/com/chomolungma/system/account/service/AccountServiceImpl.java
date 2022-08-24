@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService{
     @Autowired
@@ -72,5 +74,10 @@ public class AccountServiceImpl implements AccountService{
             iAccountRoleRepository.save(account.getId(), roleId);
         }
         return null;
+    }
+
+    @Override
+    public List<AccountEntity> getAccounts(AccountEntity account) {
+        return iAccountRepository.queryAccounts(account);
     }
 }

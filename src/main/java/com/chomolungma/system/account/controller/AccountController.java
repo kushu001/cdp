@@ -1,5 +1,6 @@
 package com.chomolungma.system.account.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.account.assembler.AccountAssembler;
@@ -11,6 +12,8 @@ import com.chomolungma.system.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -21,6 +24,9 @@ public class AccountController {
 
     @Autowired
     private IAccountRepository iAccountRepository;
+
+    @Autowired
+    private HttpServletResponse response;
 
     @GetMapping("/get")
     public Map<String, Object> getProfile(){
@@ -78,8 +84,16 @@ public class AccountController {
     }
 
     @GetMapping("/export")
-    public Result export(){
-        
-        return Result.success();
+    public void export(AccountDTO accountDTO) throws IOException {
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+
+        List<AccountEntity> accountEntities = accountService.getAccounts(AccountAssembler.toEntity(accountDTO));
+
+        // String filePath = System.getProperty("user.dir") + "/src/main/resources/export/";
+        String fileName = System.currentTimeMillis() + ".xlsx";
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        EasyExcel.write(response.getOutputStream(), AccountDTO.class).autoCloseStream(Boolean.FALSE).sheet("模板").doWrite(AccountAssembler.toDTO(accountEntities));
     }
 }

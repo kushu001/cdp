@@ -14,4 +14,5 @@ public interface IAccountRepository {
     AccountEntity queryAccountUser(String username, String password);
     AccountEntity queryAccount(Long id);
     AccountEntity queryAccount(String username);
+    List<AccountEntity> queryAccounts(AccountEntity accountEntity);
 }

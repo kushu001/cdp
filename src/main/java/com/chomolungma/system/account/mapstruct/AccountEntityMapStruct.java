@@ -8,6 +8,8 @@ import com.chomolungma.system.account.entity.AccountEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface AccountEntityMapStruct {
     AccountEntityMapStruct INSTANCE = Mappers.getMapper(AccountEntityMapStruct.class);
@@ -17,4 +19,6 @@ public interface AccountEntityMapStruct {
     AccountEntity toEntity(AccountInDTO accountInDTO);
 
     AccountEntity toEntity(AccountDTO accountDTO);
+
+    List<AccountDTO> toDTO(List<AccountEntity> accountEntities);
 }

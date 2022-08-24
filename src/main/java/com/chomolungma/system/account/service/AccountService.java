@@ -5,6 +5,8 @@ import com.chomolungma.system.account.dto.Account;
 import com.chomolungma.system.account.dto.AccountPageDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
 
+import java.util.List;
+
 public interface AccountService {
     AccountPageDTO getAccounts(Page<AccountEntity> page, AccountEntity account);
 
@@ -17,4 +19,6 @@ public interface AccountService {
     Void createAccount(AccountEntity account);
 
     Void updateAccount(AccountEntity account);
+
+    List<AccountEntity> getAccounts(AccountEntity account);
 }

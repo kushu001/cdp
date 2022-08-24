@@ -7,6 +7,8 @@ import com.chomolungma.system.account.dto.AccountPageDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
 import com.chomolungma.system.account.mapstruct.AccountEntityMapStruct;
 
+import java.util.List;
+
 public class AccountAssembler {
     public static AccountPageDTO toAccountPageDTO(IPage<AccountEntity> page){
         return AccountEntityMapStruct.INSTANCE.toAccountPageDTO(page);
@@ -18,5 +20,9 @@ public class AccountAssembler {
 
     public static AccountEntity toEntity(AccountDTO accountDTO){
         return AccountEntityMapStruct.INSTANCE.toEntity(accountDTO);
+    }
+
+    public static List<AccountDTO> toDTO(List<AccountEntity> accountEntities){
+        return AccountEntityMapStruct.INSTANCE.toDTO(accountEntities);
     }
 }
