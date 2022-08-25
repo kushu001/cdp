@@ -8,8 +8,8 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
 大家可以拿个这项目练手，学习基本的框架知识
 争取做一个可以用来开发简单私活的框架，方便大家使用
 ## 软件架构
-前端： 目前是使用vue-element-admin为基础，加上自己研发的部分组件，开发的一套前端框架 cdp-web-vue
-后端： 以SpringBoot为基础，利用mybatis持久框架进行后端服务的实现，开发的一套后端框架 cdp
+1. 前端： 目前是使用vue-element-admin为基础，加上自己研发的部分组件，开发的一套前端框架 cdp-web-vue
+2. 后端： 以SpringBoot为基础，利用mybatis持久框架进行后端服务的实现，开发的一套后端框架 cdp
 
 ## 安装教程
 前端
