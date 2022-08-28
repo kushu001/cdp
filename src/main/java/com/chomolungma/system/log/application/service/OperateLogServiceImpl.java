@@ -30,7 +30,9 @@ public class OperateLogServiceImpl implements OperateLogService{
         operateLogDTO.setUrl(request.getRequestURL().substring(0, request.getRequestURL().length()- request.getRequestURI().length()));
         operateLogDTO.setResourceName(request.getRequestURI());
         operateLogDTO.setPathPayload(request.getQueryString());
-        operateLogDTO.setPayload(charReader(request));
+        if (!request.getRequestURI().contains("/import")){
+            operateLogDTO.setPayload(charReader(request));
+        }
         operateLogDTO.setRequestMethod(request.getMethod());
         iOperateLogRepository.save(operateLogDTO);
         return null;

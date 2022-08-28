@@ -1,16 +1,21 @@
 package com.chomolungma.system.account.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.read.listener.ReadListener;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
+import com.chomolungma.core.application.service.ExcelService;
 import com.chomolungma.system.account.assembler.AccountAssembler;
 import com.chomolungma.system.account.dto.AccountDTO;
+import com.chomolungma.system.account.dto.AccountExcelDTO;
 import com.chomolungma.system.account.dto.AccountInDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
 import com.chomolungma.system.account.repository.IAccountRepository;
 import com.chomolungma.system.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,6 +30,8 @@ public class AccountController {
     @Autowired
     private IAccountRepository iAccountRepository;
 
+    @Autowired
+    private ExcelService excelService;
     @Autowired
     private HttpServletResponse response;
 
@@ -83,17 +90,36 @@ public class AccountController {
         return Result.success();
     }
 
+
+    @PostMapping("/import")
+    public void importExcel(MultipartFile file) throws IOException {
+        System.out.println(file.getOriginalFilename());
+        List<AccountExcelDTO> results = new ArrayList<>();
+        EasyExcel.read(file.getInputStream(), AccountExcelDTO.class, new ReadListener<AccountExcelDTO>() {
+
+            @Override
+            public void invoke(AccountExcelDTO accountExcelDTO, AnalysisContext analysisContext) {
+                accountExcelDTO.setAvatar("hahahah");
+                accountExcelDTO.setUsername(accountExcelDTO.getUsername() + "xixix");
+                results.add(accountExcelDTO);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+                System.out.println(results);
+                try {
+                    excelService.export(results, AccountExcelDTO.class);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).sheet().doRead();
+
+    }
+
     @GetMapping("/export")
     public void export(AccountDTO accountDTO) throws IOException {
-        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setCharacterEncoding("utf-8");
-
         List<AccountEntity> accountEntities = accountService.getAccounts(AccountAssembler.toEntity(accountDTO));
-
-        // String filePath = System.getProperty("user.dir") + "/src/main/resources/export/";
-        String fileName = System.currentTimeMillis() + ".xlsx";
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
-        EasyExcel.write(response.getOutputStream(), AccountDTO.class).autoCloseStream(Boolean.FALSE).sheet("模板").doWrite(AccountAssembler.toDTO(accountEntities));
+        excelService.export(AccountAssembler.toExcelDTO(accountEntities), AccountExcelDTO.class);
     }
 }

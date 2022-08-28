@@ -23,7 +23,8 @@ public class MyFilter implements Filter {
         if(request instanceof HttpServletRequest) {
             HttpServletRequest servletRequest = (HttpServletRequest) request;
             String requestURI = servletRequest.getRequestURI();
-            if (ALLOWED_PATHS.contains(requestURI)){
+            //if (ALLOWED_PATHS.contains(requestURI)){
+            if (requestURI.contains("/import")){
                 chain.doFilter(servletRequest,response);
             }else {
                 requestWrapper = new MultiReadHttpServletRequest(servletRequest);

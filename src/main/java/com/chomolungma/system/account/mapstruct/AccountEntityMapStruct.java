@@ -2,6 +2,7 @@ package com.chomolungma.system.account.mapstruct;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.account.dto.AccountDTO;
+import com.chomolungma.system.account.dto.AccountExcelDTO;
 import com.chomolungma.system.account.dto.AccountInDTO;
 import com.chomolungma.system.account.dto.AccountPageDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
@@ -20,5 +21,5 @@ public interface AccountEntityMapStruct {
 
     AccountEntity toEntity(AccountDTO accountDTO);
 
-    List<AccountDTO> toDTO(List<AccountEntity> accountEntities);
+    List<AccountExcelDTO> toExcelDTO(List<AccountEntity> accountEntities);
 }

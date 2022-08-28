@@ -2,6 +2,7 @@ package com.chomolungma.system.account.assembler;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.account.dto.AccountDTO;
+import com.chomolungma.system.account.dto.AccountExcelDTO;
 import com.chomolungma.system.account.dto.AccountInDTO;
 import com.chomolungma.system.account.dto.AccountPageDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
@@ -22,7 +23,7 @@ public class AccountAssembler {
         return AccountEntityMapStruct.INSTANCE.toEntity(accountDTO);
     }
 
-    public static List<AccountDTO> toDTO(List<AccountEntity> accountEntities){
-        return AccountEntityMapStruct.INSTANCE.toDTO(accountEntities);
+    public static List<AccountExcelDTO> toExcelDTO(List<AccountEntity> accountEntities){
+        return AccountEntityMapStruct.INSTANCE.toExcelDTO(accountEntities);
     }
 }
