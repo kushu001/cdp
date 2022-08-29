@@ -22,4 +22,6 @@ public interface AccountEntityMapStruct {
     AccountEntity toEntity(AccountDTO accountDTO);
 
     List<AccountExcelDTO> toExcelDTO(List<AccountEntity> accountEntities);
+
+    AccountDTO toDTO(AccountEntity accountEntity);
 }

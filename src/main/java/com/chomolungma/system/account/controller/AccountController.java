@@ -55,7 +55,7 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public Result getAccount(@PathVariable("id") Long id){
-        return Result.success(iAccountRepository.queryAccount(id));
+        return Result.success(AccountAssembler.toDTO(iAccountRepository.queryAccount(id)));
     }
 
     @PostMapping
