@@ -36,3 +36,20 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
 <img width="1509" alt="image" src="https://user-images.githubusercontent.com/3797320/185793666-33241540-9986-42a7-9982-f0e652029a21.png">
 <img width="1508" alt="image" src="https://user-images.githubusercontent.com/3797320/185793682-71c46204-cc20-4a57-ad01-8af88e7d97af.png">
 <img width="1059" alt="image" src="https://user-images.githubusercontent.com/3797320/185793694-6cc65eb1-e87b-45b6-a137-e785924eb2e6.png">
+
+本项目已经全部开源，如果您觉得帮到了你，请给 本项目 一个Star
+
+前端：
+
+github: https://github.com/kushu001/cdp-web-vue
+
+gitee: https://gitee.com/kushu001/cdp-web-vue
+
+后端：
+
+github: https://github.com/kushu001/cdp
+
+gitee: https://gitee.com/kushu001/cdp
+
+如果发现Bug，请到GITHUB提交Issue。
+友情提示：提问前Star是很礼貌和友善的行为，被问者也会更开心回答您的问题。
