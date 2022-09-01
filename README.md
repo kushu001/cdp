@@ -18,8 +18,11 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
     npm run dev
   ```
 后端：
-装个Mysql数据库，application.properties中配置一下相关的路径即可
-启动ChomolungmaApplication.java
+1. 装个Mysql数据库，将cdp项目中resources目录下的sql文件导入到数据库中
+  <img width="385" alt="image" src="https://user-images.githubusercontent.com/3797320/187810047-ef8a5c7c-db71-403d-90fe-cb5c8a3c40d9.png">
+
+2. application.properties中配置一下相关的路径即可
+3. 启动ChomolungmaApplication.java
 
 ## 界面截图
 
