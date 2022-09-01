@@ -23,6 +23,10 @@ public class AccountAssembler {
         return AccountEntityMapStruct.INSTANCE.toEntity(accountDTO);
     }
 
+    public static AccountEntity toEntity(AccountExcelDTO accountExcelDTO){
+        return AccountEntityMapStruct.INSTANCE.toEntity(accountExcelDTO);
+    }
+
     public static List<AccountExcelDTO> toExcelDTO(List<AccountEntity> accountEntities){
         return AccountEntityMapStruct.INSTANCE.toExcelDTO(accountEntities);
     }

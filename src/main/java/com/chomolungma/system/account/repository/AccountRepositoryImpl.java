@@ -78,6 +78,7 @@ public class AccountRepositoryImpl implements IAccountRepository{
         List<AccountRoleDO> roles = accountRoleMapper.selectList(new QueryWrapper<AccountRoleDO>().select("role_id").eq("account_id", id));
         AccountEntity accountEntity = AccountConverter.INSTANCE.toEntity(accountDO);
         accountEntity.setRoleIds(roles.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList()));
+
         return accountEntity;
     }
 

@@ -1,8 +1,6 @@
 package com.chomolungma.system.account.controller;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.read.listener.ReadListener;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.core.application.service.ExcelService;
@@ -11,9 +9,11 @@ import com.chomolungma.system.account.dto.AccountDTO;
 import com.chomolungma.system.account.dto.AccountExcelDTO;
 import com.chomolungma.system.account.dto.AccountInDTO;
 import com.chomolungma.system.account.entity.AccountEntity;
+import com.chomolungma.system.account.listener.AccountExcelListener;
 import com.chomolungma.system.account.repository.IAccountRepository;
 import com.chomolungma.system.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,29 +92,9 @@ public class AccountController {
 
 
     @PostMapping("/import")
+    @Transactional
     public void importExcel(MultipartFile file) throws IOException {
-        System.out.println(file.getOriginalFilename());
-        List<AccountExcelDTO> results = new ArrayList<>();
-        EasyExcel.read(file.getInputStream(), AccountExcelDTO.class, new ReadListener<AccountExcelDTO>() {
-
-            @Override
-            public void invoke(AccountExcelDTO accountExcelDTO, AnalysisContext analysisContext) {
-                accountExcelDTO.setAvatar("hahahah");
-                accountExcelDTO.setUsername(accountExcelDTO.getUsername() + "xixix");
-                results.add(accountExcelDTO);
-            }
-
-            @Override
-            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-                System.out.println(results);
-                try {
-                    excelService.export(results, AccountExcelDTO.class);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).sheet().doRead();
-
+        EasyExcel.read(file.getInputStream(), AccountExcelDTO.class, new AccountExcelListener(iAccountRepository, excelService)).sheet().doRead();
     }
 
     @GetMapping("/export")
