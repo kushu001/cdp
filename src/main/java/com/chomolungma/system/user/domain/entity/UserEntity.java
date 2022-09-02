@@ -14,4 +14,6 @@ public class UserEntity extends BaseEntity {
     private String phone;
     private String address;
     private String company;
+    private Long deptId;
+    private String deptName;
 }

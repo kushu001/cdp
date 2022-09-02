@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
+import com.chomolungma.system.user.interfaces.dto.User;
 import com.chomolungma.system.user.interfaces.dto.UserDTO;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface UserService {
     List<MenuDTO> getMenus(List<Long> roleIds);
 
     PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity);
+
+    List<User> getUsers(String code, UserEntity userEntity);
 }

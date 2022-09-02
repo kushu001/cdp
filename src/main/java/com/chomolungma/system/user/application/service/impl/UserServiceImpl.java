@@ -16,6 +16,7 @@ import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
 import com.chomolungma.system.user.domain.service.*;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
+import com.chomolungma.system.user.interfaces.dto.User;
 import com.chomolungma.system.user.interfaces.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,6 @@ public class UserServiceImpl extends BaseService implements UserService {
         List<OrgUserEntity> orgUserEntities = orgUserMapper.selectList(new QueryWrapper<OrgUserEntity>().in("org_id", orgEntities.stream().map(OrgEntity::getId).collect(Collectors.toList())));
         List<Long> userIds = orgUserEntities.stream().map(OrgUserEntity::getUserId).collect(Collectors.toList());
         return iUserRepository.getUserByIds(userIds, (int)page.getCurrent(), (int)page.getSize());
-        //return execute(new PageUsersDomainService(code, page, userEntity));
     }
 
     @Override
@@ -75,5 +75,10 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity) {
         return UserAssembler.toPageUserDTO(userMapper.selectPage(page, new QueryWrapper<UserEntity>().like(userEntity.getName() !=null,"name",userEntity.getName())));
+    }
+
+    @Override
+    public List<User> getUsers(String code, UserEntity userEntity) {
+        return UserAssembler.toDTO(iUserRepository.getUsers(code, userEntity));
     }
 }

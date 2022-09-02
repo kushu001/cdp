@@ -4,15 +4,18 @@ package com.chomolungma.system.user.interfaces.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.core.CurrentProfileHolder;
+import com.chomolungma.core.application.service.ExcelService;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
+import com.chomolungma.system.user.interfaces.dto.User;
 import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
 import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ExcelService excelService;
 
 //    @GetMapping
 //    public Result list(){
@@ -64,6 +70,17 @@ public class UserController {
     public Result getMenus(){
         List<Long> roleIds = CurrentProfileHolder.getProfile().getRoleIds();
         return Result.success(userService.getMenus(roleIds));
+    }
+
+    @GetMapping("/org/{code}/import")
+    public void importExcel(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
+
+    }
+
+    @GetMapping("/org/{code}/export")
+    public void exportExcel(@PathVariable("code") String code,UserSearchDTO userSearchDTO) throws IOException {
+        System.out.println();
+        excelService.export(userService.getUsers(code, UserAssembler.toUserEntity(userSearchDTO)), User.class);
     }
 
 }

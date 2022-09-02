@@ -3,12 +3,11 @@ package com.chomolungma.system.user.interfaces.assembler;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
-import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
-import com.chomolungma.system.user.interfaces.dto.UserDTO;
-import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
-import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
+import com.chomolungma.system.user.interfaces.dto.*;
 import com.chomolungma.system.user.interfaces.mapstruct.UserEntityMapStruct;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 public class UserAssembler {
     public static UserEntity toUserEntity(UserSearchDTO userSearchDTO){
@@ -30,6 +29,11 @@ public class UserAssembler {
 
     public static UserDTO fromUserEntity(UserEntity userEntity){
         return UserEntityMapStruct.INSTANCE.fromUserEntity(userEntity);
+    }
+
+
+    public static List<User> toDTO(List<UserEntity> userEntities){
+        return UserEntityMapStruct.INSTANCE.toDTO(userEntities);
     }
 
 }

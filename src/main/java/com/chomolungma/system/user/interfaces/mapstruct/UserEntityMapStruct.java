@@ -3,15 +3,14 @@ package com.chomolungma.system.user.interfaces.mapstruct;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
-import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
-import com.chomolungma.system.user.interfaces.dto.UserDTO;
-import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
-import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
+import com.chomolungma.system.user.interfaces.dto.*;
 import com.github.pagehelper.PageInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface UserEntityMapStruct {
@@ -29,5 +28,7 @@ public interface UserEntityMapStruct {
     UserEntity toUserEntity(UserFormDTO userFormDTO);
 
     UserDTO fromUserEntity(UserEntity userEntity);
+
+    List<User> toDTO(List<UserEntity> userEntities);
 
 }

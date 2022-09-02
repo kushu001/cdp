@@ -1,5 +1,7 @@
 package com.chomolungma.system.user.domain.repository;
 
+import com.chomolungma.system.user.domain.entity.UserEntity;
+import com.chomolungma.system.user.domain.repository.converter.UserConverter;
 import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
 import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
@@ -23,5 +25,10 @@ public class UserRepositoryImpl implements IUserRepository{
         PageInfo<UserOrgDO> pageInfo = new PageInfo<>(userOrgDOS);
         PageHelper.clearPage();
         return UserAssembler.toPageUserDTO(pageInfo);
+    }
+
+    @Override
+    public List<UserEntity> getUsers(String code, UserEntity userEntity) {
+        return UserConverter.INSTANCE.toEntity(userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(userEntity)));
     }
 }

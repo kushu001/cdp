@@ -16,4 +16,30 @@
             #{id}
         </foreach>
     </select>
+
+
+    <select id="selectUsersByCondition" parameterType="com.chomolungma.system.user.domain.repository.dataobject.UserDO" resultType="com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO">
+        select
+            su.*,
+            so.id as dept_id,
+            so.name as dept_name
+        from
+            sys_org so
+        left join sys_org_user sou on
+            so.id = sou.org_id
+        left join sys_user su on
+            sou.user_id = su.id
+        <where>
+            sou.user_id is not null
+            <if test="code != null and code != ''">
+                and so.code like concat(#{code, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="userDO.name !=null and userDO.name !=''">
+                and su.name like concat('%', #{userDO.name, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="userDO.gender !=null and userDO.gender !=''">
+                and su.gender =  #{userDO.gender, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>
