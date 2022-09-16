@@ -1,17 +1,14 @@
 package com.chomolungma.system.org.interfaces.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.org.application.service.OrgService;
 import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.org.interfaces.assembler.OrgAssembler;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
 import com.chomolungma.system.org.interfaces.param.OrgSearchParam;
-import com.chomolungma.system.org.mapper.OrgMapper;
 import com.chomolungma.system.user.application.service.UserService;
-import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,13 +53,13 @@ public class OrgController {
 
     @PostMapping
     public Result createOrg(@RequestBody OrgParam orgParam){
-        orgService.createOrg(OrgAssembler.convertParamToEntity(orgParam));
+        orgService.createOrg(orgParam);
         return Result.success();
     }
 
     @PutMapping
     public Result updateOrg(@RequestBody OrgParam orgParam){
-        orgService.updateOrg(OrgAssembler.convertParamToEntity(orgParam));
+        orgService.updateOrg(orgParam);
         return Result.success();
     }
 
@@ -74,8 +71,7 @@ public class OrgController {
 
     @GetMapping("/{code}/user")
     public Result getUsersByOrgId(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
-        Page<UserEntity> page = new Page<>(userSearchDTO.getPage(), userSearchDTO.getLimit());
-        return Result.success(userService.getUsersByOrg(code, page, UserAssembler.toUserEntity(userSearchDTO)));
+        return Result.success(userService.getUsersByOrg(code, userSearchDTO));
     }
 
     @DeleteMapping("/{code}/user/{ids}")

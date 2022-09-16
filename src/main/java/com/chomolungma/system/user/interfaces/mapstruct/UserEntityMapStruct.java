@@ -31,4 +31,6 @@ public interface UserEntityMapStruct {
 
     List<User> toDTO(List<UserEntity> userEntities);
 
+    com.chomolungma.system.user.domain.entity.User toUser(UserFormDTO userFormDTO);
+
 }

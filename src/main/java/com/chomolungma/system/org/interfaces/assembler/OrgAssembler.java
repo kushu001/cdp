@@ -1,6 +1,7 @@
 package com.chomolungma.system.org.interfaces.assembler;
 
 import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.interfaces.dto.OrgDTO;
 import com.chomolungma.system.org.interfaces.mapstruct.OrgEntityMapStruct;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
@@ -21,4 +22,9 @@ public final class OrgAssembler {
     public static OrgEntity convertParamToEntity(OrgSearchParam orgSearchParam){
         return OrgEntityMapStruct.INSTANCE.orgParamToOrg(orgSearchParam);
     }
+
+    public static OrgDO convertToDO(OrgParam orgParam){
+        return OrgEntityMapStruct.INSTANCE.toDO(orgParam);
+    }
+
 }

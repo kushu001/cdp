@@ -1,28 +1,28 @@
 package com.chomolungma.system.user.application.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
-import com.chomolungma.system.org.domain.entity.OrgEntity;
-import com.chomolungma.system.org.mapper.OrgMapper;
+import com.chomolungma.system.org.domain.repository.IOrgRepository;
+import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.role.domain.service.GetMenuDomainService;
 import com.chomolungma.system.user.application.service.UserService;
-import com.chomolungma.system.user.domain.entity.OrgUserEntity;
+import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
-import com.chomolungma.system.user.domain.repository.mapper.OrgUserMapper;
-import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
-import com.chomolungma.system.user.domain.service.*;
+import com.chomolungma.system.user.domain.service.DeleteUserDomainService;
+import com.chomolungma.system.user.domain.service.GetUserDomainService;
+import com.chomolungma.system.user.domain.service.UpdateUserDomainService;
+import com.chomolungma.system.user.domain.service.UserDomainService;
+import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
+import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgUserMapper;
+import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
-import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
-import com.chomolungma.system.user.interfaces.dto.User;
-import com.chomolungma.system.user.interfaces.dto.UserDTO;
+import com.chomolungma.system.user.interfaces.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends BaseService implements UserService {
@@ -38,12 +38,19 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Autowired
     private OrgUserMapper orgUserMapper;
+
+    @Autowired
+    private UserDomainService userDomainService;
+
+    @Autowired
+    private IOrgRepository iOrgRepository;
+
+    @Autowired
+    private OrgAdapter orgAdapter;
     @Override
-    public PageUserDTO getUsersByOrg(String code, Page<UserEntity> page, UserEntity userEntity) {
-        List<OrgEntity> orgEntities = orgMapper.selectList(new QueryWrapper<OrgEntity>().likeRight("code", code));
-        List<OrgUserEntity> orgUserEntities = orgUserMapper.selectList(new QueryWrapper<OrgUserEntity>().in("org_id", orgEntities.stream().map(OrgEntity::getId).collect(Collectors.toList())));
-        List<Long> userIds = orgUserEntities.stream().map(OrgUserEntity::getUserId).collect(Collectors.toList());
-        return iUserRepository.getUserByIds(userIds, (int)page.getCurrent(), (int)page.getSize());
+    public PageUserDTO getUsersByOrg(String code, UserSearchDTO userSearchDTO) {
+        return iUserRepository.getUserByIds(code, userSearchDTO.getPage(), userSearchDTO.getLimit());
+
     }
 
     @Override
@@ -52,8 +59,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void createUser(Long orgId, UserEntity userEntity) {
-        execute(new CreateUserDomainService(orgId, userEntity));
+    public void createUser(Long orgId, UserFormDTO userFormDTO) {
+        com.chomolungma.system.user.domain.entity.User user = UserAssembler.toEntity(userFormDTO);
+        Org org = orgAdapter.adapter(orgId);
+        user.setOrg(org);
+        userDomainService.save(user);
     }
 
     @Override
@@ -74,7 +84,8 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity) {
-        return UserAssembler.toPageUserDTO(userMapper.selectPage(page, new QueryWrapper<UserEntity>().like(userEntity.getName() !=null,"name",userEntity.getName())));
+        //return UserAssembler.toPageUserDTO(userMapper.selectPage(page, new QueryWrapper<UserEntity>().like(userEntity.getName() !=null,"name",userEntity.getName())));
+        return null; //TODO
     }
 
     @Override

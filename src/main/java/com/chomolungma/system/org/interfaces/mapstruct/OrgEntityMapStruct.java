@@ -1,6 +1,7 @@
 package com.chomolungma.system.org.interfaces.mapstruct;
 
 import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.interfaces.dto.OrgDTO;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
 import com.chomolungma.system.org.interfaces.param.OrgSearchParam;
@@ -19,4 +20,6 @@ public interface OrgEntityMapStruct {
     OrgEntity orgParamToOrg(OrgParam orgParam);
 
     OrgEntity orgParamToOrg(OrgSearchParam orgSearchParam);
+
+    OrgDO toDO(OrgParam orgParam);
 }

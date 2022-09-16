@@ -7,13 +7,14 @@ import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.core.application.service.ExcelService;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
+import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
-import com.chomolungma.system.user.interfaces.dto.User;
+import com.chomolungma.system.user.interfaces.dto.UserExcelDTO;
 import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
 import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,15 +28,8 @@ public class UserController {
 
     @Autowired
     private UserMapper userMapper;
-
     @Autowired
     private ExcelService excelService;
-
-//    @GetMapping
-//    public Result list(){
-//        List<UserEntity> users = userMapper.selectList(new QueryWrapper<>());
-//        return Result.success(users);
-//    }
 
     @GetMapping
     public Result pageList(UserSearchDTO userSearchDTO){
@@ -45,8 +39,7 @@ public class UserController {
 
     @GetMapping("/org/{code}")
     public Result pageList(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
-        Page<UserEntity> page = new Page<>(userSearchDTO.getPage(), userSearchDTO.getLimit());
-        return Result.success(userService.getUsersByOrg(code, page, UserAssembler.toUserEntity(userSearchDTO)));
+        return Result.success(userService.getUsersByOrg(code, userSearchDTO));
     }
 
     @GetMapping("/{id}")
@@ -56,7 +49,7 @@ public class UserController {
 
     @PostMapping("/org/{orgId}")
     public Result createUser(@PathVariable("orgId") Long orgId, @RequestBody UserFormDTO userFormDTO){
-        userService.createUser(orgId, UserAssembler.toUserEntity(userFormDTO));
+        userService.createUser(orgId, userFormDTO);
         return Result.success();
     }
 
@@ -72,15 +65,14 @@ public class UserController {
         return Result.success(userService.getMenus(roleIds));
     }
 
-    @GetMapping("/org/{code}/import")
-    public void importExcel(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
-
+    @PostMapping("/org/{code}/import")
+    public void importExcel(@PathVariable("code") String code, MultipartFile file){
+        System.out.println(file.getOriginalFilename());
     }
 
     @GetMapping("/org/{code}/export")
     public void exportExcel(@PathVariable("code") String code,UserSearchDTO userSearchDTO) throws IOException {
-        System.out.println();
-        excelService.export(userService.getUsers(code, UserAssembler.toUserEntity(userSearchDTO)), User.class);
+        excelService.export(userService.getUsers(code, UserAssembler.toUserEntity(userSearchDTO)), UserExcelDTO.class);
     }
 
 }

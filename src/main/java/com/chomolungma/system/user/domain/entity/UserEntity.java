@@ -1,5 +1,6 @@
 package com.chomolungma.system.user.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.chomolungma.core.domain.entity.BaseEntity;
 import lombok.Data;
@@ -14,6 +15,8 @@ public class UserEntity extends BaseEntity {
     private String phone;
     private String address;
     private String company;
+    @TableField(exist = false)
     private Long deptId;
+    @TableField(exist = false)
     private String deptName;
 }

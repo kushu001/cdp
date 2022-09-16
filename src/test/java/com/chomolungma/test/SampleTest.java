@@ -1,6 +1,6 @@
 package com.chomolungma.test;
 
-import com.chomolungma.system.user.domain.repository.mapper.UserMapper;
+import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

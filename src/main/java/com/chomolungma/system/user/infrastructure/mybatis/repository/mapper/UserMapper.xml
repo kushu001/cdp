@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chomolungma.system.user.domain.repository.mapper.UserMapper">
+<mapper namespace="com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper">
 <!--  分页查询部门人员  -->
     <select id="pageUsersByIds" parameterType="java.util.List" resultType="com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO">
         select
@@ -18,7 +18,7 @@
     </select>
 
 
-    <select id="selectUsersByCondition" parameterType="com.chomolungma.system.user.domain.repository.dataobject.UserDO" resultType="com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO">
+    <select id="selectUsersByCondition" parameterType="com.chomolungma.system.user.infrastructure.dataobject.UserDO" resultType="com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO">
         select
             su.*,
             so.id as dept_id,

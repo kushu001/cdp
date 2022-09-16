@@ -1,7 +1,11 @@
-package com.chomolungma.system.user.domain.repository.dataobject;
+package com.chomolungma.system.user.infrastructure.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.chomolungma.core.dataobject.BaseDO;
+import lombok.Data;
 
+@TableName(value = "sys_user")
+@Data
 public class UserDO extends BaseDO {
     private String name;
     private String gender;

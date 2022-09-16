@@ -3,18 +3,16 @@ package com.chomolungma.system.user.application.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
-import com.chomolungma.system.user.interfaces.dto.User;
-import com.chomolungma.system.user.interfaces.dto.UserDTO;
+import com.chomolungma.system.user.interfaces.dto.*;
 
 import java.util.List;
 
 public interface UserService {
-    PageUserDTO getUsersByOrg(String code, Page<UserEntity> page, UserEntity userEntity);
+    PageUserDTO getUsersByOrg(String code, UserSearchDTO userSearchDTO);
 
     UserDTO getUser(Long id);
 
-    void createUser(Long orgId, UserEntity userEntity);
+    void createUser(Long orgId, UserFormDTO userFormDTO);
 
     void updateUser(UserEntity userEntity);
 
