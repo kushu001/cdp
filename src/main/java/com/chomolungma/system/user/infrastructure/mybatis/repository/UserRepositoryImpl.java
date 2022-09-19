@@ -3,9 +3,11 @@ package com.chomolungma.system.user.infrastructure.mybatis.repository;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
+import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.User;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
+import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.user.infrastructure.converter.UserConverter;
 import com.chomolungma.system.user.infrastructure.dataobject.OrgUserDO;
 import com.chomolungma.system.user.infrastructure.dataobject.UserDO;
@@ -32,9 +34,12 @@ public class UserRepositoryImpl implements IUserRepository {
     @Autowired
     private OrgMapper orgMapper;
 
+    @Autowired
+    private OrgAdapter orgAdapter;
+
 
     @Override
-    public PageUserDTO getUserByIds(String code, int current, int size) {
+    public PageUserDTO getUsersByCode(String code, int current, int size) {
         List<OrgDO> orgDOS = orgMapper.selectList(new QueryWrapper<OrgDO>().likeRight("code", code));
         List<OrgUserDO> orgUserDOS = orgUserMapper.selectList(new QueryWrapper<OrgUserDO>().in("org_id", orgDOS.stream().map(OrgDO::getId).collect(Collectors.toList())));
         List<Long> userIds = orgUserDOS.stream().map(OrgUserDO::getUserId).collect(Collectors.toList());
@@ -66,5 +71,16 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public User findUser(String idNumber) {
         return UserConverter.INSTANCE.toEntity(userMapper.selectOne(new QueryWrapper<UserDO>().eq("id_number", idNumber)));
+    }
+
+    @Override
+    public UserDTO findUser(Long id) {
+        UserDO userDO = userMapper.selectById(id);
+        OrgUserDO orgUserDO = orgUserMapper.selectOne(new QueryWrapper<OrgUserDO>().eq("user_id", userDO.getId()));
+        Org org = orgAdapter.adapter(orgUserDO.getOrgId());
+        UserDTO userDTO = UserConverter.INSTANCE.toDTO(userDO);
+        userDTO.setDeptId(org.getId());
+        userDTO.setDeptName(org.getName());
+        return userDTO;
     }
 }

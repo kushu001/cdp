@@ -12,6 +12,6 @@ public class UserDTO extends BaseDTO {
     private String phone;
     private String address;
     private String company;
-    private String deptId;
+    private Long deptId;
     private String deptName;
 }

@@ -11,9 +11,8 @@ import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
 import com.chomolungma.system.user.domain.service.DeleteUserDomainService;
-import com.chomolungma.system.user.domain.service.GetUserDomainService;
 import com.chomolungma.system.user.domain.service.UpdateUserDomainService;
-import com.chomolungma.system.user.domain.service.UserDomainService;
+import com.chomolungma.system.user.domain.service.impl.IUserDomainService;
 import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgUserMapper;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
@@ -40,7 +39,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     private OrgUserMapper orgUserMapper;
 
     @Autowired
-    private UserDomainService userDomainService;
+    private IUserDomainService iUserDomainService;
 
     @Autowired
     private IOrgRepository iOrgRepository;
@@ -49,12 +48,12 @@ public class UserServiceImpl extends BaseService implements UserService {
     private OrgAdapter orgAdapter;
     @Override
     public PageUserDTO getUsersByOrg(String code, UserSearchDTO userSearchDTO) {
-        return iUserRepository.getUserByIds(code, userSearchDTO.getPage(), userSearchDTO.getLimit());
+        return iUserRepository.getUsersByCode(code, userSearchDTO.getPage(), userSearchDTO.getLimit());
     }
 
     @Override
     public UserDTO getUser(Long id) {
-        return UserAssembler.fromUserEntity(execute(new GetUserDomainService(id)));
+        return iUserRepository.findUser(id);
     }
 
     @Override
@@ -62,7 +61,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         com.chomolungma.system.user.domain.entity.User user = UserAssembler.toEntity(userFormDTO);
         Org org = orgAdapter.adapter(orgId);
         user.setOrg(org);
-        userDomainService.save(user);
+        iUserDomainService.addUser(user);
     }
 
     @Override

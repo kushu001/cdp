@@ -20,4 +20,7 @@ public interface UserConverter {
     UserDO toDO(User user);
 
     User toEntity(UserDO userDO);
+
+    UserDTO toDTO(UserDO userDO);
+
 }

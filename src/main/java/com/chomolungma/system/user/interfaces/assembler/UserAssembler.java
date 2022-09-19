@@ -36,7 +36,11 @@ public class UserAssembler {
     }
 
     public static com.chomolungma.system.user.domain.entity.User toEntity(UserFormDTO userFormDTO){
-        return UserEntityMapStruct.INSTANCE.toUser(userFormDTO);
+        return UserEntityMapStruct.INSTANCE.toEntity(userFormDTO);
+    }
+
+    public static UserDTO toDTO(com.chomolungma.system.user.domain.entity.User user){
+        return UserEntityMapStruct.INSTANCE.toDTO(user);
     }
 
 }
