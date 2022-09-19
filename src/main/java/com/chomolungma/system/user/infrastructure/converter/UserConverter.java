@@ -2,8 +2,8 @@ package com.chomolungma.system.user.infrastructure.converter;
 
 import com.chomolungma.system.user.domain.entity.User;
 import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
 import com.chomolungma.system.user.infrastructure.dataobject.UserDO;
+import com.chomolungma.system.user.interfaces.dto.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -15,7 +15,7 @@ public interface UserConverter {
 
     UserDO toDO(UserEntity userEntity);
 
-    List<UserEntity> toEntity(List<UserOrgDO> userOrgDOS);
+    List<UserEntity> toEntity(List<UserDTO> userOrgDOS);
 
     UserDO toDO(User user);
 

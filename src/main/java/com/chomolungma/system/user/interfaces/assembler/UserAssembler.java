@@ -2,7 +2,6 @@ package com.chomolungma.system.user.interfaces.assembler;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
 import com.chomolungma.system.user.interfaces.dto.*;
 import com.chomolungma.system.user.interfaces.mapstruct.UserEntityMapStruct;
 import com.github.pagehelper.PageInfo;
@@ -22,7 +21,7 @@ public class UserAssembler {
         return UserEntityMapStruct.INSTANCE.toPageUserDTO(userEntity);
     }
 
-    public static PageUserDTO toPageUserDTO(PageInfo<UserOrgDO> userOrgDOPageInfo){
+    public static PageUserDTO toPageUserDTO(PageInfo<UserDTO> userOrgDOPageInfo){
         return UserEntityMapStruct.INSTANCE.toPageUserDTO(userOrgDOPageInfo);
     }
 

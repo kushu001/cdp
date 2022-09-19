@@ -6,7 +6,6 @@ import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMa
 import com.chomolungma.system.user.domain.entity.User;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
-import com.chomolungma.system.user.domain.repository.dataobject.UserOrgDO;
 import com.chomolungma.system.user.infrastructure.converter.UserConverter;
 import com.chomolungma.system.user.infrastructure.dataobject.OrgUserDO;
 import com.chomolungma.system.user.infrastructure.dataobject.UserDO;
@@ -14,6 +13,7 @@ import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgU
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
+import com.chomolungma.system.user.interfaces.dto.UserDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,8 @@ public class UserRepositoryImpl implements IUserRepository {
         List<OrgUserDO> orgUserDOS = orgUserMapper.selectList(new QueryWrapper<OrgUserDO>().in("org_id", orgDOS.stream().map(OrgDO::getId).collect(Collectors.toList())));
         List<Long> userIds = orgUserDOS.stream().map(OrgUserDO::getUserId).collect(Collectors.toList());
         PageHelper.startPage(current, size);
-        List<UserOrgDO> userOrgDOS = userIds.size()==0? new ArrayList<>() : userMapper.pageUsersByIds(userIds);
-        PageInfo<UserOrgDO> pageInfo = new PageInfo<>(userOrgDOS);
+        List<UserDTO> userOrgDOS = userIds.size()==0? new ArrayList<>() : userMapper.pageUsersByIds(userIds);
+        PageInfo<UserDTO> pageInfo = new PageInfo<>(userOrgDOS);
         PageHelper.clearPage();
         return UserAssembler.toPageUserDTO(pageInfo);
     }
@@ -48,17 +48,6 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public List<UserEntity> getUsers(String code, UserEntity userEntity) {
         return UserConverter.INSTANCE.toEntity(userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(userEntity)));
-    }
-
-    @Override
-    public void save(UserEntity userEntity) {
-        // 转换成DO
-        UserDO userDO = UserConverter.INSTANCE.toDO(userEntity);
-        // 新增用户
-        userMapper.insert(userDO);
-        // 建议关联
-
-
     }
 
     @Override

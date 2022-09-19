@@ -7,5 +7,5 @@ import java.util.List;
 
 @Data
 public class PageUserDTO extends PageDTO {
-    private List<User> records;
+    private List<UserDTO> records;
 }

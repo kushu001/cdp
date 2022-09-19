@@ -11,8 +11,6 @@ public interface IUserRepository {
 
     List<UserEntity> getUsers(String code, UserEntity userEntity);
 
-    void save(UserEntity userEntity);
-
     void save(User user);
 
     User findUser(String idNumber);

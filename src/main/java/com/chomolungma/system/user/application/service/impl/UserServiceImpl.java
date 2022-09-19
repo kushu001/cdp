@@ -50,7 +50,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public PageUserDTO getUsersByOrg(String code, UserSearchDTO userSearchDTO) {
         return iUserRepository.getUserByIds(code, userSearchDTO.getPage(), userSearchDTO.getLimit());
-
     }
 
     @Override
