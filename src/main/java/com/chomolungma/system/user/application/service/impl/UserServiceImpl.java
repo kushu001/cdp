@@ -10,7 +10,6 @@ import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
-import com.chomolungma.system.user.domain.service.DeleteUserDomainService;
 import com.chomolungma.system.user.domain.service.impl.IUserDomainService;
 import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgUserMapper;
@@ -21,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends BaseService implements UserService {
@@ -70,7 +70,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public void deleteUsers(String code, List<String> ids) {
-        execute(new DeleteUserDomainService(code, ids));
+        iUserRepository.remove(ids.stream().map(Long::valueOf).collect(Collectors.toList()));
     }
 
 

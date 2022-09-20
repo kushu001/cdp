@@ -14,7 +14,11 @@ public interface IUserRepository {
 
     void save(User user);
 
+    void remove(List<Long> ids);
+
     User findUser(String idNumber);
 
     UserDTO findUser(Long id);
+
+
 }

@@ -75,6 +75,14 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public void remove(List<Long> ids) {
+        // 删除用户信息
+        userMapper.deleteBatchIds(ids);
+        // 删除用户部门关联信息
+        orgUserMapper.delete(new QueryWrapper<OrgUserDO>().in("user_id", ids));
+    }
+
+    @Override
     public User findUser(String idNumber) {
         return UserConverter.INSTANCE.toEntity(userMapper.selectOne(new QueryWrapper<UserDO>().eq("id_number", idNumber)));
     }
