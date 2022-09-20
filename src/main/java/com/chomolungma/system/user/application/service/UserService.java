@@ -14,7 +14,7 @@ public interface UserService {
 
     void createUser(Long orgId, UserFormDTO userFormDTO);
 
-    void updateUser(UserEntity userEntity);
+    void updateUser(com.chomolungma.system.user.domain.entity.User user);
 
     void deleteUsers(String code, List<String> ids);
 

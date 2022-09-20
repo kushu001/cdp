@@ -11,7 +11,6 @@ import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
 import com.chomolungma.system.user.domain.service.DeleteUserDomainService;
-import com.chomolungma.system.user.domain.service.UpdateUserDomainService;
 import com.chomolungma.system.user.domain.service.impl.IUserDomainService;
 import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgUserMapper;
@@ -65,8 +64,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void updateUser(UserEntity userEntity) {
-        execute(new UpdateUserDomainService(userEntity));
+    public void updateUser(com.chomolungma.system.user.domain.entity.User user) {
+        iUserDomainService.modifyUser(user);
     }
 
     @Override

@@ -55,7 +55,7 @@ public class UserController {
 
     @PutMapping
     public Result updateUser(@RequestBody UserFormDTO userFormDTO){
-        userService.updateUser(UserAssembler.toUserEntity(userFormDTO));
+        userService.updateUser(UserAssembler.toEntity(userFormDTO));
         return Result.success();
     }
 

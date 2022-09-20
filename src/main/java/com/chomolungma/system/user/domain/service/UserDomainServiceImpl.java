@@ -21,4 +21,9 @@ public class UserDomainServiceImpl implements IUserDomainService {
         }
     }
 
+    @Override
+    public void modifyUser(User user) {
+        iUserRepository.save(user);
+    }
+
 }

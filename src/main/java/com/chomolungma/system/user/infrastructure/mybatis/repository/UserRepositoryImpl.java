@@ -59,13 +59,19 @@ public class UserRepositoryImpl implements IUserRepository {
     public void save(User user) {
         // 转换成DO
         UserDO userDO = UserConverter.INSTANCE.toDO(user);
-        // 新增用户
-        userMapper.insert(userDO);
-        //新增用户关联
-        OrgUserDO orgUserDO = new OrgUserDO();
-        orgUserDO.setOrgId(user.getOrg().getId());
-        orgUserDO.setUserId(userDO.getId());
-        orgUserMapper.insert(orgUserDO);
+
+        if (userDO.getId() == null){
+            // 新增用户
+            userMapper.insert(userDO);
+            //新增用户关联
+            OrgUserDO orgUserDO = new OrgUserDO();
+            orgUserDO.setOrgId(user.getOrg().getId());
+            orgUserDO.setUserId(userDO.getId());
+            orgUserMapper.insert(orgUserDO);
+        }else{
+            userMapper.updateById(userDO);
+        }
+
     }
 
     @Override

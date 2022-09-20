@@ -24,7 +24,7 @@ public interface UserEntityMapStruct {
     })
     PageUserDTO toPageUserDTO(PageInfo<UserDTO> pageUsers);
 
-    UserEntity toUserEntity(UserFormDTO userFormDTO);
+    UserEntity  toUserEntity(UserFormDTO userFormDTO);
 
     UserDTO fromUserEntity(UserEntity userEntity);
 
