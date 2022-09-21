@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.core.application.service.ExcelService;
+import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
@@ -38,7 +39,21 @@ public class UserController {
     }
 
     @GetMapping("/org/{code}")
-    public Result pageList(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
+    public Result pageList(@PathVariable("code") String code, PageDTO pageDTO,
+                           @RequestParam(required = false) String name,
+                           @RequestParam(value = "id_number", required = false) String idNumber,
+                           @RequestParam(required = false) String phone,
+                           @RequestParam(required = false) String tel,
+                           @RequestParam(required = false) String address
+    ){
+        UserSearchDTO userSearchDTO = new UserSearchDTO();
+        userSearchDTO.setIdNumber(idNumber);
+        userSearchDTO.setName(name);
+        userSearchDTO.setPhone(phone);
+        userSearchDTO.setTel(tel);
+        userSearchDTO.setAddress(address);
+        userSearchDTO.setPage(pageDTO.getPage());
+        userSearchDTO.setLimit(pageDTO.getLimit());
         return Result.success(userService.getUsersByOrg(code, userSearchDTO));
     }
 

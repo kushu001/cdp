@@ -34,4 +34,6 @@ public interface UserEntityMapStruct {
 
     UserDTO toDTO(com.chomolungma.system.user.domain.entity.User user);
 
+    com.chomolungma.system.user.domain.entity.User toEntity(UserSearchDTO userSearchDTO);
+
 }

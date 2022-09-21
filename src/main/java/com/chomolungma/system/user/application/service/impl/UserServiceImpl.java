@@ -47,7 +47,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     private OrgAdapter orgAdapter;
     @Override
     public PageUserDTO getUsersByOrg(String code, UserSearchDTO userSearchDTO) {
-        return iUserRepository.getUsersByCode(code, userSearchDTO.getPage(), userSearchDTO.getLimit());
+        com.chomolungma.system.user.domain.entity.User user = UserAssembler.toEntity(userSearchDTO);
+        return iUserRepository.getUsersByCode(code, user, userSearchDTO.getPage(), userSearchDTO.getLimit());
     }
 
     @Override

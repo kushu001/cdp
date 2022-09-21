@@ -1,7 +1,6 @@
 package com.chomolungma.system.user.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.User;
@@ -21,9 +20,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
@@ -39,12 +36,12 @@ public class UserRepositoryImpl implements IUserRepository {
 
 
     @Override
-    public PageUserDTO getUsersByCode(String code, int current, int size) {
-        List<OrgDO> orgDOS = orgMapper.selectList(new QueryWrapper<OrgDO>().likeRight("code", code));
-        List<OrgUserDO> orgUserDOS = orgUserMapper.selectList(new QueryWrapper<OrgUserDO>().in("org_id", orgDOS.stream().map(OrgDO::getId).collect(Collectors.toList())));
-        List<Long> userIds = orgUserDOS.stream().map(OrgUserDO::getUserId).collect(Collectors.toList());
+    public PageUserDTO getUsersByCode(String code, User user, int current, int size) {
+        //List<OrgDO> orgDOS = orgMapper.selectList(new QueryWrapper<OrgDO>().likeRight("code", code));
+        //List<OrgUserDO> orgUserDOS = orgUserMapper.selectList(new QueryWrapper<OrgUserDO>().in("org_id", orgDOS.stream().map(OrgDO::getId).collect(Collectors.toList())));
+        //List<Long> userIds = orgUserDOS.stream().map(OrgUserDO::getUserId).collect(Collectors.toList());
         PageHelper.startPage(current, size);
-        List<UserDTO> userOrgDOS = userIds.size()==0? new ArrayList<>() : userMapper.pageUsersByIds(userIds);
+        List<UserDTO> userOrgDOS = userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(user));
         PageInfo<UserDTO> pageInfo = new PageInfo<>(userOrgDOS);
         PageHelper.clearPage();
         return UserAssembler.toPageUserDTO(pageInfo);
