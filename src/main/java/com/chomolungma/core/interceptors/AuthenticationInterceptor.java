@@ -1,9 +1,9 @@
 package com.chomolungma.core.interceptors;
 
 import com.chomolungma.common.exception.BusinessRuntimeException;
-import com.chomolungma.common.tools.TokenUtils;
 import com.chomolungma.core.CurrentProfileHolder;
-import com.chomolungma.system.account.entity.AccountEntity;
+import com.chomolungma.system.account.infrastructure.TokenUtils;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.log.application.service.OperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,8 +25,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         }
 
         String[] tokenArray = bearerToken.split(" ");
-        AccountEntity accountEntity = TokenUtils.decode(tokenArray[1]);
-        CurrentProfileHolder.setContext(accountEntity);
+        AccountDTO account = TokenUtils.decode(tokenArray[1]);
+        CurrentProfileHolder.setContext(account);
         operateLogService.generateOperateLog();
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

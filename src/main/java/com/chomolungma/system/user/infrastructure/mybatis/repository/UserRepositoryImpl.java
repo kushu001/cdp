@@ -37,13 +37,10 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public PageUserDTO getUsersByCode(String code, User user, int current, int size) {
-        //List<OrgDO> orgDOS = orgMapper.selectList(new QueryWrapper<OrgDO>().likeRight("code", code));
-        //List<OrgUserDO> orgUserDOS = orgUserMapper.selectList(new QueryWrapper<OrgUserDO>().in("org_id", orgDOS.stream().map(OrgDO::getId).collect(Collectors.toList())));
-        //List<Long> userIds = orgUserDOS.stream().map(OrgUserDO::getUserId).collect(Collectors.toList());
         PageHelper.startPage(current, size);
         List<UserDTO> userOrgDOS = userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(user));
         PageInfo<UserDTO> pageInfo = new PageInfo<>(userOrgDOS);
-        PageHelper.clearPage();
+        //PageHelper.clearPage();
         return UserAssembler.toPageUserDTO(pageInfo);
     }
 

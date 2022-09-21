@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountMapper">
+    <!-- 根据账户id 查询角色信息 -->
+    <select id="selectRolesByAccountId" parameterType="java.lang.Long" resultType="com.chomolungma.system.account.infrastructure.dto.RoleDTO">
+        select
+            sr.id,
+            sr.name,
+            sr.code,
+            sr.remark
+        from
+            sys_account_role sar
+            left join sys_role sr on
+            sar.role_id = sr.id
+        <where>
+            sar.account_id = #{accountId, jdbcType=BIGINT}
+        </where>
+    </select>
+
+</mapper>

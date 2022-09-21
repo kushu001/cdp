@@ -1,15 +1,15 @@
 package com.chomolungma.core;
 
-import com.chomolungma.system.account.entity.AccountEntity;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 
 public class CurrentProfileHolder {
-    private static ThreadLocal<AccountEntity> context = new ThreadLocal<>();
+    private static ThreadLocal<AccountDTO> context = new ThreadLocal<>();
 
-    public static void setContext(AccountEntity accountEntity) {
-        context.set(accountEntity);
+    public static void setContext(AccountDTO account) {
+        context.set(account);
     }
 
-    public static AccountEntity getProfile(){
+    public static AccountDTO getProfile(){
         return context.get();
     }
 

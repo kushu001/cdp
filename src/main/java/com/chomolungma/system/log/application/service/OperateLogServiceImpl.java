@@ -1,7 +1,7 @@
 package com.chomolungma.system.log.application.service;
 
 import com.chomolungma.core.CurrentProfileHolder;
-import com.chomolungma.system.account.entity.AccountEntity;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.log.domain.repository.IOperateLogRepository;
 import com.chomolungma.system.log.interfaces.dto.OperateLogDTO;
 import org.apache.ibatis.logging.Log;
@@ -24,9 +24,9 @@ public class OperateLogServiceImpl implements OperateLogService{
 
     @Override
     public Void generateOperateLog() throws IOException {
-        AccountEntity accountEntity = CurrentProfileHolder.getProfile();
+        AccountDTO accountDTO = CurrentProfileHolder.getProfile();
         OperateLogDTO operateLogDTO = new OperateLogDTO();
-        operateLogDTO.setUser(accountEntity.getUsername());
+        operateLogDTO.setUser(accountDTO.getUsername());
         operateLogDTO.setUrl(request.getRequestURL().substring(0, request.getRequestURL().length()- request.getRequestURI().length()));
         operateLogDTO.setResourceName(request.getRequestURI());
         operateLogDTO.setPathPayload(request.getQueryString());
