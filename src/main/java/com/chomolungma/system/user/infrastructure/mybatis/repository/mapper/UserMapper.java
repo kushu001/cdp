@@ -8,7 +8,5 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UserMapper extends BaseMapper<UserDO> {
-    List<UserDTO> pageUsersByIds(List<Long> ids);
-
     List<UserDTO> selectUsersByCondition(@Param("code") String code, @Param("userDO") UserDO userDO);
 }
