@@ -1,6 +1,5 @@
 package com.chomolungma.system.user.application.service.impl;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.org.domain.repository.IOrgRepository;
@@ -81,9 +80,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity) {
-        //return UserAssembler.toPageUserDTO(userMapper.selectPage(page, new QueryWrapper<UserEntity>().like(userEntity.getName() !=null,"name",userEntity.getName())));
-        return null; //TODO
+    public PageUserDTO getUsers(UserSearchDTO userSearchDTO) {
+        return iUserRepository.getUsers(UserAssembler.toEntity(userSearchDTO), userSearchDTO.getPage(), userSearchDTO.getLimit());
     }
 
     @Override

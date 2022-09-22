@@ -1,6 +1,5 @@
 package com.chomolungma.system.user.application.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.interfaces.dto.*;
@@ -20,7 +19,7 @@ public interface UserService {
 
     List<MenuDTO> getMenus(List<Long> roleIds);
 
-    PageUserDTO getUsers(Page<UserEntity> page, UserEntity userEntity);
+    PageUserDTO getUsers(UserSearchDTO userSearchDTO);
 
     List<User> getUsers(String code, UserEntity userEntity);
 }

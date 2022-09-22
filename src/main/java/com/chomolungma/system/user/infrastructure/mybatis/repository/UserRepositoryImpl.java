@@ -45,6 +45,11 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
+    public PageUserDTO getUsers(User user, int current, int size) {
+        return getUsersByCode(null, user, current, size);
+    }
+
+    @Override
     public List<UserEntity> getUsers(String code, UserEntity userEntity) {
         return UserConverter.INSTANCE.toEntity(userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(userEntity)));
     }

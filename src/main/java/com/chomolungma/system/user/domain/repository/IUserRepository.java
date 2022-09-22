@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IUserRepository {
     PageUserDTO getUsersByCode(String code, User user, int current, int size);
+    PageUserDTO getUsers(User user, int current, int size);
 
     List<UserEntity> getUsers(String code, UserEntity userEntity);
 
