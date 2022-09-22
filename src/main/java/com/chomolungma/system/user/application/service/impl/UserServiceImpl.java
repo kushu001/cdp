@@ -3,7 +3,6 @@ package com.chomolungma.system.user.application.service.impl;
 import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.org.domain.repository.IOrgRepository;
-import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.role.domain.service.GetMenuDomainService;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.domain.entity.Org;
@@ -11,8 +10,6 @@ import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
 import com.chomolungma.system.user.domain.service.impl.IUserDomainService;
 import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
-import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.OrgUserMapper;
-import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +22,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private GetMenuDomainService getMenuDomainService;
-
     @Autowired
     private IUserRepository iUserRepository;
     @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private OrgMapper orgMapper;
-
-    @Autowired
-    private OrgUserMapper orgUserMapper;
-
-    @Autowired
     private IUserDomainService iUserDomainService;
-
     @Autowired
     private IOrgRepository iOrgRepository;
-
     @Autowired
     private OrgAdapter orgAdapter;
     @Override
