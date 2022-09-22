@@ -7,7 +7,6 @@ import com.chomolungma.system.account.domain.repository.IAccountRepository;
 import com.chomolungma.system.account.infrastructure.converter.AccountConverter;
 import com.chomolungma.system.account.infrastructure.converter.AccountUserConverter;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountDO;
-import com.chomolungma.system.account.infrastructure.dataobject.AccountRoleDO;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
 import com.chomolungma.system.account.infrastructure.dto.RoleDTO;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountMapper;
@@ -15,6 +14,7 @@ import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.A
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountPageDTO;
+import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
@@ -30,10 +30,14 @@ public class AccountRepositoryImpl implements IAccountRepository {
 
     private AccountRoleMapper accountRoleMapper;
 
-    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, AccountRoleMapper accountRoleMapper){
+    private UserMapper userMapper;
+
+
+    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, AccountRoleMapper accountRoleMapper, UserMapper userMapper){
         this.accountMapper = accountMapper;
         this.accountUserRoleMapper = accountUserRoleMapper;
         this.accountRoleMapper = accountRoleMapper;
+        this.userMapper = userMapper;
     }
     @Override
     public Void save(Account account) {
@@ -83,10 +87,11 @@ public class AccountRepositoryImpl implements IAccountRepository {
     @Override
     public AccountDTO queryAccount(Long id) {
         AccountDO accountDO = accountMapper.selectById(id);
-        List<AccountRoleDO> roles = accountRoleMapper.selectList(new QueryWrapper<AccountRoleDO>().select("role_id").eq("account_id", id));
+        List<RoleDTO> roles= accountMapper.selectRolesByAccountId(id);
         AccountDTO accountDTO = AccountAssembler.toDTO(accountDO);
-        accountDTO.setRoleIds(roles.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList()));
-
+        accountDTO.setRoleIds(roles.stream().map(RoleDTO::getId).collect(Collectors.toList()));
+        accountDTO.setRoleName(roles.stream().map(RoleDTO::getName).collect(Collectors.joining(",")));
+        accountDTO.setName(userMapper.selectById(accountDO.getUserId()).getName());
         return accountDTO;
     }
 
