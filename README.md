@@ -14,6 +14,11 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
    以SpringBoot为基础，利用mybatis持久框架进行后端服务的实现，开发的一套后端框架 cdp
    
    目前正在做后端代码的领域驱动设计的改造，将业务代码和技术代码进行分离，使之更好的适应将来技术的变更，而不影响业务代码的改变
+   
+   成果（目前主要精力放在优化代码架构上）：
+   
+   <img width="279" alt="image" src="https://user-images.githubusercontent.com/3797320/191653532-a6cdcda0-b23a-46c8-9cd1-d42df52848a7.png">
+   <img width="221" alt="image" src="https://user-images.githubusercontent.com/3797320/191653665-46686166-0e64-4909-b1b8-fbdf5985de34.png">
 
 ## 安装教程
 前端
