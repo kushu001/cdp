@@ -1,4 +1,4 @@
-package com.chomolungma.system.role.domain.repository.dataobject;
+package com.chomolungma.system.role.infrastructure.dataobject;
 
 import lombok.Data;
 

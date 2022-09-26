@@ -1,18 +1,19 @@
 package com.chomolungma.system.role.interfaces.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
+import com.chomolungma.core.interfaces.dto.PageDTO;
+import com.chomolungma.system.role.application.service.RoleService;
+import com.chomolungma.system.role.domain.enity.RoleEntity;
+import com.chomolungma.system.role.domain.repository.IRoleRepository;
 import com.chomolungma.system.role.interfaces.assembler.RoleAssembler;
 import com.chomolungma.system.role.interfaces.dto.InPermissionDTO;
 import com.chomolungma.system.role.interfaces.dto.InRoleFormDTO;
-import com.chomolungma.system.role.interfaces.dto.OutRoleSearchDTO;
-import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.interfaces.dto.InRoleSearchDTO;
-import com.chomolungma.system.role.application.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/role")
@@ -21,22 +22,30 @@ public class RoleController {
     @Autowired
     public RoleService roleService;
 
+    @Autowired
+    public IRoleRepository iRoleRepository;
+
     @GetMapping
-    public Result pageList(InRoleSearchDTO inRoleSearchDTO){
+    public Result pageList(PageDTO pageDTO,
+                           @RequestParam(required = false) String name,
+                           @RequestParam(required = false) String code,
+                           @RequestParam(required = false) Integer status){
+        InRoleSearchDTO inRoleSearchDTO = new InRoleSearchDTO();
+        inRoleSearchDTO.setName(name);
+        inRoleSearchDTO.setCode(code);
+        inRoleSearchDTO.setStatus(status);
         RoleEntity role = RoleAssembler.toEntity(inRoleSearchDTO);
-        OutRoleSearchDTO pageResult = roleService.getPageRoles(new Page<>(inRoleSearchDTO.getPage(), inRoleSearchDTO.getLimit()),role);
-        return Result.success(pageResult);
+        return Result.success(RoleAssembler.toDTO(iRoleRepository.query(pageDTO.getPage(), pageDTO.getLimit(), role)));
     }
 
     @GetMapping("/all")
-    public Result list(InRoleFormDTO inRoleFormDTO){
-        RoleEntity role = RoleAssembler.toEntity(inRoleFormDTO);
-        return Result.success(roleService.getRoles(role));
+    public Result list(){
+        return Result.success(iRoleRepository.queryAll());
     }
 
     @GetMapping("/{id}")
     public Result info(@PathVariable("id") Long id){
-        return Result.success(roleService.getRole(id));
+        return Result.success(iRoleRepository.query(id));
     }
 
     @PostMapping
@@ -55,7 +64,8 @@ public class RoleController {
 
     @DeleteMapping("/{ids}")
     public Result deleteById(@PathVariable("ids") String ids){
-        roleService.deleteByIds(Arrays.asList(ids.split(",")));
+        //roleService.deleteByIds(Arrays.asList(ids.split(",")));
+        iRoleRepository.remove(Arrays.stream(ids.split(",")).map(Long::valueOf).collect(Collectors.toList()));
         return Result.success();
     }
 

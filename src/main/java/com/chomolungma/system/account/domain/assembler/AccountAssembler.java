@@ -27,7 +27,6 @@ public class AccountAssembler {
             Role role = new Role();
             role.setId(roleId);
             roles.add(role);
-
         }
         account.setRoles(roles);
         return account;

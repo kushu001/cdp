@@ -1,4 +1,4 @@
-package com.chomolungma.system.role.domain.repository.dataobject;
+package com.chomolungma.system.role.infrastructure.dataobject;
 
 import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
 import lombok.Data;

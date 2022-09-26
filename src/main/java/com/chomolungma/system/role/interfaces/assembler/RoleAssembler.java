@@ -7,6 +7,7 @@ import com.chomolungma.system.role.interfaces.dto.InRoleSearchDTO;
 import com.chomolungma.system.role.interfaces.dto.OutRoleFormDTO;
 import com.chomolungma.system.role.interfaces.dto.OutRoleSearchDTO;
 import com.chomolungma.system.role.interfaces.mapstruct.RoleEntityMapStruct;
+import com.github.pagehelper.PageInfo;
 
 public class RoleAssembler {
     public static RoleEntity toEntity(InRoleSearchDTO inRoleSearchDTO){
@@ -25,6 +26,8 @@ public class RoleAssembler {
         return RoleEntityMapStruct.INSTANCE.toOutRoleFormDTO(roleEntity);
     }
 
-
+    public static OutRoleSearchDTO toDTO(PageInfo<RoleEntity> pageInfo){
+        return RoleEntityMapStruct.INSTANCE.toDTO(pageInfo);
+    }
 
 }
