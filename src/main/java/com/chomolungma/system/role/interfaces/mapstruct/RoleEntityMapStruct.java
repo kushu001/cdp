@@ -1,8 +1,10 @@
 package com.chomolungma.system.role.interfaces.mapstruct;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.chomolungma.system.role.interfaces.dto.*;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
+import com.chomolungma.system.role.interfaces.dto.InRoleFormDTO;
+import com.chomolungma.system.role.interfaces.dto.InRoleSearchDTO;
+import com.chomolungma.system.role.interfaces.dto.OutRoleSearchDTO;
+import com.chomolungma.system.role.interfaces.dto.Role;
 import com.github.pagehelper.PageInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,10 +20,6 @@ public interface RoleEntityMapStruct {
     RoleEntity fromSearchDTO(InRoleSearchDTO inRoleSearchDTO);
 
     RoleEntity fromFormDTO(InRoleFormDTO inRoleFormDTO);
-
-    OutRoleSearchDTO toOutRoleSearchDTO(IPage<RoleEntity> rolePage);
-
-    OutRoleFormDTO toOutRoleFormDTO(RoleEntity role);
 
     List<Role> toList(List<RoleEntity> roles);
 

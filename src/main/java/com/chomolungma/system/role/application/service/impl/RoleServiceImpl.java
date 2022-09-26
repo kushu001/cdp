@@ -31,11 +31,6 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
-        roleMapper.deleteBatchIds(ids);
-    }
-
-    @Override
     public void authorized(Long roleId, List<RoleMenuDTO> permissions) {
         iRoleRepository.save(roleId, permissions);
     }

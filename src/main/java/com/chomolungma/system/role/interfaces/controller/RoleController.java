@@ -64,7 +64,6 @@ public class RoleController {
 
     @DeleteMapping("/{ids}")
     public Result deleteById(@PathVariable("ids") String ids){
-        //roleService.deleteByIds(Arrays.asList(ids.split(",")));
         iRoleRepository.remove(Arrays.stream(ids.split(",")).map(Long::valueOf).collect(Collectors.toList()));
         return Result.success();
     }
