@@ -1,7 +1,11 @@
 package com.chomolungma.system.org.domain.repository;
 
-import com.chomolungma.system.org.pojo.Org;
+import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.interfaces.dto.OrgDTO;
+
+import java.util.List;
 
 public interface IOrgRepository {
-    Org find(Long id);
+    OrgEntity findOne(Long id);
+    List<OrgEntity> find(OrgDTO orgDTO);
 }

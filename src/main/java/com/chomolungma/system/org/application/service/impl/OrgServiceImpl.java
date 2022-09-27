@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.system.org.application.service.OrgService;
+import com.chomolungma.system.org.domain.entity.OrgEntity;
 import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.org.interfaces.mapstruct.OrgEntityMapStruct;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
-import com.chomolungma.system.org.pojo.Org;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +23,13 @@ public class OrgServiceImpl implements OrgService {
     }
 
     @Override
-    public IPage<Org> queryOrg(Page<Org> page, Org org) {
+    public IPage<OrgEntity> queryOrg(Page<OrgEntity> page, OrgEntity org) {
         // orgMapper.selectPageVo(page,org);
         return null;
     }
 
     @Override
-    public List<Org> query(Org org) {
+    public List<OrgEntity> query(OrgEntity org) {
         return null; //orgMapper.selectVo(org);
     }
 

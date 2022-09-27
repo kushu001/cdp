@@ -1,5 +1,6 @@
 package com.chomolungma.system.user.infrastructure.adapter;
 
+import com.chomolungma.system.org.domain.entity.OrgEntity;
 import com.chomolungma.system.org.domain.repository.IOrgRepository;
 import com.chomolungma.system.user.domain.entity.Org;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ public class OrgAdapter {
     private IOrgRepository orgRepository;
 
     public Org adapter(Long orgId){
-        com.chomolungma.system.org.pojo.Org org  = orgRepository.find(orgId);
+        OrgEntity org  = orgRepository.findOne(orgId);
         Org userOrg = new Org();
         userOrg.setId(org.getId());
         userOrg.setName(org.getName());

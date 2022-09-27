@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.org.application.service.OrgService;
 import com.chomolungma.system.org.domain.entity.OrgEntity;
+import com.chomolungma.system.org.domain.repository.IOrgRepository;
 import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.org.interfaces.assembler.OrgAssembler;
+import com.chomolungma.system.org.interfaces.dto.OrgDTO;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
-import com.chomolungma.system.org.interfaces.param.OrgSearchParam;
 import com.chomolungma.system.user.application.service.UserService;
 import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
 import org.springframework.web.bind.annotation.*;
@@ -26,23 +27,25 @@ public class OrgController {
 
     private OrgMapper orgMapper;
 
-    public OrgController(OrgService orgService,UserService userService, OrgMapper orgMapper){
+    private IOrgRepository iOrgRepository;
+
+    public OrgController(OrgService orgService, UserService userService, OrgMapper orgMapper, IOrgRepository iOrgRepository){
         this.orgService = orgService;
         this.userService = userService;
         this.orgMapper = orgMapper;
+        this.iOrgRepository = iOrgRepository;
     }
 
     @GetMapping
-    public Result queryOrg(OrgSearchParam orgSearchParam){
-       List<OrgEntity> orgList = orgMapper.selectVo(OrgAssembler.convertParamToEntity(orgSearchParam));
+    public Result queryOrg(OrgDTO orgDTO){
+        List<OrgEntity> orgList = iOrgRepository.find(orgDTO);
         return Result.success(OrgAssembler.toDTO(orgList));
-
     }
 
 
     @GetMapping("/{id}")
     public Result getOrg(@PathVariable("id") Long id){
-        return Result.success(orgMapper.selectById(id));
+        return Result.success(iOrgRepository.findOne(id));
     }
 
     @GetMapping("/all")
