@@ -1,11 +1,9 @@
 package com.chomolungma.system.org.interfaces.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.org.application.service.OrgService;
 import com.chomolungma.system.org.domain.entity.OrgEntity;
 import com.chomolungma.system.org.domain.repository.IOrgRepository;
-import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.org.interfaces.assembler.OrgAssembler;
 import com.chomolungma.system.org.interfaces.dto.OrgDTO;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
@@ -25,14 +23,11 @@ public class OrgController {
 
     private UserService userService;
 
-    private OrgMapper orgMapper;
-
     private IOrgRepository iOrgRepository;
 
-    public OrgController(OrgService orgService, UserService userService, OrgMapper orgMapper, IOrgRepository iOrgRepository){
+    public OrgController(OrgService orgService, UserService userService, IOrgRepository iOrgRepository){
         this.orgService = orgService;
         this.userService = userService;
-        this.orgMapper = orgMapper;
         this.iOrgRepository = iOrgRepository;
     }
 
@@ -48,12 +43,6 @@ public class OrgController {
         return Result.success(iOrgRepository.findOne(id));
     }
 
-    @GetMapping("/all")
-    public Result queryAll(){
-        return Result.success(orgMapper.selectList(new QueryWrapper<>()));
-    }
-
-
     @PostMapping
     public Result createOrg(@RequestBody OrgParam orgParam){
         orgService.createOrg(orgParam);
@@ -68,7 +57,7 @@ public class OrgController {
 
     @DeleteMapping("/{id}")
     public Result deleteOrg(@PathVariable("id") Long id){
-        orgService.deleteOrg(id);
+        iOrgRepository.remove(id);
         return Result.success();
     }
 

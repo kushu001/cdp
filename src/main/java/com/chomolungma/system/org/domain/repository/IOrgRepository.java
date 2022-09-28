@@ -8,4 +8,6 @@ import java.util.List;
 public interface IOrgRepository {
     OrgEntity findOne(Long id);
     List<OrgEntity> find(OrgDTO orgDTO);
+    void save(OrgEntity org);
+    void remove(Long id);
 }

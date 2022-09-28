@@ -16,5 +16,7 @@ public interface OrgConverter {
 
     OrgDO toDO(OrgDTO orgDTO);
 
+    OrgDO toDO(OrgEntity org);
+
     List<OrgEntity> toEntity(List<OrgDO> orgDOS);
 }
