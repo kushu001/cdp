@@ -1,6 +1,6 @@
-package com.chomolungma.system.log.domain.repository.mapper;
+package com.chomolungma.system.log.infrastructure.mybatis.repository.mapper;
 
-import com.chomolungma.system.log.domain.repository.dataobject.OperateLogDO;
+import com.chomolungma.system.log.infrastructure.dataobject.OperateLogDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

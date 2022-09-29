@@ -1,7 +1,7 @@
-package com.chomolungma.system.log.domain.repository.converter;
+package com.chomolungma.system.log.infrastructure.converter;
 
 import com.chomolungma.system.log.domain.entity.OperateLogEntity;
-import com.chomolungma.system.log.domain.repository.dataobject.OperateLogDO;
+import com.chomolungma.system.log.infrastructure.dataobject.OperateLogDO;
 import com.chomolungma.system.log.interfaces.dto.OperateLogDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

@@ -1,7 +1,7 @@
 package com.chomolungma.system.log.interfaces.assembler;
 
 import com.chomolungma.system.log.domain.entity.OperateLogEntity;
-import com.chomolungma.system.log.domain.repository.dataobject.OperateLogDO;
+import com.chomolungma.system.log.infrastructure.dataobject.OperateLogDO;
 import com.chomolungma.system.log.interfaces.dto.OperateLogDTO;
 import com.chomolungma.system.log.interfaces.dto.OperateLogPageDTO;
 import com.github.pagehelper.PageInfo;

@@ -1,4 +1,4 @@
-package com.chomolungma.system.log.domain.repository.dataobject;
+package com.chomolungma.system.log.infrastructure.dataobject;
 
 import com.chomolungma.core.dataobject.BaseDO;
 import lombok.Data;
