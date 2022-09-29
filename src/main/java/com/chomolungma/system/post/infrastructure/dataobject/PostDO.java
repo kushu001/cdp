@@ -1,13 +1,14 @@
-package com.chomolungma.system.post.repository.dataobject;
+package com.chomolungma.system.post.infrastructure.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.chomolungma.core.dataobject.BaseDO;
 import lombok.Data;
 
 @Data
-public class QueryPostDO extends BaseDO {
+@TableName("sys_post")
+public class PostDO extends BaseDO {
     private String name;
     private String code;
     private String type;
-    private String typeName;
     private Integer sort;
 }
