@@ -1,17 +1,17 @@
 package com.chomolungma.system.dict.interfaces.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.common.result.Result;
+import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.dict.application.service.DictService;
 import com.chomolungma.system.dict.domain.entity.DictEntity;
-import com.chomolungma.system.dict.domain.mapper.DictMapper;
+import com.chomolungma.system.dict.domain.repository.IDictRepository;
+import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictMapper;
 import com.chomolungma.system.dict.interfaces.assembler.DictAssembler;
-import com.chomolungma.system.dict.interfaces.param.DictItemParam;
 import com.chomolungma.system.dict.interfaces.param.DictParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/dict")
@@ -21,26 +21,22 @@ public class DictController{
 
     private DictService dictService;
 
-    public DictController(DictMapper dictMapper,DictService dictService){
+    private IDictRepository iDictRepository;
+
+    public DictController(DictMapper dictMapper,DictService dictService, IDictRepository iDictRepository){
         this.dictMapper = dictMapper;
         this.dictService = dictService;
+        this.iDictRepository = iDictRepository;
     }
 
-
-//    @GetMapping
-//    public Result queryDict(){
-//        return Result.success(dictService.queryDictTree());
-//    }
-
     @GetMapping
-    public Result pageList(DictParam dictParam){
-        IPage<DictEntity> pages = dictService.queryPageDict(new Page<>(dictParam.getPage(),dictParam.getLimit()),dictParam.getParam());
-        return Result.success(DictAssembler.covertToDTO(pages));
+    public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String param){
+        return Result.success(iDictRepository.query(pageDTO.getPage(), pageDTO.getLimit(), param));
     }
 
     @GetMapping("/{id}")
     public Result info(@PathVariable("id") Long id){
-        return Result.success(DictAssembler.covertToDictDTO(dictService.getDict(id)));
+        return Result.success(iDictRepository.query(id));
     }
 
     @PostMapping
@@ -58,28 +54,7 @@ public class DictController{
 
     @DeleteMapping("/{ids}")
     public Result deleteDict(@PathVariable String ids){
-        dictMapper.deleteBatchIds(Arrays.asList(ids.split(",").clone()));
-        return Result.success();
-    }
-
-
-    @PostMapping("/item")
-    public Result createDictItem(@RequestBody DictItemParam dictItemParam){
-        //dictService.createDictItem(dictItemParam);
-        return Result.success();
-    }
-
-
-    @PutMapping("/item")
-    public Result updateDictItem(@RequestBody DictItemParam dictItemParam){
-        //dictService.updateDictItem(dictItemParam);
-        return Result.success();
-    }
-
-
-    @DeleteMapping("/item/{ids}")
-    public Result deleteDictItem(@PathVariable String ids){
-        //dictService.deleteDictItem(Arrays.asList(ids.split(",").clone()));
+        iDictRepository.remove(Arrays.stream(ids.split(",")).map(Long::valueOf).collect(Collectors.toList()));
         return Result.success();
     }
 }
