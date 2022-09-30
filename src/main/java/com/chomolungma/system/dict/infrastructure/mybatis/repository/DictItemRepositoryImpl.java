@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class DictItemRepositoryImpl implements IDictItemRepository {
     @Override
     public DictItemPageDTO query(int current, int size,Long dictId, String name, String code) {
         PageHelper.startPage(current, size);
-        List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).like(name != null, "name", name).or().like(code != null, "code", code));
+        List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).like(!StringUtils.isEmpty(name), "name", name).or().like(!StringUtils.isEmpty(code), "code", code));
         PageInfo<DictItemDO> pageInfo = new PageInfo<>(dictItemDOS);
         return DictItemConverter.INSTANCE.toDTO(pageInfo);
     }

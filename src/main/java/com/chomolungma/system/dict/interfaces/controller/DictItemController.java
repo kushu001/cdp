@@ -28,7 +28,7 @@ public class DictItemController {
 
     @GetMapping("/{dictId}/{id}")
     public Result info(@PathVariable("dictId") Long dictId, @PathVariable("id") Long id){
-        return Result.success(iDictItemRepository.query(id));
+        return Result.success(DictItemAssembler.toDTO(iDictItemRepository.query(id)));
     }
 
     @PostMapping("/{dictId}")
