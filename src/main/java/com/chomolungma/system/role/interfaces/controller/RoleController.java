@@ -9,7 +9,6 @@ import com.chomolungma.system.role.interfaces.assembler.RoleAssembler;
 import com.chomolungma.system.role.interfaces.dto.InPermissionDTO;
 import com.chomolungma.system.role.interfaces.dto.InRoleFormDTO;
 import com.chomolungma.system.role.interfaces.dto.InRoleSearchDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -19,11 +18,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/role")
 public class RoleController {
 
-    @Autowired
-    public RoleService roleService;
+    public final RoleService roleService;
 
-    @Autowired
-    public IRoleRepository iRoleRepository;
+    public final IRoleRepository iRoleRepository;
+
+    public RoleController(RoleService roleService, IRoleRepository iRoleRepository) {
+        this.roleService = roleService;
+        this.iRoleRepository = iRoleRepository;
+    }
 
     @GetMapping
     public Result pageList(PageDTO pageDTO,

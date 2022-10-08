@@ -13,15 +13,17 @@ import com.chomolungma.system.role.infrastructure.mybatis.repository.mapper.Role
 import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class RoleRepositoryImpl implements IRoleRepository {
-    @Autowired
-    private RoleMapper roleMapper;
+    private final RoleMapper roleMapper;
+
+    public RoleRepositoryImpl(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
+    }
 
     @Override
     public void save(Long roleId, List<RoleMenuDTO> permissions) {

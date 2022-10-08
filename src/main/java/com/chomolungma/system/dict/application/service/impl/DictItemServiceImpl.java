@@ -4,17 +4,16 @@ import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.dict.application.service.DictItemService;
 import com.chomolungma.system.dict.domain.entity.DictItemEntity;
 import com.chomolungma.system.dict.domain.repository.IDictItemRepository;
-import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictItemMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DictItemServiceImpl extends BaseService implements DictItemService {
-    @Autowired
-    private DictItemMapper dictItemMapper;
 
-    @Autowired
-    private IDictItemRepository iDictItemRepository;
+    private final IDictItemRepository iDictItemRepository;
+
+    public DictItemServiceImpl(IDictItemRepository iDictItemRepository) {
+        this.iDictItemRepository = iDictItemRepository;
+    }
 
     @Override
     public Void createDictItem(DictItemEntity dictItemEntity) {

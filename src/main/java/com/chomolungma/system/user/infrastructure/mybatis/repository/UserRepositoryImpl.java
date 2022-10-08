@@ -1,7 +1,6 @@
 package com.chomolungma.system.user.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.User;
 import com.chomolungma.system.user.domain.entity.UserEntity;
@@ -17,22 +16,22 @@ import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
 import com.chomolungma.system.user.interfaces.dto.UserDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private OrgUserMapper orgUserMapper;
-    @Autowired
-    private OrgMapper orgMapper;
+    private final UserMapper userMapper;
+    private final OrgUserMapper orgUserMapper;
 
-    @Autowired
-    private OrgAdapter orgAdapter;
+    private final OrgAdapter orgAdapter;
+
+    public UserRepositoryImpl(UserMapper userMapper, OrgUserMapper orgUserMapper, OrgAdapter orgAdapter) {
+        this.userMapper = userMapper;
+        this.orgUserMapper = orgUserMapper;
+        this.orgAdapter = orgAdapter;
+    }
 
 
     @Override

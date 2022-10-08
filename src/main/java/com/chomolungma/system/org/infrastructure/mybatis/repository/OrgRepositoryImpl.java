@@ -7,15 +7,18 @@ import com.chomolungma.system.org.infrastructure.converter.OrgConverter;
 import com.chomolungma.system.org.infrastructure.dataobject.OrgDO;
 import com.chomolungma.system.org.infrastructure.mybatis.repository.mapper.OrgMapper;
 import com.chomolungma.system.org.interfaces.dto.OrgDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class OrgRepositoryImpl implements IOrgRepository {
-    @Autowired
-    private OrgMapper orgMapper;
+    private final OrgMapper orgMapper;
+
+    public OrgRepositoryImpl(OrgMapper orgMapper) {
+        this.orgMapper = orgMapper;
+    }
+
     @Override
     public OrgEntity findOne(Long id) {
         OrgDO orgDo = orgMapper.selectById(id);

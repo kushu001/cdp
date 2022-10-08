@@ -6,12 +6,10 @@ import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.core.application.service.ExcelService;
 import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.user.application.service.UserService;
-import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.chomolungma.system.user.interfaces.assembler.UserAssembler;
 import com.chomolungma.system.user.interfaces.dto.UserExcelDTO;
 import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
 import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,13 +20,13 @@ import java.util.List;
 @RequestMapping("/api/v1/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ExcelService excelService;
 
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private ExcelService excelService;
+    public UserController(UserService userService, ExcelService excelService) {
+        this.userService = userService;
+        this.excelService = excelService;
+    }
 
     @GetMapping
     public Result pageList(PageDTO pageDTO,

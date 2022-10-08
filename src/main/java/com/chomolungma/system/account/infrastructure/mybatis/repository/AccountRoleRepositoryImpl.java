@@ -4,14 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.system.account.domain.repository.IAccountRoleRepository;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountRoleDO;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountRoleMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountRoleRepositoryImpl implements IAccountRoleRepository {
 
-    @Autowired
-    private AccountRoleMapper accountRoleMapper;
+    private final AccountRoleMapper accountRoleMapper;
+
+    public AccountRoleRepositoryImpl(AccountRoleMapper accountRoleMapper) {
+        this.accountRoleMapper = accountRoleMapper;
+    }
 
     @Override
     public Void save(Long accountId, Long roleId) {

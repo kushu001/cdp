@@ -7,7 +7,6 @@ import com.chomolungma.system.account.domain.entity.Role;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
 import com.chomolungma.system.account.domain.repository.IAccountRoleRepository;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +15,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService{
-    @Autowired
-    private IAccountRepository iAccountRepository;
-    @Autowired
-    private IAccountRoleRepository iAccountRoleRepository;
+    private final IAccountRepository iAccountRepository;
+    private final IAccountRoleRepository iAccountRoleRepository;
+
+    public AccountServiceImpl(IAccountRepository iAccountRepository, IAccountRoleRepository iAccountRoleRepository) {
+        this.iAccountRepository = iAccountRepository;
+        this.iAccountRoleRepository = iAccountRoleRepository;
+    }
 
     @Override
     public Void resetPassword(Long id) {

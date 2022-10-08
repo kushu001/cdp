@@ -5,7 +5,6 @@ import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.dict.application.service.DictService;
 import com.chomolungma.system.dict.domain.entity.DictEntity;
 import com.chomolungma.system.dict.domain.repository.IDictRepository;
-import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictMapper;
 import com.chomolungma.system.dict.interfaces.assembler.DictAssembler;
 import com.chomolungma.system.dict.interfaces.param.DictParam;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +16,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/dict")
 public class DictController{
 
-    private DictMapper dictMapper;
 
-    private DictService dictService;
+    private final DictService dictService;
 
-    private IDictRepository iDictRepository;
+    private final IDictRepository iDictRepository;
 
-    public DictController(DictMapper dictMapper,DictService dictService, IDictRepository iDictRepository){
-        this.dictMapper = dictMapper;
+    public DictController(DictService dictService, IDictRepository iDictRepository){
+
         this.dictService = dictService;
         this.iDictRepository = iDictRepository;
     }

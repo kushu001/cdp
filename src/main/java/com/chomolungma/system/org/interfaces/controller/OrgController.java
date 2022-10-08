@@ -19,11 +19,11 @@ import java.util.List;
 @RequestMapping("/api/v1/org")
 public class OrgController {
 
-    private OrgService orgService;
+    private final OrgService orgService;
 
-    private UserService userService;
+    private final UserService userService;
 
-    private IOrgRepository iOrgRepository;
+    private final IOrgRepository iOrgRepository;
 
     public OrgController(OrgService orgService, UserService userService, IOrgRepository iOrgRepository){
         this.orgService = orgService;

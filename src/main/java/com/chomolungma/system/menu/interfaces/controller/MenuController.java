@@ -7,7 +7,6 @@ import com.chomolungma.system.menu.domain.entity.MenuEntity;
 import com.chomolungma.system.menu.interfaces.assembler.MenuAssembler;
 import com.chomolungma.system.menu.mapper.MenuMapper;
 import com.chomolungma.system.menu.param.MenuParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,16 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/menu")
 public class MenuController {
+    private final MenuService menuService;
 
-    //private MenuService menuService;
-    @Autowired
-    private MenuService menuService;
+    private final MenuMapper menuMapper;
 
-    private MenuMapper menuMapper;
-
-    public MenuController(MenuMapper menuMapper){
-        //this.menuService = menuService;
+    public MenuController(MenuMapper menuMapper, MenuService menuService){
         this.menuMapper = menuMapper;
+        this.menuService = menuService;
     }
 
     @GetMapping

@@ -7,31 +7,30 @@ import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.account.application.service.AccountService;
 import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.domain.entity.Account;
-import com.chomolungma.system.account.infrastructure.listener.AccountExcelListener;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
+import com.chomolungma.system.account.infrastructure.listener.AccountExcelListener;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/account")
 public class AccountController {
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private IAccountRepository iAccountRepository;
-    @Autowired
-    private ExcelService excelService;
-    @Autowired
-    private HttpServletResponse response;
+    private final AccountService accountService;
+    private final IAccountRepository iAccountRepository;
+    private final ExcelService excelService;
+
+    public AccountController(AccountService accountService, IAccountRepository iAccountRepository, ExcelService excelService) {
+        this.accountService = accountService;
+        this.iAccountRepository = iAccountRepository;
+        this.excelService = excelService;
+    }
 
     @GetMapping("/get")
     public Map<String, Object> getProfile(){

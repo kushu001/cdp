@@ -9,7 +9,6 @@ import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.Dict
 import com.chomolungma.system.dict.interfaces.dto.DictItemPageDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -17,8 +16,11 @@ import java.util.List;
 
 @Repository
 public class DictItemRepositoryImpl implements IDictItemRepository {
-    @Autowired
-    private DictItemMapper dictItemMapper;
+    private final DictItemMapper dictItemMapper;
+
+    public DictItemRepositoryImpl(DictItemMapper dictItemMapper) {
+        this.dictItemMapper = dictItemMapper;
+    }
 
     @Override
     public DictItemPageDTO query(int current, int size,Long dictId, String name, String code) {

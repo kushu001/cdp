@@ -5,10 +5,11 @@ import com.chomolungma.system.menu.domain.repository.dataobject.MenuDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RoleDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO;
 import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+@Mapper
 public interface RoleMapper extends BaseMapper<RoleDO> {
     void insertRolePermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
 

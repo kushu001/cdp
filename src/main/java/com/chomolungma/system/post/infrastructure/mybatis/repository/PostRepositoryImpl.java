@@ -9,7 +9,6 @@ import com.chomolungma.system.post.infrastructure.mybatis.repository.mapper.Post
 import com.chomolungma.system.post.interfaces.dto.PostPageDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -18,8 +17,11 @@ import java.util.List;
 @Repository
 public class PostRepositoryImpl implements IPostRepository {
 
-    @Autowired
-    private PostMapper postMapper;
+    private final PostMapper postMapper;
+
+    public PostRepositoryImpl(PostMapper postMapper) {
+        this.postMapper = postMapper;
+    }
 
     @Override
     public Void save(PostEntity postEntity) {

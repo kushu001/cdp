@@ -1,9 +1,8 @@
-package com.chomolungma.system.login.controller;
+package com.chomolungma.system.login.interfaces.controller;
 
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.login.param.LoginForm;
 import com.chomolungma.system.login.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/api/v1")
 public class LoginController {
-    @Autowired
-    private LoginService loginService;
+    private final LoginService loginService;
 
-    @Autowired
-    private HttpServletResponse response;
+    private final HttpServletResponse response;
+
+    public LoginController(LoginService loginService, HttpServletResponse response) {
+        this.loginService = loginService;
+        this.response = response;
+    }
 
     @PostMapping("/login")
     public Result login(@RequestBody LoginForm loginForm){

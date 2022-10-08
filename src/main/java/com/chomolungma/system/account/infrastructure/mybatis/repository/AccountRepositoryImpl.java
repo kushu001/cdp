@@ -3,6 +3,7 @@ package com.chomolungma.system.account.infrastructure.mybatis.repository;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.domain.entity.Account;
+import com.chomolungma.system.account.domain.entity.Role;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
 import com.chomolungma.system.account.infrastructure.converter.AccountConverter;
 import com.chomolungma.system.account.infrastructure.converter.AccountUserConverter;
@@ -10,7 +11,6 @@ import com.chomolungma.system.account.infrastructure.dataobject.AccountDO;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
 import com.chomolungma.system.account.infrastructure.dto.RoleDTO;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountMapper;
-import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountRoleMapper;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountPageDTO;
@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,16 +28,12 @@ import java.util.stream.Collectors;
 public class AccountRepositoryImpl implements IAccountRepository {
     private AccountMapper accountMapper;
     private AccountUserRoleMapper accountUserRoleMapper;
-
-    private AccountRoleMapper accountRoleMapper;
-
     private UserMapper userMapper;
 
 
-    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, AccountRoleMapper accountRoleMapper, UserMapper userMapper){
+    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, UserMapper userMapper){
         this.accountMapper = accountMapper;
         this.accountUserRoleMapper = accountUserRoleMapper;
-        this.accountRoleMapper = accountRoleMapper;
         this.userMapper = userMapper;
     }
     @Override
@@ -76,10 +73,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
     public Account queryAccountUser(String username, String password) {
         AccountUserRoleDO accountUserRoleDO = accountUserRoleMapper.selectAccount(username, password);
         List<RoleDTO> roles= accountMapper.selectRolesByAccountId(accountUserRoleDO.getId());
-        //List<AccountRoleDO> accountRoleDOS = accountRoleMapper.selectList(new QueryWrapper<AccountRoleDO>().eq("account_id", accountUserRoleDO.getId()));
         Account account = AccountUserConverter.INSTANCE.toEntity(accountUserRoleDO);
-        //List<Long> roleIds = accountRoleDOS.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList());
-        //account.setRoleIds(roleIds);
         account.setRoles(AccountConverter.INSTANCE.toEntity(roles));
         return account;
     }
@@ -98,7 +92,19 @@ public class AccountRepositoryImpl implements IAccountRepository {
     @Override
     public Account queryAccount(String username) {
         AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
-        return AccountConverter.INSTANCE.toEntity(accountDO);
+        List<RoleDTO> roles= accountMapper.selectRolesByAccountId(accountDO.getId());
+        Account account = AccountConverter.INSTANCE.toEntity(accountDO);
+
+        List<Role> roleEntities = new ArrayList<>();
+        for (RoleDTO roleDto: roles
+             ) {
+            Role role = new Role();
+            role.setId(roleDto.getId());
+            role.setName(role.getName());
+            roleEntities.add(role);
+        }
+        account.setRoles(roleEntities);
+        return account;
     }
 
     @Override

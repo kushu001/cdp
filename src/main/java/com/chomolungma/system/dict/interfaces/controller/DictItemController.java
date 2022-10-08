@@ -6,7 +6,6 @@ import com.chomolungma.system.dict.application.service.DictItemService;
 import com.chomolungma.system.dict.domain.repository.IDictItemRepository;
 import com.chomolungma.system.dict.interfaces.assembler.DictItemAssembler;
 import com.chomolungma.system.dict.interfaces.param.DictItemParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -15,11 +14,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/dict/item")
 public class DictItemController {
-    @Autowired
-    private DictItemService dictItemService;
+    private final DictItemService dictItemService;
 
-    @Autowired
-    private IDictItemRepository iDictItemRepository;
+    private final IDictItemRepository iDictItemRepository;
+
+    public DictItemController(DictItemService dictItemService, IDictItemRepository iDictItemRepository) {
+        this.dictItemService = dictItemService;
+        this.iDictItemRepository = iDictItemRepository;
+    }
 
     @GetMapping("/{dictId}")
     public Result pageList(@PathVariable("dictId") Long dictId, PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){

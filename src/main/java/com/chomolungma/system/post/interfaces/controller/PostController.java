@@ -5,7 +5,6 @@ import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.post.domain.repository.IPostRepository;
 import com.chomolungma.system.post.interfaces.mapstruct.PostEntityMapStruct;
 import com.chomolungma.system.post.interfaces.param.PostParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -13,8 +12,11 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/api/v1/post")
 public class PostController {
-    @Autowired
-    private IPostRepository iPostRepository;
+    private final IPostRepository iPostRepository;
+
+    public PostController(IPostRepository iPostRepository) {
+        this.iPostRepository = iPostRepository;
+    }
 
     @GetMapping
     public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrgServiceImpl implements OrgService {
 
-    private OrgFactory orgFactory;
+    private final OrgFactory orgFactory;
 
-    private IOrgRepository iOrgRepository;
+    private final IOrgRepository iOrgRepository;
 
     public OrgServiceImpl(OrgFactory orgFactory, IOrgRepository iOrgRepository){
         this.orgFactory = orgFactory;
