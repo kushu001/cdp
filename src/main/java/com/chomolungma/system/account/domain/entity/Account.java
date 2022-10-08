@@ -19,7 +19,7 @@ public class Account extends BaseEntity {
     private List<Role> roles;
 
     public void resetPassword(){
-        this.password = "123456";
+        this.password = "$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK";
     }
 
     public void bindUser(Long userId){
