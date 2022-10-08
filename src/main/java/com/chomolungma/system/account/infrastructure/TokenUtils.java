@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
-import com.chomolungma.system.login.domain.UserDetail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +35,7 @@ public class TokenUtils {
         return token;
     }
 
-    public static String encode(UserDetail userDetail){
+    public static String encode(Long accountId){
         String token = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -47,9 +46,7 @@ public class TokenUtils {
 
             token = JWT.create()
                     .withHeader(header)
-                    .withClaim("userid", userDetail.getAccount().getId())
-                    .withClaim("username", userDetail.getAccount().getUsername())
-                    .withClaim("roleIds", userDetail.getAccount().getRoles())
+                    .withClaim("userid", accountId)
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             exception.printStackTrace();
@@ -58,7 +55,7 @@ public class TokenUtils {
         return token;
     }
 
-    public static AccountDTO decode(String token){
+    public static AccountDTO decodeOld(String token){
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
         DecodedJWT jwt = null;
         AccountDTO account = new AccountDTO();
@@ -71,5 +68,17 @@ public class TokenUtils {
             throw new BusinessRuntimeException("凭证已过期，请重新登录");
         }
         return account;
+    }
+
+    public static Long decode(String token){
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret)).build();
+        Long accountId;
+        try {
+            accountId = verifier.verify(token).getClaim("userid").asLong();
+
+        }catch (Exception e){
+            throw new BusinessRuntimeException("凭证已过期，请重新登录");
+        }
+        return accountId;
     }
 }

@@ -1,7 +1,6 @@
 package com.chomolungma.system.login.service.impl;
 
 import com.chomolungma.common.exception.BusinessRuntimeException;
-import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.infrastructure.TokenUtils;
 import com.chomolungma.system.login.domain.UserDetail;
 import com.chomolungma.system.login.service.LoginService;
@@ -37,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
         UserDetail userDetail = (UserDetail)authenticate.getPrincipal();
 
         // 如果存在，生成token，并且将token置入缓存，方便下次存取
-        String token = TokenUtils.encode(AccountAssembler.toDTO(userDetail.getAccount()));
+        String token = TokenUtils.encode(userDetail.getAccount().getId());
 
         caffeineCache.put("userId"+ userDetail.getAccount().getId(), userDetail);
 

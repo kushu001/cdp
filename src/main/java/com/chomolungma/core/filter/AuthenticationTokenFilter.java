@@ -3,7 +3,6 @@ package com.chomolungma.core.filter;
 import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.infrastructure.TokenUtils;
-import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.login.domain.UserDetail;
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,9 +35,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         String[] tokenArray = bearerToken.split(" ");
-        AccountDTO account = TokenUtils.decode(tokenArray[1]);
-        caffeineCache.getIfPresent("userId" + account.getId());
-        UserDetail userDetail = (UserDetail) caffeineCache.asMap().get("userId" + account.getId());
+        Long accountId = TokenUtils.decode(tokenArray[1]);
+        caffeineCache.getIfPresent("userId" + accountId);
+        UserDetail userDetail = (UserDetail) caffeineCache.asMap().get("userId" + accountId);
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetail,null,null);
