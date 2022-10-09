@@ -17,7 +17,14 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<mapstruct.version>1.5.2.Final</mapstruct.version>
-		<mysql.version>8.0.16</mysql.version>
+		<mysql.version>8.0.30</mysql.version>
+		<fastjson.version>2.0.14</fastjson.version>
+		<easyexcel.version>3.1.1</easyexcel.version>
+		<UserAgentUtils.version>1.21</UserAgentUtils.version>
+		<pagehelper.version>1.4.5</pagehelper.version>
+		<javaee-api.version>8.0.1</javaee-api.version>
+		<jwt.version>4.0.0</jwt.version>
+		<lombok.version>1.18.24</lombok.version>
 	</properties>
 
 	<dependencies>
@@ -41,12 +48,12 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>${lombok.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>3.18.3</version>
+			<version>${jwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,35 +87,35 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+			<version>${javaee-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.4.3</version>
+			<version>${pagehelper.version}</version>
 		</dependency>
 
 		<!--浏览器解析工具-->
 		<dependency>
 			<groupId>eu.bitwalker</groupId>
 			<artifactId>UserAgentUtils</artifactId>
-			<version>1.21</version>
+			<version>${UserAgentUtils.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>2.0.11</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>easyexcel</artifactId>
-			<version>3.1.1</version>
+			<version>${easyexcel.version}</version>
 		</dependency>
 	</dependencies>
 
