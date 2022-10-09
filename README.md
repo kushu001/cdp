@@ -4,18 +4,24 @@
 ![image](https://user-images.githubusercontent.com/3797320/185794835-8fed3b7d-c401-4b8b-a7d4-ecba007d2d09.png)
 
 cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
-从无到有做一个Springboot开发框架，用于学习整个开发流程，提高自己整合相关技术的能力
-大家可以拿个这项目练手，学习基本的框架知识
+
+本项目开发平台是以DDD为指导思想，努力以DDD驱动框架的设计开发，争取使业务代码和技术代码做到高内聚，低耦合
+
+以Springboot开发框架为地基，集成Spring Security, Mybatis, Mybatis-plus等开源项目为钢材，自己的基础开发代码为砖瓦，用于学习整个开发流程，提高自己整合相关技术的能力和DDD的实践能力
+
+大家可以拿个这项目练手，学习基本的框架和领域开发知识
+
 争取做一个可以用来开发简单私活的框架，方便大家使用
+
 ## 软件架构
 1. 前端： 目前是使用vue-element-admin为基础，加上自己研发的部分组件，开发的一套前端框架 cdp-web-vue
 2. 后端： 
 
    以SpringBoot为基础，利用mybatis持久框架进行后端服务的实现，开发的一套后端框架 cdp
    
-   目前正在做后端代码的领域驱动设计的改造，将业务代码和技术代码进行分离，使之更好的适应将来技术的变更，而不影响业务代码的改变
+   目前已经完成初版后端代码的领域驱动设计的改造，将业务代码和技术代码进行分离，使之更好的适应将来技术的变更，而不影响业务代码的改变
    
-   成果（目前主要精力放在优化代码架构上）：
+   成果：
    
    <img width="279" alt="image" src="https://user-images.githubusercontent.com/3797320/191653532-a6cdcda0-b23a-46c8-9cd1-d42df52848a7.png">
    <img width="221" alt="image" src="https://user-images.githubusercontent.com/3797320/191653665-46686166-0e64-4909-b1b8-fbdf5985de34.png">
