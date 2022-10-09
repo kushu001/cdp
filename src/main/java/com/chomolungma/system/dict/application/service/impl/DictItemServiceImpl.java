@@ -1,13 +1,12 @@
 package com.chomolungma.system.dict.application.service.impl;
 
-import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.dict.application.service.DictItemService;
 import com.chomolungma.system.dict.domain.entity.DictItemEntity;
 import com.chomolungma.system.dict.domain.repository.IDictItemRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DictItemServiceImpl extends BaseService implements DictItemService {
+public class DictItemServiceImpl implements DictItemService {
 
     private final IDictItemRepository iDictItemRepository;
 

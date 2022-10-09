@@ -6,7 +6,6 @@ import com.chomolungma.system.log.domain.repository.IOperateLogRepository;
 import com.chomolungma.system.log.interfaces.dto.OperateLogDTO;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +15,14 @@ import java.io.IOException;
 @Service
 public class OperateLogServiceImpl implements OperateLogService{
     Log logger = LogFactory.getLog(OperateLogServiceImpl.class);
-    @Autowired
-    private IOperateLogRepository iOperateLogRepository;
+    private final IOperateLogRepository iOperateLogRepository;
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+
+    public OperateLogServiceImpl(IOperateLogRepository iOperateLogRepository, HttpServletRequest request) {
+        this.iOperateLogRepository = iOperateLogRepository;
+        this.request = request;
+    }
 
     @Override
     public Void generateOperateLog() throws IOException {

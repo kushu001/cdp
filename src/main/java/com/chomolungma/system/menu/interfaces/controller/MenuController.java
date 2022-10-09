@@ -3,9 +3,9 @@ package com.chomolungma.system.menu.interfaces.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.common.result.Result;
 import com.chomolungma.system.menu.application.service.MenuService;
-import com.chomolungma.system.menu.domain.entity.MenuEntity;
+import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
+import com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper;
 import com.chomolungma.system.menu.interfaces.assembler.MenuAssembler;
-import com.chomolungma.system.menu.mapper.MenuMapper;
 import com.chomolungma.system.menu.param.MenuParam;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ public class MenuController {
 
     @GetMapping
     public Result queryMenu(){
-        List<MenuEntity> menuList = menuMapper.selectList(new QueryWrapper<MenuEntity>().orderByAsc("sort"));
+        List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().orderByAsc("sort"));
         return Result.success(MenuAssembler.convertToDto(menuList));
 
     }

@@ -1,8 +1,6 @@
 package com.chomolungma.system.role.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.chomolungma.system.menu.domain.entity.MenuEntity;
-import com.chomolungma.system.menu.infrastructure.converter.MenuConverter;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
@@ -48,9 +46,8 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public List<MenuEntity> query(List<Long> roleIds) {
-        List<MenuDO> menuDOS = roleMapper.selectMenusByRoleIds(roleIds);
-        return MenuConverter.INSTANCE.toEntity(menuDOS);
+    public List<MenuDO> query(List<Long> roleIds) {
+        return roleMapper.selectMenusByRoleIds(roleIds);
     }
 
     @Override

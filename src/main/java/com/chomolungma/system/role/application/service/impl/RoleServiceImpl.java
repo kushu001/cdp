@@ -1,6 +1,5 @@
 package com.chomolungma.system.role.application.service.impl;
 
-import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.role.application.service.RoleService;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl extends BaseService implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
     public final IRoleRepository iRoleRepository;
 

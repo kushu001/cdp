@@ -12,7 +12,6 @@ import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class LoginLogServiceImpl implements LoginLogService{
     Log logger = LogFactory.getLog(LoginLogServiceImpl.class);
-    @Autowired
-    private ILoginLogRepository iLoginLogRepository;
+    private final ILoginLogRepository iLoginLogRepository;
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+
+    public LoginLogServiceImpl(ILoginLogRepository iLoginLogRepository, HttpServletRequest request) {
+        this.iLoginLogRepository = iLoginLogRepository;
+        this.request = request;
+    }
 
     @Override
     public Void generateLoginLog() {

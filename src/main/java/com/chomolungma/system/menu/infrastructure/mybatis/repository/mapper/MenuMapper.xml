@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.menu//DTD Mapper 3.0//EN" "http://mybatis.menu/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chomolungma.system.menu.mapper.MenuMapper">
+<mapper namespace="com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper">
     <!-- 查询部门 -->
     <select id="selectPageVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
         select * from sys_menu

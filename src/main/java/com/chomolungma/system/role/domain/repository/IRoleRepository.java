@@ -1,6 +1,6 @@
 package com.chomolungma.system.role.domain.repository;
 
-import com.chomolungma.system.menu.domain.entity.MenuEntity;
+import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
 import com.github.pagehelper.PageInfo;
@@ -12,7 +12,7 @@ public interface IRoleRepository {
 
      void save(RoleEntity role);
 
-     List<MenuEntity> query(List<Long> roleIds);
+     List<MenuDO> query(List<Long> roleIds);
 
      List<RoleMenuDTO> queryMenus(Long roleId);
 

@@ -1,28 +1,28 @@
 package com.chomolungma.system.menu.application.service.impl;
 
-import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.application.service.MenuService;
 import com.chomolungma.system.menu.domain.entity.MenuEntity;
-import com.chomolungma.system.menu.domain.service.CreateMenuDomainService;
-import com.chomolungma.system.menu.domain.service.DeleteMenuDomainService;
-import com.chomolungma.system.menu.domain.service.UpdateMenuDomainService;
+import com.chomolungma.system.menu.domain.repository.IMenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MenuServiceImpl extends BaseService implements MenuService {
+public class MenuServiceImpl implements MenuService {
 
+    @Autowired
+    private IMenuRepository iMenuRepository;
     @Override
     public void createMenu(MenuEntity menuEntity) {
-        execute(new CreateMenuDomainService(menuEntity));
+        iMenuRepository.save(menuEntity);
     }
 
     @Override
     public void deleteMenu(Long id) {
-        execute(new DeleteMenuDomainService(id));
+        iMenuRepository.remove(id);
     }
 
     @Override
     public void updateMenu(MenuEntity menuEntity) {
-        execute(new UpdateMenuDomainService(menuEntity));
+        iMenuRepository.save(menuEntity);
     }
 }

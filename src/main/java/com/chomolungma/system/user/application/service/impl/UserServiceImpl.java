@@ -1,6 +1,5 @@
 package com.chomolungma.system.user.application.service.impl;
 
-import com.chomolungma.core.application.service.BaseService;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.role.domain.service.GetMenuDomainService;
 import com.chomolungma.system.user.application.service.UserService;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl extends BaseService implements UserService {
+public class UserServiceImpl implements UserService {
     private final GetMenuDomainService getMenuDomainService;
     private final IUserRepository iUserRepository;
     private final IUserDomainService iUserDomainService;

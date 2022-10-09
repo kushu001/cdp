@@ -1,15 +1,14 @@
-package com.chomolungma.system.menu.domain.repository.converter;
+package com.chomolungma.system.menu.infrastructure.converter;
 
 import com.chomolungma.system.menu.domain.entity.MenuEntity;
-import com.chomolungma.system.menu.domain.repository.dataobject.MenuDO;
+import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 @Mapper
 public interface MenuConverter {
     MenuConverter INSTANCE = Mappers.getMapper(MenuConverter.class);
+    MenuDO toDO(MenuEntity menuEntity);
 
-    List<MenuEntity> toEntity(List<MenuDO> menuDOS);
+
 }

@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         // 如果存在，生成token，并且将token置入缓存，方便下次存取
         String token = TokenUtils.encode(userDetail.getAccount().getId());
 
-        caffeineCache.put("accountId"+ userDetail.getAccount().getId(), userDetail);
+        caffeineCache.put("accountId_"+ userDetail.getAccount().getId(), userDetail);
 
         return token;
     }
