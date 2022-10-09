@@ -36,7 +36,7 @@
         </where>
     </delete>
 
-    <select id="selectMenusByRoleIds" resultType="com.chomolungma.system.menu.domain.repository.dataobject.MenuDO">
+    <select id="selectMenusByRoleIds" resultType="com.chomolungma.system.menu.infrastructure.dataobject.MenuDO">
         select sm.* from sys_role_menu srm
             left join sys_menu sm on srm.menu_id = sm.id
         <where>

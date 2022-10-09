@@ -1,9 +1,9 @@
-package com.chomolungma.system.login.service.impl;
+package com.chomolungma.system.login.application.service.impl;
 
 import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.system.account.infrastructure.TokenUtils;
+import com.chomolungma.system.login.application.service.LoginService;
 import com.chomolungma.system.login.domain.UserDetail;
-import com.chomolungma.system.login.service.LoginService;
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         // 如果存在，生成token，并且将token置入缓存，方便下次存取
         String token = TokenUtils.encode(userDetail.getAccount().getId());
 
-        caffeineCache.put("userId"+ userDetail.getAccount().getId(), userDetail);
+        caffeineCache.put("accountId"+ userDetail.getAccount().getId(), userDetail);
 
         return token;
     }

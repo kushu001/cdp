@@ -36,8 +36,8 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
         String[] tokenArray = bearerToken.split(" ");
         Long accountId = TokenUtils.decode(tokenArray[1]);
-        caffeineCache.getIfPresent("userId" + accountId);
-        UserDetail userDetail = (UserDetail) caffeineCache.asMap().get("userId" + accountId);
+        caffeineCache.getIfPresent("accountId_" + accountId);
+        UserDetail userDetail = (UserDetail) caffeineCache.asMap().get("accountId_" + accountId);
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetail,null,null);

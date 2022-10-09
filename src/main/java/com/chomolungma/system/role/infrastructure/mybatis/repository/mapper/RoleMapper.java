@@ -1,7 +1,7 @@
 package com.chomolungma.system.role.infrastructure.mybatis.repository.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.chomolungma.system.menu.domain.repository.dataobject.MenuDO;
+import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RoleDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO;
 import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;

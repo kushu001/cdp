@@ -2,8 +2,8 @@ package com.chomolungma.system.role.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.system.menu.domain.entity.MenuEntity;
-import com.chomolungma.system.menu.domain.repository.converter.MenuConverter;
-import com.chomolungma.system.menu.domain.repository.dataobject.MenuDO;
+import com.chomolungma.system.menu.infrastructure.converter.MenuConverter;
+import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
 import com.chomolungma.system.role.infrastructure.converter.RoleConverter;
