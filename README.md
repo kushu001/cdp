@@ -28,7 +28,7 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
 
 ## 安装教程
 
-目前已经在语雀中编码教程 [《CDP开发教程》](https://www.yuque.com/books/share/ce75a160-0070-440d-b754-349ab087bb50?#)
+目前已经在语雀中编码教程 [《CDP开发教程》](https://www.yuque.com/books/share/ce75a160-0070-440d-b754-349ab087bb50?#) 我会不定期更新教程
 
 前端
   ```
