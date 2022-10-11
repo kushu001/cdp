@@ -3,10 +3,10 @@
 <mapper namespace="com.chomolungma.system.role.infrastructure.mybatis.repository.mapper.RoleMapper">
     <insert id="insertRolePermission" parameterType="com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO">
         insert into sys_role_menu
-        (role_id, menu_id, is_half_key)
+        (role_id, menu_id)
         VALUES
         <foreach collection ="rolePermissionDO.permissions" item="item" separator =",">
-            (#{rolePermissionDO.roleId}, #{item.menuId}, #{item.isHalfKey})
+            (#{rolePermissionDO.roleId}, #{item})
         </foreach >
     </insert>
 
@@ -44,15 +44,23 @@
             <foreach collection="list" item="roleId" index="index" open="(" close=")" separator=",">
                 #{roleId}
             </foreach>
+            and sm.type = 0
         </where>
         group by srm.menu_id order by sm.sort
     </select>
 
-
     <select id="selectMenusByRoleId" resultType="com.chomolungma.system.role.interfaces.dto.RoleMenuDTO">
-        select menu_id, is_half_key from sys_role_menu
+        select
+            menu_id,
+            has_leaf,
+            is_half_key
+        from
+            sys_role_menu srm
+        left join sys_menu sm on
+            srm.menu_id = sm.id
         <where>
             role_id = #{roleId, jdbcType=BIGINT}
         </where>
     </select>
+
 </mapper>

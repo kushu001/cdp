@@ -8,7 +8,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 public interface IRoleRepository {
-     void save(Long roleId, List<RoleMenuDTO> permissions);
+     void save(Long roleId, List<Long> permissions);
 
      void save(RoleEntity role);
 

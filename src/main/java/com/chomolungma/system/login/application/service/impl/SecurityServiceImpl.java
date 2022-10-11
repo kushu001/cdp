@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -27,7 +28,7 @@ public class SecurityServiceImpl implements UserDetailsService {
         if(Objects.isNull(account)){
             throw new BusinessRuntimeException("用户名或密码错误");
         }
-
-        return new UserDetail(account);
+        List<String> permissions = iAccountRepository.findPermissions(account.getId());
+        return new UserDetail(account, permissions);
     }
 }

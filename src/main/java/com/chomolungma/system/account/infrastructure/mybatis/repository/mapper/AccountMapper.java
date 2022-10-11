@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface AccountMapper extends BaseMapper<AccountDO> {
     List<RoleDTO> selectRolesByAccountId(Long accountId);
+
+    List<String> getPermissions(Long accountId);
 }

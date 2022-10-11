@@ -12,5 +12,6 @@ public class MenuParam {
     private String icon;
     private String sort;
     private String type;
+    private String permission;
     private String status;
 }

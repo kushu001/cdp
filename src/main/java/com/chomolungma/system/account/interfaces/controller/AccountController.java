@@ -12,6 +12,7 @@ import com.chomolungma.system.account.infrastructure.listener.AccountExcelListen
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -60,11 +61,13 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('system:account:view')")
     public Result getAccount(@PathVariable("id") Long id){
         return Result.success(iAccountRepository.queryAccount(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('system:account:add')")
     public Result createAccount(@RequestBody AccountInDTO accountInDTO){
         Account account = AccountAssembler.toEntity(accountInDTO);
         accountService.createAccount(account);
@@ -72,6 +75,7 @@ public class AccountController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('system:account:edit')")
     public Result updateAccount(@RequestBody AccountInDTO accountInDTO){
         Account account = AccountAssembler.toEntity(accountInDTO);
         accountService.updateAccount(account);
@@ -79,18 +83,21 @@ public class AccountController {
     }
 
     @DeleteMapping("/{ids}")
+    @PreAuthorize("hasAuthority('system:account:delete')")
     public Result deleteAccount(@PathVariable("ids") String ids){
         iAccountRepository.remove(Arrays.asList(ids.split(",")));
         return Result.success();
     }
 
     @PutMapping("/password/{id}")
+    @PreAuthorize("hasAuthority('system:account:reset')")
     public Result resetPassword(@PathVariable("id") Long id){
         accountService.resetPassword(id);
         return Result.success();
     }
 
     @PutMapping("/{id}/user/{userId}")
+    @PreAuthorize("hasAuthority('system:account:bind')")
     public Result bindUser(@PathVariable("id") Long id, @PathVariable("userId") Long userId){
         accountService.bindUser(id, userId);
         return Result.success();
@@ -99,11 +106,13 @@ public class AccountController {
 
     @PostMapping("/import")
     @Transactional
+    @PreAuthorize("hasAuthority('system:account:import')")
     public void importExcel(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream(), AccountExcelDTO.class, new AccountExcelListener(iAccountRepository, excelService)).sheet().doRead();
     }
 
     @GetMapping("/export")
+    @PreAuthorize("hasAuthority('system:account:export')")
     public void export(AccountDTO accountDTO) throws IOException {
         List<Account> accountEntities = accountService.getAccounts(AccountAssembler.toEntity(accountDTO));
         excelService.export(AccountAssembler.toExcelDTO(accountEntities), AccountExcelDTO.class);

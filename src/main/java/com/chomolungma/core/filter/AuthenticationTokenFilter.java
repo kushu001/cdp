@@ -40,7 +40,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         UserDetail userDetail = (UserDetail) caffeineCache.asMap().get("accountId_" + accountId);
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(userDetail,null,null);
+                new UsernamePasswordAuthenticationToken(userDetail,null,userDetail.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         CurrentProfileHolder.setContext(AccountAssembler.toDTO(userDetail.getAccount()));
         //放行

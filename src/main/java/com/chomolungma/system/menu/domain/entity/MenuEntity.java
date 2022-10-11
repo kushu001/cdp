@@ -13,5 +13,7 @@ public class MenuEntity extends BaseEntity {
     private String url;
     private String icon;
     private String sort;
+    private String permission;
+    private Boolean hasLeaf = false;
     private String type;
 }

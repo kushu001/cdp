@@ -14,5 +14,7 @@ public class MenuDO extends BaseDO {
     private String name;
     private String icon;
     private String url;
+    private String permission;
+    private Boolean hasLeaf;
     private String type;
 }

@@ -11,7 +11,7 @@ public interface RoleService {
 
     void updateRole(RoleEntity roleEntity);
 
-    void authorized(Long roleId, List<RoleMenuDTO> permissions);
+    void authorized(Long roleId, List<Long> permissions);
 
     List<RoleMenuDTO> permission(Long roleId);
 }

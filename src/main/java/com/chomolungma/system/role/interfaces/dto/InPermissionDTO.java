@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class InPermissionDTO {
-    private List<RoleMenuDTO> permissions;
+    private List<Long> permissions;
 }

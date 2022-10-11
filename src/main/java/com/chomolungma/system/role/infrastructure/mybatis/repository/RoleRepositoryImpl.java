@@ -24,7 +24,7 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public void save(Long roleId, List<RoleMenuDTO> permissions) {
+    public void save(Long roleId, List<Long> permissions) {
         roleMapper.deletePermissionByRoleId(roleId);
         RolePermissionDO permissionDO = new RolePermissionDO();
         permissionDO.setRoleId(roleId);

@@ -28,13 +28,18 @@ public class MenuController {
     public Result queryMenu(){
         List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().orderByAsc("sort"));
         return Result.success(MenuAssembler.convertToDto(menuList));
-
     }
 
-    @GetMapping("/all")
-    public Result queryAll(){
-        return Result.success(menuMapper.selectList(new QueryWrapper<>()));
+    @GetMapping("/type/{type}")
+    public Result queryMenuPermissions(@PathVariable("type") String type){
+        List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().eq("type", type).orderByAsc("sort"));
+        return Result.success(menuList);
     }
+//
+//    @GetMapping("/all")
+//    public Result queryAll(){
+//        return Result.success(menuMapper.selectList(new QueryWrapper<>()));
+//    }
 
 
     @PostMapping

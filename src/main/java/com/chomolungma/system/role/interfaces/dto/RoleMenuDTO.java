@@ -6,4 +6,5 @@ import lombok.Data;
 public class RoleMenuDTO {
     private Long menuId;
     private Boolean isHalfKey;
+    private Boolean hasLeaf;
 }

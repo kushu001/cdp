@@ -29,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void authorized(Long roleId, List<RoleMenuDTO> permissions) {
+    public void authorized(Long roleId, List<Long> permissions) {
         iRoleRepository.save(roleId, permissions);
     }
 

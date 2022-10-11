@@ -17,4 +17,21 @@
         </where>
     </select>
 
+<!--  查询用户权限  -->
+    <select id="getPermissions" parameterType="java.lang.Long" resultType="java.lang.String">
+        select
+            DISTINCT sm.permission
+        from
+            sys_account sa
+                left join sys_account_role sar on
+                sa.id = sar.account_id
+                left join sys_role_menu srm on
+                sar.role_id = srm.role_id
+                left join sys_menu sm on
+                srm.menu_id = sm.id
+        <where>
+            sm.`type`  = 1
+            and sa.id = #{accountId, jdbcType=BIGINT}
+        </where>
+    </select>
 </mapper>

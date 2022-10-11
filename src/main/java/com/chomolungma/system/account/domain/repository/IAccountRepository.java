@@ -15,4 +15,5 @@ public interface IAccountRepository {
     AccountDTO queryAccount(Long id);
     Account queryAccount(String username);
     List<Account> queryAccounts(Account account);
+    List<String> findPermissions(Long accountId);
 }

@@ -1,10 +1,10 @@
 package com.chomolungma.core.config;
 
 import com.chomolungma.core.filter.AuthenticationTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,13 +14,17 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private AuthenticationTokenFilter authenticationTokenFilter;
+    private final AuthenticationTokenFilter authenticationTokenFilter;
 
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
+    private final AuthenticationEntryPoint authenticationEntryPoint;
+
+    public SecurityConfig(AuthenticationTokenFilter authenticationTokenFilter, AuthenticationEntryPoint authenticationEntryPoint) {
+        this.authenticationTokenFilter = authenticationTokenFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
 
 
     @Bean

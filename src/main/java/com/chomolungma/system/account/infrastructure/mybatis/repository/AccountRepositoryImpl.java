@@ -114,4 +114,9 @@ public class AccountRepositoryImpl implements IAccountRepository {
         return AccountUserConverter.INSTANCE.toEntity(accountUserRoleDOS);
     }
 
+    @Override
+    public List<String> findPermissions(Long accountId) {
+        return accountMapper.getPermissions(accountId);
+    }
+
 }
