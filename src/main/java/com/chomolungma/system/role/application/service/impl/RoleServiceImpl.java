@@ -3,7 +3,7 @@ package com.chomolungma.system.role.application.service.impl;
 import com.chomolungma.system.role.application.service.RoleService;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
-import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
+import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +29,23 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void authorized(Long roleId, List<Long> permissions) {
-        iRoleRepository.save(roleId, permissions);
+    public void authorizedMenus(Long roleId, List<Long> permissions) {
+        iRoleRepository.saveMenus(roleId, permissions);
     }
 
     @Override
-    public List<RoleMenuDTO> permission(Long roleId) {
+    public void authorizedOperations(Long roleId, List<Long> permissions) {
+        iRoleRepository.saveOperations(roleId, permissions);
+    }
+
+    @Override
+    public List<RolePermissionDTO> menus(Long roleId) {
         return iRoleRepository.queryMenus(roleId);
+    }
+
+    @Override
+    public List<RolePermissionDTO> operations(Long roleId) {
+        return iRoleRepository.queryOperation(roleId);
     }
 
 

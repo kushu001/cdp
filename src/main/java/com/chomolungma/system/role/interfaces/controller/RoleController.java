@@ -70,14 +70,25 @@ public class RoleController {
         return Result.success();
     }
 
-    @PostMapping("/{roleId}/authorized")
-    public Result authorized(@PathVariable("roleId") Long roleId, @RequestBody InPermissionDTO inPermissionDTO){
-        roleService.authorized(roleId, inPermissionDTO.getPermissions());
+    @PostMapping("/{roleId}/authorizedMenus")
+    public Result authorizedMenus(@PathVariable("roleId") Long roleId, @RequestBody InPermissionDTO inPermissionDTO){
+        roleService.authorizedMenus(roleId, inPermissionDTO.getPermissions());
         return Result.success();
     }
 
-    @GetMapping("/{roleId}/permission")
-    public Result permission(@PathVariable("roleId") Long roleId){
-        return Result.success(roleService.permission(roleId));
+    @PostMapping("/{roleId}/authorizedOperations")
+    public Result authorizedOperations(@PathVariable("roleId") Long roleId, @RequestBody InPermissionDTO inPermissionDTO){
+        roleService.authorizedOperations(roleId, inPermissionDTO.getPermissions());
+        return Result.success();
+    }
+
+    @GetMapping("/{roleId}/menus")
+    public Result menus(@PathVariable("roleId") Long roleId){
+        return Result.success(roleService.menus(roleId));
+    }
+
+    @GetMapping("/{roleId}/operations")
+    public Result operations(@PathVariable("roleId") Long roleId){
+        return Result.success(roleService.operations(roleId));
     }
 }

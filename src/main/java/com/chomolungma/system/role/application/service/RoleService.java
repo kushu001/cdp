@@ -1,7 +1,7 @@
 package com.chomolungma.system.role.application.service;
 
 import com.chomolungma.system.role.domain.enity.RoleEntity;
-import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
+import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
 
 import java.util.List;
 
@@ -11,7 +11,11 @@ public interface RoleService {
 
     void updateRole(RoleEntity roleEntity);
 
-    void authorized(Long roleId, List<Long> permissions);
+    void authorizedMenus(Long roleId, List<Long> permissions);
 
-    List<RoleMenuDTO> permission(Long roleId);
+    void authorizedOperations(Long roleId, List<Long> permissions);
+
+    List<RolePermissionDTO> menus(Long roleId);
+
+    List<RolePermissionDTO> operations(Long roleId);
 }

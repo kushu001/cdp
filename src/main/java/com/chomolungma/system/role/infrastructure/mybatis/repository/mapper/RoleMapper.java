@@ -4,22 +4,28 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RoleDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO;
-import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
+import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 @Mapper
 public interface RoleMapper extends BaseMapper<RoleDO> {
-    void insertRolePermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
+    void insertRoleMenusPermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
+
+    void insertRoleOperationsPermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
+
 
     List<MenuDO> selectMenusByRoleIds(List<Long> roleIds);
 
-    void deletePermissionByRoleId(Long roleId);
+    void deleteMenusPermissionByRoleId(Long roleId);
 
-    List<RoleMenuDTO> selectMenusByRoleId(Long roleId);
+    void deleteOperationsPermissionByRoleId(Long roleId);
+
+    List<RolePermissionDTO> selectMenusByRoleId(Long roleId);
 
     void deletePermissionByBatchRoleIds(List<Long> ids);
 
     void deleteAccountRoleByBatchRoleIds(List<Long> ids);
+    List<RolePermissionDTO> getOperations(Long roleId);
 }

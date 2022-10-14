@@ -8,7 +8,7 @@ import com.chomolungma.system.role.infrastructure.converter.RoleConverter;
 import com.chomolungma.system.role.infrastructure.dataobject.RoleDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO;
 import com.chomolungma.system.role.infrastructure.mybatis.repository.mapper.RoleMapper;
-import com.chomolungma.system.role.interfaces.dto.RoleMenuDTO;
+import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
@@ -24,16 +24,25 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public void save(Long roleId, List<Long> permissions) {
-        roleMapper.deletePermissionByRoleId(roleId);
+    public void saveMenus(Long roleId, List<Long> permissions) {
+        roleMapper.deleteMenusPermissionByRoleId(roleId);
         RolePermissionDO permissionDO = new RolePermissionDO();
         permissionDO.setRoleId(roleId);
         permissionDO.setPermissions(permissions);
         if (permissions.size() > 0) {
-            roleMapper.insertRolePermission(permissionDO);
+            roleMapper.insertRoleMenusPermission(permissionDO);
         }
     }
-
+    @Override
+    public void saveOperations(Long roleId, List<Long> permissions) {
+        roleMapper.deleteOperationsPermissionByRoleId(roleId);
+        RolePermissionDO permissionDO = new RolePermissionDO();
+        permissionDO.setRoleId(roleId);
+        permissionDO.setPermissions(permissions);
+        if (permissions.size() > 0) {
+            roleMapper.insertRoleOperationsPermission(permissionDO);
+        }
+    }
     @Override
     public void save(RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
@@ -51,8 +60,13 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public List<RoleMenuDTO> queryMenus(Long roleId) {
+    public List<RolePermissionDTO> queryMenus(Long roleId) {
         return roleMapper.selectMenusByRoleId(roleId);
+    }
+
+    @Override
+    public List<RolePermissionDTO> queryOperation(Long roleId) {
+        return roleMapper.getOperations(roleId);
     }
 
     @Override

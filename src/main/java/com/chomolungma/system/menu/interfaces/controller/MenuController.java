@@ -32,9 +32,11 @@ public class MenuController {
 
     @GetMapping("/type/{type}")
     public Result queryMenuPermissions(@PathVariable("type") String type){
-        List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().eq("type", type).orderByAsc("sort"));
-        return Result.success(menuList);
+        return Result.success(menuService.permissions(type));
     }
+
+
+
 //
 //    @GetMapping("/all")
 //    public Result queryAll(){
