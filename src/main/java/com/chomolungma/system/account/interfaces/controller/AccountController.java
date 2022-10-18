@@ -2,6 +2,7 @@ package com.chomolungma.system.account.interfaces.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.chomolungma.common.result.Result;
+import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.core.application.service.ExcelService;
 import com.chomolungma.core.interfaces.dto.PageDTO;
 import com.chomolungma.system.account.application.service.AccountService;
@@ -36,9 +37,7 @@ public class AccountController {
     @GetMapping("/get")
     public Map<String, Object> getProfile(){
         Map<String, Object> map = new HashMap<>();
-        List<String> roles = new ArrayList<>();
-        roles.add("admin");
-        map.put("roles", roles);
+        map.put("roles", CurrentProfileHolder.getProfile().getPermissions());
         map.put("introduction","I am a super administrator");
         map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         map.put("name","Super Admin");

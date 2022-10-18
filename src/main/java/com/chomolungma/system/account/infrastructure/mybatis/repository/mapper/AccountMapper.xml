@@ -25,10 +25,10 @@
             sys_account sa
                 left join sys_account_role sar on
                 sa.id = sar.account_id
-                left join sys_role_menu srm on
-                sar.role_id = srm.role_id
+                left join sys_role_operation sro on
+                sar.role_id = sro.role_id
                 left join sys_menu sm on
-                srm.menu_id = sm.id
+                sro.operation_id = sm.id
         <where>
             sm.`type`  = 1
             and sa.id = #{accountId, jdbcType=BIGINT}

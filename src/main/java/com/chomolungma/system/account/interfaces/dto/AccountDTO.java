@@ -10,6 +10,7 @@ public class AccountDTO extends PageDTO {
     private Long userId;
     private String username;
     private List<Long> roleIds;
+    private List<String> permissions;
     private String roleName;
     private String password;
     private String name;

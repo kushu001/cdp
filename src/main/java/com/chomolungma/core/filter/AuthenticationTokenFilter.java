@@ -3,6 +3,7 @@ package com.chomolungma.core.filter;
 import com.chomolungma.core.CurrentProfileHolder;
 import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.infrastructure.TokenUtils;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.login.domain.UserDetail;
 import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,7 +43,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetail,null,userDetail.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        CurrentProfileHolder.setContext(AccountAssembler.toDTO(userDetail.getAccount()));
+        AccountDTO accountDTO = AccountAssembler.toDTO(userDetail.getAccount());
+        accountDTO.setPermissions(userDetail.getPermissions());
+        CurrentProfileHolder.setContext(accountDTO);
         //放行
         filterChain.doFilter(request, response);
 
