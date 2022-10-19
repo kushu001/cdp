@@ -27,8 +27,18 @@ cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
    <img width="221" alt="image" src="https://user-images.githubusercontent.com/3797320/191653665-46686166-0e64-4909-b1b8-fbdf5985de34.png">
 
 ## 安装教程
-
 目前已经在语雀中编码教程 [《CDP开发教程》](https://www.yuque.com/books/share/ce75a160-0070-440d-b754-349ab087bb50?#) 我会不定期更新教程
+
+### 安装环境
+
+jdk版本：java 8
+
+mysql: mysql 8以上
+
+maven: 3.8.5
+
+vue: 2以上
+
 
 前端
   ```
