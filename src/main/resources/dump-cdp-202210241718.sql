@@ -201,7 +201,7 @@ CREATE TABLE `sys_menu` (
   `sort` int DEFAULT NULL COMMENT '排序',
   `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='菜单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +210,7 @@ CREATE TABLE `sys_menu` (
 
 LOCK TABLES `sys_menu` WRITE;
 /*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
-INSERT INTO `sys_menu` VALUES (51,'2022-05-06 03:43:57',NULL,'2022-10-11 02:55:42',NULL,NULL,NULL,0,'系统管理','system','setting','/system',NULL,'0',1,1,NULL),(123,'2022-05-22 14:32:37',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,51,'账户管理','account','user','/system/account',NULL,'0',1,1,NULL),(124,'2022-05-22 14:32:45',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'用户管理','user','people','/system/user',NULL,'0',1,2,NULL),(125,'2022-05-22 14:32:54',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'角色管理','role','user-role','/system/role',NULL,'0',1,3,NULL),(127,'2022-05-22 14:33:02',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'部门管理','org','org','/system/org',NULL,'0',1,4,NULL),(128,'2022-05-22 14:33:09',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'菜单管理','menu','el-icon-menu','/system/menu',NULL,'0',0,5,NULL),(129,'2022-05-22 14:33:19',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'字典管理','dict','el-icon-notebook-2','/system/dict',NULL,'0',0,6,NULL),(134,'2022-05-07 02:23:58',NULL,'2022-10-11 02:54:21',NULL,NULL,NULL,127,'新增','新增',NULL,NULL,'system:org:add','1',0,1,NULL),(135,'2022-05-22 14:33:42',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'岗位管理','岗位管理','example','/system/post',NULL,'0',0,7,NULL),(136,'2022-05-22 14:33:59',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'日志管理','log','log','/system/log',NULL,'0',1,8,NULL),(137,NULL,NULL,'2022-10-11 02:54:21',NULL,NULL,NULL,127,'批量删除','org',NULL,NULL,'system:org:delete','1',0,1,NULL),(159,NULL,NULL,'2022-10-11 08:53:51',NULL,NULL,NULL,0,'开发者选项','development','el-icon-s-platform','/development',NULL,'0',1,2,NULL),(160,NULL,NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'菜单管理','menu','el-icon-menu','/development/menu',NULL,'0',0,1,NULL),(161,NULL,NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'测试页面','test','el-icon-hot-water','/development/test',NULL,'0',0,3,NULL),(162,'2022-07-14 00:40:09',NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'错误日志','errorLog','el-icon-s-platform','/development/error-log',NULL,'0',0,2,NULL),(163,'2022-08-08 12:59:56',NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,136,'登录日志','login-log','log','/system/log/login-log',NULL,'0',0,1,NULL),(164,'2022-08-08 13:00:27',NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,136,'操作日志','operate-log','log','/system/log/operate-log',NULL,'0',0,2,NULL),(179,'2022-10-10 02:40:45',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,123,'新增','account','','','system:account:add','1',0,NULL,NULL),(180,'2022-10-10 02:41:30',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,123,'更新','account','','','system:account:edit','1',0,NULL,NULL),(181,'2022-10-10 02:44:45',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,123,'删除','account','','','system:account:delete','1',0,NULL,NULL),(182,'2022-10-10 03:27:09',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,123,'查看','account','','','system:account:view','1',0,NULL,NULL),(183,'2022-10-10 06:01:18',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,124,'新增','user','','','system:user:add','1',0,NULL,NULL),(187,'2022-10-11 02:53:42',NULL,'2022-10-11 02:53:42',NULL,NULL,NULL,125,'新增','role','','','system:role:add','1',0,NULL,NULL);
+INSERT INTO `sys_menu` VALUES (51,'2022-05-06 03:43:57',NULL,'2022-10-11 02:55:42',NULL,NULL,NULL,0,'系统管理','system','setting','/system',NULL,'0',1,1,NULL),(123,'2022-05-22 14:32:37',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,51,'账户管理','account','user','/system/account',NULL,'0',1,1,NULL),(124,'2022-05-22 14:32:45',NULL,'2022-10-19 16:01:53',NULL,NULL,NULL,51,'用户管理','user','iconfont cdp-icon-user-group-fill','/system/user',NULL,'0',0,2,NULL),(125,'2022-05-22 14:32:54',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'角色管理','role','user-role','/system/role',NULL,'0',1,3,NULL),(127,'2022-05-22 14:33:02',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'部门管理','org','org','/system/org',NULL,'0',1,4,NULL),(128,'2022-05-22 14:33:09',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'菜单管理','menu','el-icon-menu','/system/menu',NULL,'0',0,5,NULL),(129,'2022-05-22 14:33:19',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'字典管理','dict','el-icon-notebook-2','/system/dict',NULL,'0',0,6,NULL),(134,'2022-05-07 02:23:58',NULL,'2022-10-11 02:54:21',NULL,NULL,NULL,127,'新增','新增',NULL,NULL,'system:org:add','1',0,1,NULL),(135,'2022-05-22 14:33:42',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'岗位管理','岗位管理','example','/system/post',NULL,'0',0,7,NULL),(136,'2022-05-22 14:33:59',NULL,'2022-10-11 05:37:17',NULL,NULL,NULL,51,'日志管理','log','log','/system/log',NULL,'0',1,8,NULL),(137,NULL,NULL,'2022-10-11 02:54:21',NULL,NULL,NULL,127,'批量删除','org',NULL,NULL,'system:org:delete','1',0,1,NULL),(159,NULL,NULL,'2022-10-11 08:53:51',NULL,NULL,NULL,0,'开发者选项','development','el-icon-s-platform','/development',NULL,'0',1,2,NULL),(160,NULL,NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'菜单管理','menu','el-icon-menu','/development/menu',NULL,'0',0,1,NULL),(161,NULL,NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'测试页面','test','el-icon-hot-water','/development/test',NULL,'0',0,3,NULL),(162,'2022-07-14 00:40:09',NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,159,'错误日志','errorLog','el-icon-s-platform','/development/error-log',NULL,'0',0,2,NULL),(163,'2022-08-08 12:59:56',NULL,'2022-10-19 15:56:29',NULL,NULL,NULL,136,'登录日志','login-log','iconfont cdp-icon-times-circle','/system/log/login-log',NULL,'0',0,1,NULL),(164,'2022-08-08 13:00:27',NULL,'2022-10-11 02:54:59',NULL,NULL,NULL,136,'操作日志','operate-log','log','/system/log/operate-log',NULL,'0',0,2,NULL),(179,'2022-10-10 02:40:45',NULL,'2022-10-19 16:25:34',NULL,NULL,NULL,123,'新增','account','iconfont cdp-icon-plus','','system:account:add','1',0,3,NULL),(180,'2022-10-10 02:41:30',NULL,'2022-10-19 16:26:33',NULL,NULL,NULL,123,'更新','account','iconfont cdp-icon-edit','','system:account:edit','1',0,2,NULL),(181,'2022-10-10 02:44:45',NULL,'2022-10-19 16:26:27',NULL,NULL,NULL,123,'删除','account','iconfont cdp-icon-delete-fill','','system:account:delete','1',0,4,NULL),(182,'2022-10-10 03:27:09',NULL,'2022-10-19 16:26:40',NULL,NULL,NULL,123,'查看','account','iconfont cdp-icon-eye-fill','','system:account:view','1',0,1,NULL),(183,'2022-10-10 06:01:18',NULL,'2022-10-11 02:43:17',NULL,NULL,NULL,124,'新增','user','','','system:user:add','1',0,NULL,NULL),(187,'2022-10-11 02:53:42',NULL,'2022-10-11 02:53:42',NULL,NULL,NULL,125,'新增','role','','','system:role:add','1',0,NULL,NULL),(188,'2022-10-19 07:38:09',NULL,'2022-10-24 03:46:35',NULL,NULL,NULL,51,'资源管理','system','el-icon-s-promotion','/system/resource',NULL,'0',1,6,NULL),(189,'2022-10-19 07:39:56',NULL,'2022-10-19 07:39:56',NULL,NULL,NULL,188,'新增','system','','','system:resources:add','1',0,NULL,NULL),(190,'2022-10-19 08:17:36',NULL,'2022-10-19 08:17:36',NULL,NULL,NULL,188,'更新','system','','','system:resources:edit','1',0,NULL,NULL),(192,'2022-10-21 01:29:38',NULL,'2022-10-21 01:35:48',NULL,NULL,NULL,0,'仪表盘',NULL,'','/',NULL,'0',1,0,NULL),(193,'2022-10-21 01:36:18',NULL,'2022-10-21 01:36:18',NULL,NULL,NULL,192,'仪表盘',NULL,'el-icon-s-platform','/dashboard',NULL,'0',0,0,NULL);
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,6 +378,36 @@ LOCK TABLES `sys_privilege` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_resource`
+--
+
+DROP TABLE IF EXISTS `sys_resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_resource` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `name` varchar(100) DEFAULT NULL COMMENT '资源名称',
+  `sign` varchar(100) DEFAULT NULL COMMENT '标识',
+  `url` varchar(100) DEFAULT NULL COMMENT '接口地址',
+  `status` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COMMENT='资源表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_resource`
+--
+
+LOCK TABLES `sys_resource` WRITE;
+/*!40000 ALTER TABLE `sys_resource` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_resource` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sys_role`
 --
 
@@ -425,7 +455,7 @@ CREATE TABLE `sys_role_menu` (
   `menu_id` int DEFAULT NULL COMMENT '菜单ID',
   `is_half_key` tinyint DEFAULT NULL COMMENT '是否halfKey',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1601 DEFAULT CHARSET=utf8mb3 COMMENT='角色菜单权限';
+) ENGINE=InnoDB AUTO_INCREMENT=1701 DEFAULT CHARSET=utf8mb3 COMMENT='角色菜单权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -434,7 +464,7 @@ CREATE TABLE `sys_role_menu` (
 
 LOCK TABLES `sys_role_menu` WRITE;
 /*!40000 ALTER TABLE `sys_role_menu` DISABLE KEYS */;
-INSERT INTO `sys_role_menu` VALUES (1586,NULL,NULL,NULL,NULL,1,51,NULL),(1587,NULL,NULL,NULL,NULL,1,123,NULL),(1588,NULL,NULL,NULL,NULL,1,124,NULL),(1589,NULL,NULL,NULL,NULL,1,125,NULL),(1590,NULL,NULL,NULL,NULL,1,127,NULL),(1591,NULL,NULL,NULL,NULL,1,128,NULL),(1592,NULL,NULL,NULL,NULL,1,129,NULL),(1593,NULL,NULL,NULL,NULL,1,135,NULL),(1594,NULL,NULL,NULL,NULL,1,136,NULL),(1595,NULL,NULL,NULL,NULL,1,163,NULL),(1596,NULL,NULL,NULL,NULL,1,164,NULL),(1597,NULL,NULL,NULL,NULL,1,159,NULL),(1598,NULL,NULL,NULL,NULL,1,160,NULL),(1599,NULL,NULL,NULL,NULL,1,162,NULL),(1600,NULL,NULL,NULL,NULL,1,161,NULL);
+INSERT INTO `sys_role_menu` VALUES (1685,NULL,NULL,NULL,NULL,1,51,NULL),(1686,NULL,NULL,NULL,NULL,1,123,NULL),(1687,NULL,NULL,NULL,NULL,1,124,NULL),(1688,NULL,NULL,NULL,NULL,1,125,NULL),(1689,NULL,NULL,NULL,NULL,1,127,NULL),(1690,NULL,NULL,NULL,NULL,1,128,NULL),(1691,NULL,NULL,NULL,NULL,1,129,NULL),(1692,NULL,NULL,NULL,NULL,1,188,NULL),(1693,NULL,NULL,NULL,NULL,1,135,NULL),(1694,NULL,NULL,NULL,NULL,1,136,NULL),(1695,NULL,NULL,NULL,NULL,1,163,NULL),(1696,NULL,NULL,NULL,NULL,1,164,NULL),(1697,NULL,NULL,NULL,NULL,1,159,NULL),(1698,NULL,NULL,NULL,NULL,1,160,NULL),(1699,NULL,NULL,NULL,NULL,1,162,NULL),(1700,NULL,NULL,NULL,NULL,1,161,NULL);
 /*!40000 ALTER TABLE `sys_role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,7 +484,7 @@ CREATE TABLE `sys_role_operation` (
   `role_id` int DEFAULT NULL COMMENT '角色ID',
   `operation_id` int DEFAULT NULL COMMENT '操作ID[即菜单表中的id]',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 COMMENT='角色操作权限';
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb3 COMMENT='角色操作权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +493,7 @@ CREATE TABLE `sys_role_operation` (
 
 LOCK TABLES `sys_role_operation` WRITE;
 /*!40000 ALTER TABLE `sys_role_operation` DISABLE KEYS */;
-INSERT INTO `sys_role_operation` VALUES (50,NULL,NULL,NULL,NULL,1,124),(51,NULL,NULL,NULL,NULL,1,183),(52,NULL,NULL,NULL,NULL,1,125),(53,NULL,NULL,NULL,NULL,1,187),(54,NULL,NULL,NULL,NULL,1,127),(55,NULL,NULL,NULL,NULL,1,134),(56,NULL,NULL,NULL,NULL,1,137),(57,NULL,NULL,NULL,NULL,1,51);
+INSERT INTO `sys_role_operation` VALUES (70,NULL,NULL,NULL,NULL,1,51),(71,NULL,NULL,NULL,NULL,1,123),(72,NULL,NULL,NULL,NULL,1,179),(73,NULL,NULL,NULL,NULL,1,180),(74,NULL,NULL,NULL,NULL,1,181),(75,NULL,NULL,NULL,NULL,1,182),(76,NULL,NULL,NULL,NULL,1,124),(77,NULL,NULL,NULL,NULL,1,183),(78,NULL,NULL,NULL,NULL,1,125),(79,NULL,NULL,NULL,NULL,1,187),(80,NULL,NULL,NULL,NULL,1,127),(81,NULL,NULL,NULL,NULL,1,134),(82,NULL,NULL,NULL,NULL,1,137);
 /*!40000 ALTER TABLE `sys_role_operation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,4 +545,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-14 10:12:42
+-- Dump completed on 2022-10-24 17:18:10
