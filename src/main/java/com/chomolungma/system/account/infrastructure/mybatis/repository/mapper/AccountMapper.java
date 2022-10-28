@@ -11,4 +11,6 @@ public interface AccountMapper extends BaseMapper<AccountDO> {
     List<RoleDTO> selectRolesByAccountId(Long accountId);
 
     List<String> getPermissions(Long accountId);
+
+    List<String> getResources(Long accountId);
 }

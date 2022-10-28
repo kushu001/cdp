@@ -91,4 +91,9 @@ public class RoleController {
     public Result operations(@PathVariable("roleId") Long roleId){
         return Result.success(roleService.operations(roleId));
     }
+
+    @GetMapping("/{roleId}/resources")
+    public Result resources(@PathVariable("roleId") Long roleId){
+        return Result.success(roleService.resources(roleId));
+    }
 }

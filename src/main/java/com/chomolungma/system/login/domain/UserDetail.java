@@ -20,13 +20,16 @@ public class UserDetail implements UserDetails {
 
     private List<String> permissions;
 
+    private List<String> resources;
+
     //存储SpringSecurity所需要的权限信息的集合
     @JSONField(serialize = false)
     private List<GrantedAuthority> authorities;
 
-    public UserDetail(Account account, List<String> permissions) {
+    public UserDetail(Account account, List<String> permissions, List<String> resources) {
         this.account = account;
         this.permissions = permissions;
+        this.resources = resources;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -34,7 +37,7 @@ public class UserDetail implements UserDetails {
             return authorities;
         }
         //把permissions中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中
-        authorities = permissions.stream().
+        authorities = resources.stream().
                 map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
         return authorities;

@@ -28,4 +28,6 @@ public interface RoleMapper extends BaseMapper<RoleDO> {
 
     void deleteAccountRoleByBatchRoleIds(List<Long> ids);
     List<RolePermissionDTO> getOperations(Long roleId);
+
+    List<Long> getResources(Long roleId);
 }

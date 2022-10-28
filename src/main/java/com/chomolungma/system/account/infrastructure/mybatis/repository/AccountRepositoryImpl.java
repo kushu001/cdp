@@ -119,4 +119,9 @@ public class AccountRepositoryImpl implements IAccountRepository {
         return accountMapper.getPermissions(accountId);
     }
 
+    @Override
+    public List<String> findResources(Long accountId) {
+        return accountMapper.getResources(accountId);
+    }
+
 }

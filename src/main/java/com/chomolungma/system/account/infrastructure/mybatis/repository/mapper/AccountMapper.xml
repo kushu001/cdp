@@ -32,6 +32,25 @@
         <where>
             sm.`type`  = 1
             and sa.id = #{accountId, jdbcType=BIGINT}
+            and sm.id is not null
+        </where>
+    </select>
+
+
+    <select id="getResources" parameterType="java.lang.Long" resultType="java.lang.String">
+        select
+        DISTINCT sr.sign
+        from
+        sys_account sa
+        left join sys_account_role sar on
+        sa.id = sar.account_id
+        left join sys_role_resource srr on
+        sar.role_id = srr.role_id
+        left join sys_resource sr on
+        srr.resource_id = sr.id
+        <where>
+            sa.id = #{accountId, jdbcType=BIGINT}
+            and sr.id is not null
         </where>
     </select>
 </mapper>

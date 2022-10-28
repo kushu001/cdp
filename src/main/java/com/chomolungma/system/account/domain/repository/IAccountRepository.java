@@ -16,4 +16,6 @@ public interface IAccountRepository {
     Account queryAccount(String username);
     List<Account> queryAccounts(Account account);
     List<String> findPermissions(Long accountId);
+
+    List<String> findResources(Long accountId);
 }

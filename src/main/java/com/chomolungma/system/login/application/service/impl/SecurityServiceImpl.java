@@ -28,7 +28,10 @@ public class SecurityServiceImpl implements UserDetailsService {
         if(Objects.isNull(account)){
             throw new BusinessRuntimeException("用户名或密码错误");
         }
+
         List<String> permissions = iAccountRepository.findPermissions(account.getId());
-        return new UserDetail(account, permissions);
+
+        List<String> resources = iAccountRepository.findResources(account.getId());
+        return new UserDetail(account, permissions, resources);
     }
 }

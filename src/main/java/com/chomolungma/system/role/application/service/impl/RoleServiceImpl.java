@@ -48,5 +48,10 @@ public class RoleServiceImpl implements RoleService {
         return iRoleRepository.queryOperation(roleId);
     }
 
+    @Override
+    public List<Long> resources(Long roleId) {
+        return iRoleRepository.queryResources(roleId);
+    }
+
 
 }

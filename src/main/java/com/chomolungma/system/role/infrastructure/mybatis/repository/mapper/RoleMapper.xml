@@ -88,4 +88,14 @@
         </where>
     </select>
 
+    <select id="getResources" resultType="java.lang.Long">
+        select
+            srr.resource_id as id
+        from
+            sys_role_resource srr
+        <where>
+            role_id = #{roleId, jdbcType=BIGINT}
+        </where>
+    </select>
+
 </mapper>

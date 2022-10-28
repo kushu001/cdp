@@ -70,6 +70,11 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
+    public List<Long> queryResources(Long roleId) {
+        return roleMapper.getResources(roleId);
+    }
+
+    @Override
     public PageInfo<RoleEntity> query(int current, int size, RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
         PageHelper.startPage(current,size);

@@ -20,6 +20,8 @@ public interface IRoleRepository {
 
      List<RolePermissionDTO> queryOperation(Long roleId);
 
+     List<Long> queryResources(Long roleId);
+
      PageInfo<RoleEntity> query(int current, int size, RoleEntity role);
 
      List<RoleEntity> queryAll();

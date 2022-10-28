@@ -45,6 +45,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         AccountDTO accountDTO = AccountAssembler.toDTO(userDetail.getAccount());
         accountDTO.setPermissions(userDetail.getPermissions());
+        accountDTO.setResources(userDetail.getResources());
         CurrentProfileHolder.setContext(accountDTO);
         //放行
         filterChain.doFilter(request, response);

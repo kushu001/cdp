@@ -1,6 +1,7 @@
 package com.chomolungma.common.result;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.http.HttpStatus;
 
 @JsonInclude(value= JsonInclude.Include.NON_NULL)
 public class Result {
@@ -15,22 +16,30 @@ public class Result {
     }
 
     public static Result success( ){
-        return new Result("操作成功！",200,null);
+        return new Result("操作成功！",HttpStatus.OK.value(),null);
     }
     public static Result success( Object data){
-        return new Result("操作成功！",200,data);
+        return new Result("操作成功！",HttpStatus.OK.value(),data);
     }
 
     public static Result success(String msg, Object data){
-            return new Result(msg,200,data);
+            return new Result(msg,HttpStatus.OK.value(),data);
     }
 
     public static Result fail(Object data){
-        return new Result("操作失败",500,data);
+        return new Result("操作失败",HttpStatus.INTERNAL_SERVER_ERROR.value(),data);
     }
 
     public static Result fail(String msg, Object data){
-        return new Result(msg,500,data);
+        return new Result(msg,HttpStatus.INTERNAL_SERVER_ERROR.value(),data);
+    }
+
+    public static Result fail(String msg, HttpStatus status, Object data){
+        return new Result(msg,status.value(),data);
+    }
+
+    public static Result fail(String msg, HttpStatus status){
+        return new Result(msg,status.value(),null);
     }
 
     public String getMsg() {

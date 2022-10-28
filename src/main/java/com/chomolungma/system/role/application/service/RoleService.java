@@ -18,4 +18,6 @@ public interface RoleService {
     List<RolePermissionDTO> menus(Long roleId);
 
     List<RolePermissionDTO> operations(Long roleId);
+
+    List<Long> resources(Long roleId);
 }

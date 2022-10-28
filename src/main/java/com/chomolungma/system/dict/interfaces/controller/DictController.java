@@ -7,7 +7,6 @@ import com.chomolungma.system.dict.domain.entity.DictEntity;
 import com.chomolungma.system.dict.domain.repository.IDictRepository;
 import com.chomolungma.system.dict.interfaces.assembler.DictAssembler;
 import com.chomolungma.system.dict.interfaces.param.DictParam;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -33,20 +32,20 @@ public class DictController{
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('system:dict:get')")
+    //@PreAuthorize("hasAuthority('system:dict:get')")
     public Result info(@PathVariable("id") Long id){
         return Result.success(iDictRepository.query(id));
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('system:dict:add')")
+    //@PreAuthorize("hasAuthority('system:dict:add')")
     public Result createDict(@RequestBody DictParam dictParam){
         dictService.createDict(DictAssembler.covertToEntity(dictParam));
         return Result.success();
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('system:dict:edit')")
+    //@PreAuthorize("hasAuthority('system:dict:edit')")
     public Result updateDict(@PathVariable("id") Long id, @RequestBody DictParam dictParam){
         DictEntity dictEntity = DictAssembler.covertToEntity(dictParam);
         dictEntity.setId(id);
@@ -54,7 +53,7 @@ public class DictController{
     }
 
     @DeleteMapping("/{ids}")
-    @PreAuthorize("hasAuthority('system:dict:delete')")
+    //@PreAuthorize("hasAuthority('system:dict:delete')")
     public Result deleteDict(@PathVariable String ids){
         iDictRepository.remove(Arrays.stream(ids.split(",")).map(Long::valueOf).collect(Collectors.toList()));
         return Result.success();
