@@ -395,7 +395,7 @@ CREATE TABLE `sys_resource` (
   `url` varchar(100) DEFAULT NULL COMMENT '接口地址',
   `status` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COMMENT='资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COMMENT='资源表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,6 +404,7 @@ CREATE TABLE `sys_resource` (
 
 LOCK TABLES `sys_resource` WRITE;
 /*!40000 ALTER TABLE `sys_resource` DISABLE KEYS */;
+INSERT INTO `sys_resource` VALUES (12,'2022-10-27 08:04:17',NULL,'2022-10-27 08:04:17',NULL,'查询账户','system:account:list','/api/v1/account',NULL);
 /*!40000 ALTER TABLE `sys_resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -498,6 +499,34 @@ INSERT INTO `sys_role_operation` VALUES (70,NULL,NULL,NULL,NULL,1,51),(71,NULL,N
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sys_role_resource`
+--
+
+DROP TABLE IF EXISTS `sys_role_resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sys_role_resource` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `role_id` int DEFAULT NULL COMMENT '角色ID',
+  `resource_id` int DEFAULT NULL COMMENT '接口ID[即资源表中的id]',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COMMENT='角色接口权限';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_role_resource`
+--
+
+LOCK TABLES `sys_role_resource` WRITE;
+/*!40000 ALTER TABLE `sys_role_resource` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_role_resource` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sys_user`
 --
 
@@ -545,4 +574,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-24 17:18:10
+-- Dump completed on 2022-10-28 11:19:29
