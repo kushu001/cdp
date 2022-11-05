@@ -16,4 +16,5 @@ public class MenuDTO extends BaseDTO {
     private Boolean hasLeaf;
     private String sort;
     private String type;
+    private Boolean enabled;
 }

@@ -16,4 +16,5 @@ public class MenuEntity extends BaseEntity {
     private String permission;
     private Boolean hasLeaf = false;
     private String type;
+    private Boolean enabled;
 }

@@ -17,5 +17,6 @@ public class MenuDO extends BaseDO {
     private String permission;
     private Boolean hasLeaf;
     private String type;
+    private Boolean enabled;
     private Integer sort;
 }

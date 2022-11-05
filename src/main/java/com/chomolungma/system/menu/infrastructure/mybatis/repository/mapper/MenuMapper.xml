@@ -5,6 +5,7 @@
     <select id="selectPageVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
         select * from sys_menu
         <where>
+            enabled = 1
             <if test="menu.name != null and menu.name !=''">
                 and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
             </if>
@@ -21,6 +22,7 @@
     <select id="selectVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
         select * from sys_menu
         <where>
+            enabled = 1
             <if test="name != null and name !=''">
                 and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
             </if>
