@@ -11,6 +11,7 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="nickname" property="nickname" jdbcType="VARCHAR" />
         <result column="avatar" property="avatar" jdbcType="CHAR" />
+        <result column="enabled" property="enabled" jdbcType="TINYINT" />
         <result column="status" property="status" jdbcType="TINYINT" />
     </resultMap>
 
@@ -58,6 +59,7 @@
         sa.update_time ,
         sa.update_user ,
         sa.username ,
+        sa.enabled,
         su.name ,
         group_concat(sr.name) as role_name,
         sa.nickname ,
@@ -79,6 +81,9 @@
             </if>
             <if test="accountUserRole.status != null and accountUserRole.status !=''">
                 and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
+            </if>
+            <if test="accountUserRole.enabled != null">
+                and sa.enabled = #{accountUserRole.enabled,jdbcType=TINYINT}
             </if>
         </where>
         group by sa.id

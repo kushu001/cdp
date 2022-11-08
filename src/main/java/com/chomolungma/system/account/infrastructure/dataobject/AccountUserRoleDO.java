@@ -10,4 +10,5 @@ public class AccountUserRoleDO extends BaseDO {
     private String name;
     private String roleName;
     private String avatar;
+    private Boolean enabled;
 }

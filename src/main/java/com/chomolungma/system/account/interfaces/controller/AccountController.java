@@ -52,12 +52,12 @@ public class AccountController {
                               @RequestParam(required = false) String username,
                               @RequestParam(required = false) String name,
                               @RequestParam(required = false) String nickname,
-                              @RequestParam(required = false) Integer status){
+                              @RequestParam(required = false) Boolean enabled){
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setUsername(username);
         accountDTO.setName(name);
         accountDTO.setNickname(nickname);
-        accountDTO.setStatus(status);
+        accountDTO.setEnabled(enabled);
         return Result.success(iAccountRepository.queryPageList(AccountAssembler.toEntity(accountDTO),pageDTO.getPage(), pageDTO.getLimit()));
     }
 

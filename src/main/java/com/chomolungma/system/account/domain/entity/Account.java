@@ -17,6 +17,7 @@ public class Account extends BaseEntity {
     private String nickname;
     private String avatar;
     private List<Role> roles;
+    private Boolean enabled;
 
     public void resetPassword(){
         this.password = "$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK";

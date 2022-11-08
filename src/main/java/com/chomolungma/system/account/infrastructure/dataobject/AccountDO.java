@@ -12,4 +12,5 @@ public class AccountDO extends BaseDO {
     private String nickname;
     private String password;
     private String avatar;
+    private Boolean enabled;
 }
