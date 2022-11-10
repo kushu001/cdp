@@ -54,7 +54,8 @@ vue: 2以上
 
 ## 界面截图
 
-<img width="1511" alt="image" src="https://user-images.githubusercontent.com/3797320/185793574-455ed3d4-1772-48d3-8433-bfef96aca105.png">
+<img width="1460" alt="image" src="https://user-images.githubusercontent.com/3797320/201058664-75dc738f-c3ab-4033-a989-07c7c919a000.png">
+<img width="1464" alt="image" src="https://user-images.githubusercontent.com/3797320/201058740-bb76030a-d81f-4e83-9f5d-6c116b7f1a38.png">
 <img width="1507" alt="image" src="https://user-images.githubusercontent.com/3797320/185793597-fb79f67c-84b0-4df3-aa03-e53053522982.png">
 <img width="1509" alt="image" src="https://user-images.githubusercontent.com/3797320/185793610-68853393-5d56-4546-b14b-b51467875399.png">
 <img width="1462" alt="image" src="https://user-images.githubusercontent.com/3797320/195744141-73aad171-3172-48a8-85f7-a50c0b97c3c4.png">
