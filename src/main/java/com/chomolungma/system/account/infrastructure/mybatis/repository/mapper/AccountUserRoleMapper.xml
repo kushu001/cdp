@@ -61,7 +61,7 @@
         sa.username ,
         sa.enabled,
         su.name ,
-        group_concat(sr.name) as role_name,
+        group_concat(sr.name ORDER by sr.name DESC) as role_name,
         sa.nickname ,
         sa.avatar ,
         sa.status
