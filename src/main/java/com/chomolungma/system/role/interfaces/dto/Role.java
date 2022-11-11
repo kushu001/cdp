@@ -11,6 +11,7 @@ public class Role {
     private String name;
     private String code;
     private String remark;
+    private Boolean enabled;
     private Integer status;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;

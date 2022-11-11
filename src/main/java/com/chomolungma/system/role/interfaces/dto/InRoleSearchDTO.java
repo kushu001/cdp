@@ -11,6 +11,7 @@ public class InRoleSearchDTO extends PageDTO {
     public String code;
     public String remark;
     public Integer status;
+    public Boolean enabled;
     public Date startTime;
     public Date endTime;
 

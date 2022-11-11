@@ -8,5 +8,6 @@ public class InRoleFormDTO {
     public String name;
     public String code;
     public String remark;
+    public Boolean enabled;
     public Integer status;
 }

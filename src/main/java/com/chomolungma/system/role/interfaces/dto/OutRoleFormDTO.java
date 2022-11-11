@@ -8,5 +8,6 @@ public class OutRoleFormDTO {
     private String name;
     private String code;
     private String remark;
+    private Boolean enabled;
     private Integer status;
 }

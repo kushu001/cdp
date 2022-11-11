@@ -10,6 +10,7 @@ public class RoleEntity {
     private String name;
     private String code;
     private String remark;
+    private Boolean enabled;
     private Integer status;
     private Date createTime;
 }
