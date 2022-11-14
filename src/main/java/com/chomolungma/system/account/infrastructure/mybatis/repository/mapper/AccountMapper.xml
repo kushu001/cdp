@@ -54,4 +54,15 @@
             and sr.id is not null
         </where>
     </select>
+
+    <!-- 批量删除账户-假删除 -->
+    <update id="deleteBatchByIds" parameterType="list">
+        update sys_account set deleted = 1
+        <where>
+            id in
+            <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                #{item, jdbcType=BIGINT}
+            </foreach>
+        </where>
+    </update>
 </mapper>

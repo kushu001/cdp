@@ -70,6 +70,7 @@
         left join sys_account_role sar on sa.id = sar.account_id
         left join sys_role sr on sar.role_id = sr.id
         <where>
+            sa.deleted = 0
             <if test="accountUserRole.username != null and accountUserRole.username !=''">
                 and sa.username like  CONCAT('%',#{accountUserRole.username,jdbcType=VARCHAR},'%')
             </if>

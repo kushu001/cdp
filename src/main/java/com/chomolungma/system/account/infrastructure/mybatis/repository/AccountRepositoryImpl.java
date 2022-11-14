@@ -50,7 +50,8 @@ public class AccountRepositoryImpl implements IAccountRepository {
 
     @Override
     public Void remove(List<String> ids) {
-        accountMapper.deleteBatchIds(ids);
+        //accountMapper.deleteBatchIds(ids);
+        accountMapper.deleteBatchByIds(ids);
         return null;
     }
 
