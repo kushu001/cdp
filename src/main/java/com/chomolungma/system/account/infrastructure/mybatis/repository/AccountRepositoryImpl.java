@@ -49,12 +49,6 @@ public class AccountRepositoryImpl implements IAccountRepository {
     }
 
     @Override
-    public Void remove(Account account) {
-        accountMapper.deleteById(account.getId());
-        return null;
-    }
-
-    @Override
     public Void remove(List<String> ids) {
         accountMapper.deleteBatchIds(ids);
         return null;
@@ -92,12 +86,14 @@ public class AccountRepositoryImpl implements IAccountRepository {
     @Override
     public Account queryAccount(String username) {
         AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
+        if (accountDO == null) {
+            return null;
+        }
         List<RoleDTO> roles= accountMapper.selectRolesByAccountId(accountDO.getId());
         Account account = AccountConverter.INSTANCE.toEntity(accountDO);
 
         List<Role> roleEntities = new ArrayList<>();
-        for (RoleDTO roleDto: roles
-             ) {
+        for (RoleDTO roleDto: roles) {
             Role role = new Role();
             role.setId(roleDto.getId());
             role.setName(role.getName());
