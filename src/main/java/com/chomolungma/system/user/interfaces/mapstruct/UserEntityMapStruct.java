@@ -1,6 +1,5 @@
 package com.chomolungma.system.user.interfaces.mapstruct;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.interfaces.dto.*;
 import com.github.pagehelper.PageInfo;
@@ -16,16 +15,11 @@ public interface UserEntityMapStruct {
     UserEntityMapStruct INSTANCE = Mappers.getMapper(UserEntityMapStruct.class);
 
     UserEntity fromUserSearchDTO(UserSearchDTO userSearchDTO);
-
-    PageUserDTO toPageUserDTO(IPage<UserEntity> pageUsers);
     @Mappings({
         @Mapping(target = "records", source = "list"),
         @Mapping(target = "page", source = "pageNum")
     })
     PageUserDTO toPageUserDTO(PageInfo<UserDTO> pageUsers);
-
-    UserEntity  toUserEntity(UserFormDTO userFormDTO);
-
     UserDTO fromUserEntity(UserEntity userEntity);
 
     List<User> toDTO(List<UserEntity> userEntities);

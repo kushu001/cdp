@@ -95,4 +95,11 @@ public class UserRepositoryImpl implements IUserRepository {
         userDTO.setDeptName(org.getName());
         return userDTO;
     }
+
+    @Override
+    public void audit(Long id) {
+        UserDO userDO = userMapper.selectById(id);
+        userDO.setStatus(1);
+        userMapper.updateById(userDO);
+    }
 }

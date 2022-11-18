@@ -22,4 +22,5 @@ public interface UserService {
     PageUserDTO getUsers(UserSearchDTO userSearchDTO);
 
     List<User> getUsers(String code, UserEntity userEntity);
+    void audit(Long userId);
 }

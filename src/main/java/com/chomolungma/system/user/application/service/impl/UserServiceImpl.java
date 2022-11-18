@@ -73,4 +73,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers(String code, UserEntity userEntity) {
         return UserAssembler.toDTO(iUserRepository.getUsers(code, userEntity));
     }
+
+    @Override
+    public void audit(Long userId) {
+        iUserRepository.audit(userId);
+    }
 }

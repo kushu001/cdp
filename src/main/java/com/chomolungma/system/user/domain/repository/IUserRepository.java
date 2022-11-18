@@ -21,5 +21,5 @@ public interface IUserRepository {
 
     UserDTO findUser(Long id);
 
-
+    void audit(Long id);
 }

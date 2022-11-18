@@ -88,6 +88,12 @@ public class UserController {
         return Result.success(userService.getMenus(roleIds));
     }
 
+    @PutMapping("/audit/{id}")
+    public Result audit(@PathVariable("id") Long id){
+        userService.audit(id);
+        return Result.success();
+    }
+
     @PostMapping("/org/{code}/import")
     public void importExcel(@PathVariable("code") String code, MultipartFile file){
         System.out.println(file.getOriginalFilename());
