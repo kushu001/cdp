@@ -1,6 +1,7 @@
 package com.chomolungma.system.user.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.User;
 import com.chomolungma.system.user.domain.entity.UserEntity;
@@ -74,6 +75,15 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public void remove(List<Long> ids) {
+        Boolean count = userMapper.noDeleteCount(ids);
+        if (count){
+            if (ids.size()>1){
+                throw new BusinessRuntimeException("含有[通过]状态的人员数据，无法删除！");
+            }else{
+                throw new BusinessRuntimeException("当前人员数据状态为[通过]，无法删除！");
+            }
+
+        }
         // 删除用户信息
         userMapper.deleteBatchIds(ids);
         // 删除用户部门关联信息

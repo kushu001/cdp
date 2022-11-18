@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<UserDO> {
     List<UserDTO> selectUsersByCondition(@Param("code") String code, @Param("userDO") UserDO userDO);
+
+    Boolean noDeleteCount(List<Long> ids);
 }

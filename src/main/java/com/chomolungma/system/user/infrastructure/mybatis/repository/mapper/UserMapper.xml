@@ -38,4 +38,16 @@
             </if>
         </where>
     </select>
+
+    <select id="noDeleteCount" parameterType="list" resultType="Boolean">
+        select count(1) from sys_user
+            <where>
+                status = 1 and
+                id in
+                <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                    #{item, jdbcType=BIGINT}
+                </foreach>
+            </where>
+
+    </select>
 </mapper>
