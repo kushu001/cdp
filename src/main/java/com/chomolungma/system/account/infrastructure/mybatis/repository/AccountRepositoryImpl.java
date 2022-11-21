@@ -14,6 +14,7 @@ import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.A
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountPageDTO;
+import com.chomolungma.system.user.infrastructure.dataobject.UserDO;
 import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -77,10 +78,11 @@ public class AccountRepositoryImpl implements IAccountRepository {
     public AccountDTO queryAccount(Long id) {
         AccountDO accountDO = accountMapper.selectById(id);
         List<RoleDTO> roles= accountMapper.selectRolesByAccountId(id);
+        UserDO userDO = userMapper.selectById(accountDO.getUserId());
         AccountDTO accountDTO = AccountAssembler.toDTO(accountDO);
         accountDTO.setRoleIds(roles.stream().map(RoleDTO::getId).collect(Collectors.toList()));
         accountDTO.setRoleName(roles.stream().map(RoleDTO::getName).collect(Collectors.joining(",")));
-        accountDTO.setName(userMapper.selectById(accountDO.getUserId()).getName());
+        accountDTO.setName(userDO != null ? userDO.getName():null);
         return accountDTO;
     }
 
