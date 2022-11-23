@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.menu//DTD Mapper 3.0//EN" "http://mybatis.menu/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper">
-    <!-- 查询部门 -->
-    <select id="selectPageVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
-        select * from sys_menu
-        <where>
-            enabled = 1
-            <if test="menu.name != null and menu.name !=''">
-                and `name` like  CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
-            </if>
-            <if test="menu.icon != null and menu.icon !=''">
-                and icon =  #{menu.icon,jdbcType=VARCHAR}
-            </if>
-            <if test="menu.status != null and menu.status !=''">
-                and status = #{menu.status,jdbcType=VARCHAR}
-            </if>
-        </where>
-    </select>
-
-
-    <select id="selectVo" parameterType="com.chomolungma.system.menu.pojo.Menu" resultType="com.chomolungma.system.menu.pojo.Menu">
-        select * from sys_menu
-        <where>
-            enabled = 1
-            <if test="name != null and name !=''">
-                and `name` like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
-            </if>
-            <if test="icon != null and icon !=''">
-                and icon =  #{icon,jdbcType=VARCHAR}
-            </if>
-            <if test="status != null and status !=''">
-                and status = #{status,jdbcType=VARCHAR}
-            </if>
-        </where>
-    </select>
-
-
     <delete id="deleteMenus" parameterType="java.lang.Long">
         delete from sys_menu where id in (
             select id from (

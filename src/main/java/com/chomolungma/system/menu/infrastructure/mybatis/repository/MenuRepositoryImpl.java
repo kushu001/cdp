@@ -6,10 +6,15 @@ import com.chomolungma.system.menu.domain.repository.IMenuRepository;
 import com.chomolungma.system.menu.infrastructure.converter.MenuConverter;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper;
+import com.chomolungma.system.menu.interfaces.assembler.MenuAssembler;
+import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MenuRepositoryImpl implements IMenuRepository {
@@ -18,6 +23,37 @@ public class MenuRepositoryImpl implements IMenuRepository {
 
     public MenuRepositoryImpl(MenuMapper menuMapper) {
         this.menuMapper = menuMapper;
+    }
+
+    @Override
+    public List<MenuDTO> query() {
+        List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().orderByAsc("sort"));
+        return MenuAssembler.convertToDto(menuList);
+    }
+
+    @Override
+    public List<MenuDTO> query(String type) {
+        List<MenuDO> results = new ArrayList<>();
+        if (type.equals("0")){
+            results = menuMapper.selectList(new QueryWrapper<MenuDO>().eq("type", type).orderByAsc("sort"));
+        }else if (type.equals("1")){
+            List<MenuDO> operations = menuMapper.selectList(new QueryWrapper<MenuDO>().orderByDesc("type").orderByAsc("sort"));
+            Map<Long, MenuDO> map = new HashMap<>();
+            for (MenuDO menuDO: operations) {
+                map.put(menuDO.getId(), menuDO);
+            }
+            Map<Long, MenuDO> result = new HashMap<>();
+            for (MenuDO menuDO: operations) {
+                if (menuDO.getType().equals("1")){
+                    fuc(result, map, menuDO);
+                }
+            }
+            for (Map.Entry<Long, MenuDO> menuDO : result.entrySet()) {
+                results.add(menuDO.getValue());
+            }
+        }
+
+        return MenuAssembler.convertToDto(results);
     }
 
     @Override
@@ -57,5 +93,15 @@ public class MenuRepositoryImpl implements IMenuRepository {
 
         // 删除角色关联菜单的记录
         menuMapper.deleteRoleMenuRelByMenuId(id);
+    }
+
+    private void fuc(Map<Long, MenuDO> result, Map<Long, MenuDO> allMap, MenuDO menuDO){
+        if (menuDO.getPid() != 0L){
+            result.put(menuDO.getId(), menuDO);
+            fuc(result, allMap, allMap.get(menuDO.getPid()));
+        }else {
+            result.put(menuDO.getId(), menuDO);
+        }
+
     }
 }

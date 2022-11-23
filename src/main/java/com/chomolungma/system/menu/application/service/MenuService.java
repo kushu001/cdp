@@ -1,7 +1,7 @@
 package com.chomolungma.system.menu.application.service;
 
 import com.chomolungma.system.menu.domain.entity.MenuEntity;
-import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
+import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface MenuService {
 
     void updateMenu(MenuEntity menuEntity);
 
-    List<MenuDO> permissions(String type);
+    List<MenuDTO> permissions(String type);
 }

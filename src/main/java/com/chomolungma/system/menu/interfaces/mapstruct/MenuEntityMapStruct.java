@@ -3,7 +3,7 @@ package com.chomolungma.system.menu.interfaces.mapstruct;
 import com.chomolungma.system.menu.domain.entity.MenuEntity;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
-import com.chomolungma.system.menu.param.MenuParam;
+import com.chomolungma.system.menu.interfaces.param.MenuParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

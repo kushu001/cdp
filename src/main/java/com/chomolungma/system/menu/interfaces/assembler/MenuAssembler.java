@@ -4,7 +4,7 @@ import com.chomolungma.system.menu.domain.entity.MenuEntity;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.menu.interfaces.mapstruct.MenuEntityMapStruct;
-import com.chomolungma.system.menu.param.MenuParam;
+import com.chomolungma.system.menu.interfaces.param.MenuParam;
 
 import java.util.List;
 

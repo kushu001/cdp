@@ -1,4 +1,4 @@
-package com.chomolungma.system.menu.param;
+package com.chomolungma.system.menu.interfaces.param;
 
 import lombok.Data;
 
