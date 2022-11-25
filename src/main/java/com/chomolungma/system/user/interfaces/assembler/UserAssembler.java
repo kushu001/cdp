@@ -1,35 +1,31 @@
 package com.chomolungma.system.user.interfaces.assembler;
 
-import com.chomolungma.system.user.domain.entity.UserEntity;
-import com.chomolungma.system.user.interfaces.dto.*;
+
+import com.chomolungma.system.user.domain.entity.User;
+import com.chomolungma.system.user.interfaces.dto.PageUserDTO;
+import com.chomolungma.system.user.interfaces.dto.UserDTO;
+import com.chomolungma.system.user.interfaces.dto.UserFormDTO;
+import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
 import com.chomolungma.system.user.interfaces.mapstruct.UserEntityMapStruct;
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
 
 public class UserAssembler {
-    public static UserEntity toUserEntity(UserSearchDTO userSearchDTO){
-        return UserEntityMapStruct.INSTANCE.fromUserSearchDTO(userSearchDTO);
-    }
 
     public static PageUserDTO toPageUserDTO(PageInfo<UserDTO> userOrgDOPageInfo){
         return UserEntityMapStruct.INSTANCE.toPageUserDTO(userOrgDOPageInfo);
     }
 
-    public static List<User> toDTO(List<UserEntity> userEntities){
-        return UserEntityMapStruct.INSTANCE.toDTO(userEntities);
-    }
-
-    public static com.chomolungma.system.user.domain.entity.User toEntity(UserFormDTO userFormDTO){
+    public static User toEntity(UserFormDTO userFormDTO){
         return UserEntityMapStruct.INSTANCE.toEntity(userFormDTO);
     }
 
-    public static UserDTO toDTO(com.chomolungma.system.user.domain.entity.User user){
-        return UserEntityMapStruct.INSTANCE.toDTO(user);
+    public static User toEntity(UserSearchDTO userSearchDTO){
+        return UserEntityMapStruct.INSTANCE.toEntity(userSearchDTO);
     }
 
-    public static com.chomolungma.system.user.domain.entity.User toEntity(UserSearchDTO userSearchDTO){
-        return UserEntityMapStruct.INSTANCE.toEntity(userSearchDTO);
+    public static UserDTO toDTO(User user){
+        return UserEntityMapStruct.INSTANCE.toDTO(user);
     }
 
 }

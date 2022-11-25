@@ -35,15 +35,7 @@ public class UserController {
                            @RequestParam(required = false) String phone,
                            @RequestParam(required = false) String tel,
                            @RequestParam(required = false) String address){
-        UserSearchDTO userSearchDTO = new UserSearchDTO();
-        userSearchDTO.setIdNumber(idNumber);
-        userSearchDTO.setName(name);
-        userSearchDTO.setPhone(phone);
-        userSearchDTO.setTel(tel);
-        userSearchDTO.setAddress(address);
-        userSearchDTO.setPage(pageDTO.getPage());
-        userSearchDTO.setLimit(pageDTO.getLimit());
-        return Result.success(userService.getUsers(userSearchDTO));
+        return Result.success(userService.getUsers(null, name, idNumber, phone, tel, address, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/org/{code}")
@@ -54,15 +46,7 @@ public class UserController {
                            @RequestParam(required = false) String tel,
                            @RequestParam(required = false) String address
     ){
-        UserSearchDTO userSearchDTO = new UserSearchDTO();
-        userSearchDTO.setIdNumber(idNumber);
-        userSearchDTO.setName(name);
-        userSearchDTO.setPhone(phone);
-        userSearchDTO.setTel(tel);
-        userSearchDTO.setAddress(address);
-        userSearchDTO.setPage(pageDTO.getPage());
-        userSearchDTO.setLimit(pageDTO.getLimit());
-        return Result.success(userService.getUsersByOrg(code, userSearchDTO));
+        return Result.success(userService.getUsers(code, name, idNumber, phone, tel, address, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/{id}")
@@ -100,8 +84,19 @@ public class UserController {
     }
 
     @GetMapping("/org/{code}/export")
-    public void exportExcel(@PathVariable("code") String code,UserSearchDTO userSearchDTO) throws IOException {
-        excelService.export(userService.getUsers(code, UserAssembler.toUserEntity(userSearchDTO)), UserExcelDTO.class);
+    public void exportExcel(@PathVariable("code") String code,
+                            @RequestParam(required = false) String name,
+                            @RequestParam(value = "id_number", required = false) String idNumber,
+                            @RequestParam(required = false) String phone,
+                            @RequestParam(required = false) String tel,
+                            @RequestParam(required = false) String address) throws IOException {
+        UserSearchDTO userSearchDTO = new UserSearchDTO();
+        userSearchDTO.setIdNumber(idNumber);
+        userSearchDTO.setName(name);
+        userSearchDTO.setPhone(phone);
+        userSearchDTO.setTel(tel);
+        userSearchDTO.setAddress(address);
+        excelService.export(userService.getUsers(code, name, idNumber, phone, tel, address), UserExcelDTO.class);
     }
 
 }

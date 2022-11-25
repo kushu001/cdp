@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.common.exception.BusinessRuntimeException;
 import com.chomolungma.system.user.domain.entity.Org;
 import com.chomolungma.system.user.domain.entity.User;
-import com.chomolungma.system.user.domain.entity.UserEntity;
 import com.chomolungma.system.user.domain.repository.IUserRepository;
 import com.chomolungma.system.user.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.user.infrastructure.converter.UserConverter;
@@ -25,7 +24,6 @@ import java.util.List;
 public class UserRepositoryImpl implements IUserRepository {
     private final UserMapper userMapper;
     private final OrgUserMapper orgUserMapper;
-
     private final OrgAdapter orgAdapter;
 
     public UserRepositoryImpl(UserMapper userMapper, OrgUserMapper orgUserMapper, OrgAdapter orgAdapter) {
@@ -36,22 +34,8 @@ public class UserRepositoryImpl implements IUserRepository {
 
 
     @Override
-    public PageUserDTO getUsersByCode(String code, User user, int current, int size) {
-        PageHelper.startPage(current, size);
-        List<UserDTO> userOrgDOS = userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(user));
-        PageInfo<UserDTO> pageInfo = new PageInfo<>(userOrgDOS);
-        //PageHelper.clearPage();
-        return UserAssembler.toPageUserDTO(pageInfo);
-    }
-
-    @Override
-    public PageUserDTO getUsers(User user, int current, int size) {
-        return getUsersByCode(null, user, current, size);
-    }
-
-    @Override
-    public List<UserEntity> getUsers(String code, UserEntity userEntity) {
-        return UserConverter.INSTANCE.toEntity(userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(userEntity)));
+    public List<UserDTO> getUsers(String code, User user) {
+        return userMapper.selectUsersByCondition(code, UserConverter.INSTANCE.toDO(user));
     }
 
     @Override
@@ -96,20 +80,12 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
-    public UserDTO findUser(Long id) {
+    public User findUser(Long id) {
         UserDO userDO = userMapper.selectById(id);
         OrgUserDO orgUserDO = orgUserMapper.selectOne(new QueryWrapper<OrgUserDO>().eq("user_id", userDO.getId()));
         Org org = orgAdapter.adapter(orgUserDO.getOrgId());
-        UserDTO userDTO = UserConverter.INSTANCE.toDTO(userDO);
-        userDTO.setDeptId(org.getId());
-        userDTO.setDeptName(org.getName());
-        return userDTO;
-    }
-
-    @Override
-    public void audit(Long id) {
-        UserDO userDO = userMapper.selectById(id);
-        userDO.setStatus(1);
-        userMapper.updateById(userDO);
+        User user = UserConverter.INSTANCE.toEntity(userDO);
+        user.setOrg(org);
+        return user;
     }
 }

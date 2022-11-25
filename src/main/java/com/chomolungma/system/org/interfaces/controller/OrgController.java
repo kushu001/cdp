@@ -63,7 +63,7 @@ public class OrgController {
 
     @GetMapping("/{code}/user")
     public Result getUsersByOrgId(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
-        return Result.success(userService.getUsersByOrg(code, userSearchDTO));
+        return Result.success();
     }
 
     @DeleteMapping("/{code}/user/{ids}")

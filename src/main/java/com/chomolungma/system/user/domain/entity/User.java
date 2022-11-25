@@ -1,10 +1,10 @@
 package com.chomolungma.system.user.domain.entity;
 
+import com.chomolungma.core.domain.entity.BaseEntity;
 import lombok.Data;
 
 @Data
-public class User {
-    private Long id;
+public class User extends BaseEntity {
     private String name;
     private Integer gender;
     private String idNumber;
@@ -13,6 +13,10 @@ public class User {
     private String address;
     private String company;
     private Org org;
-    private Integer status;
+
+
+    public void audit(){
+        this.setStatus(1);
+    }
 
 }
