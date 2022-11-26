@@ -14,8 +14,8 @@ import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.A
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountPageDTO;
-import com.chomolungma.system.user.infrastructure.dataobject.UserDO;
-import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
+import com.chomolungma.system.staff.infrastructure.dataobject.StaffDO;
+import com.chomolungma.system.staff.infrastructure.mybatis.repository.mapper.StaffMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
@@ -29,13 +29,13 @@ import java.util.stream.Collectors;
 public class AccountRepositoryImpl implements IAccountRepository {
     private AccountMapper accountMapper;
     private AccountUserRoleMapper accountUserRoleMapper;
-    private UserMapper userMapper;
+    private StaffMapper staffMapper;
 
 
-    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, UserMapper userMapper){
+    public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, StaffMapper staffMapper){
         this.accountMapper = accountMapper;
         this.accountUserRoleMapper = accountUserRoleMapper;
-        this.userMapper = userMapper;
+        this.staffMapper = staffMapper;
     }
     @Override
     public Void save(Account account) {
@@ -78,7 +78,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
     public AccountDTO queryAccount(Long id) {
         AccountDO accountDO = accountMapper.selectById(id);
         List<RoleDTO> roles= accountMapper.selectRolesByAccountId(id);
-        UserDO userDO = userMapper.selectById(accountDO.getUserId());
+        StaffDO userDO = staffMapper.selectById(accountDO.getUserId());
         AccountDTO accountDTO = AccountAssembler.toDTO(accountDO);
         accountDTO.setRoleIds(roles.stream().map(RoleDTO::getId).collect(Collectors.toList()));
         accountDTO.setRoleName(roles.stream().map(RoleDTO::getName).collect(Collectors.joining(",")));

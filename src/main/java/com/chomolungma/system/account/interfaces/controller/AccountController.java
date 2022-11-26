@@ -14,7 +14,7 @@ import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
-import com.chomolungma.system.user.application.service.UserService;
+import com.chomolungma.system.staff.application.service.StaffService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,19 +32,19 @@ public class AccountController {
     private final IAccountRepository iAccountRepository;
     private final ExcelService excelService;
 
-    private final UserService userService;
+    private final StaffService staffService;
 
-    public AccountController(AccountService accountService, IAccountRepository iAccountRepository, ExcelService excelService,UserService userService) {
+    public AccountController(AccountService accountService, IAccountRepository iAccountRepository, ExcelService excelService, StaffService staffService) {
         this.accountService = accountService;
         this.iAccountRepository = iAccountRepository;
         this.excelService = excelService;
-        this.userService = userService;
+        this.staffService = staffService;
 
     }
 
     @GetMapping("/get")
     public Map<String, Object> getProfile(){
-        List<MenuDTO> menuDTOS = userService.getMenus(CurrentProfileHolder.getProfile().getRoleIds());
+        List<MenuDTO> menuDTOS = staffService.getMenus(CurrentProfileHolder.getProfile().getRoleIds());
         Map<String, Object> map = new HashMap<>();
         map.put("roles", CurrentProfileHolder.getProfile().getPermissions());
         map.put("introduction","I am a super administrator");

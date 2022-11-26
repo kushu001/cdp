@@ -1,6 +1,6 @@
 package com.chomolungma.test;
 
-import com.chomolungma.system.user.infrastructure.mybatis.repository.mapper.UserMapper;
+import com.chomolungma.system.staff.infrastructure.mybatis.repository.mapper.StaffMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SampleTest {
     @Autowired
-    private UserMapper userMapper;
+    private StaffMapper staffMapper;
 
     @Test
     public void testSelect() {

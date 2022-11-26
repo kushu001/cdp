@@ -7,8 +7,8 @@ import com.chomolungma.system.org.domain.repository.IOrgRepository;
 import com.chomolungma.system.org.interfaces.assembler.OrgAssembler;
 import com.chomolungma.system.org.interfaces.dto.OrgDTO;
 import com.chomolungma.system.org.interfaces.param.OrgParam;
-import com.chomolungma.system.user.application.service.UserService;
-import com.chomolungma.system.user.interfaces.dto.UserSearchDTO;
+import com.chomolungma.system.staff.application.service.StaffService;
+import com.chomolungma.system.staff.interfaces.dto.StaffSearchDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -21,13 +21,13 @@ public class OrgController {
 
     private final OrgService orgService;
 
-    private final UserService userService;
+    private final StaffService staffService;
 
     private final IOrgRepository iOrgRepository;
 
-    public OrgController(OrgService orgService, UserService userService, IOrgRepository iOrgRepository){
+    public OrgController(OrgService orgService, StaffService staffService, IOrgRepository iOrgRepository){
         this.orgService = orgService;
-        this.userService = userService;
+        this.staffService = staffService;
         this.iOrgRepository = iOrgRepository;
     }
 
@@ -62,13 +62,13 @@ public class OrgController {
     }
 
     @GetMapping("/{code}/user")
-    public Result getUsersByOrgId(@PathVariable("code") String code, UserSearchDTO userSearchDTO){
+    public Result getUsersByOrgId(@PathVariable("code") String code, StaffSearchDTO staffSearchDTO){
         return Result.success();
     }
 
     @DeleteMapping("/{code}/user/{ids}")
     public Result deleteUsers(@PathVariable("code") String code, @PathVariable("ids") String ids){
-        userService.deleteUsers(code, Arrays.asList(ids.split(",")));
+        staffService.deleteStaffs(code, Arrays.asList(ids.split(",")));
         return Result.success();
     }
 
