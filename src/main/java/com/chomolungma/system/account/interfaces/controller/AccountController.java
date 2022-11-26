@@ -13,6 +13,8 @@ import com.chomolungma.system.account.infrastructure.listener.AccountExcelListen
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
+import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
+import com.chomolungma.system.user.application.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,19 +32,25 @@ public class AccountController {
     private final IAccountRepository iAccountRepository;
     private final ExcelService excelService;
 
-    public AccountController(AccountService accountService, IAccountRepository iAccountRepository, ExcelService excelService) {
+    private final UserService userService;
+
+    public AccountController(AccountService accountService, IAccountRepository iAccountRepository, ExcelService excelService,UserService userService) {
         this.accountService = accountService;
         this.iAccountRepository = iAccountRepository;
         this.excelService = excelService;
+        this.userService = userService;
+
     }
 
     @GetMapping("/get")
     public Map<String, Object> getProfile(){
+        List<MenuDTO> menuDTOS = userService.getMenus(CurrentProfileHolder.getProfile().getRoleIds());
         Map<String, Object> map = new HashMap<>();
         map.put("roles", CurrentProfileHolder.getProfile().getPermissions());
         map.put("introduction","I am a super administrator");
         map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         map.put("name","Super Admin");
+        map.put("menus", menuDTOS);
         map.put("code",200);
         return map;
     }

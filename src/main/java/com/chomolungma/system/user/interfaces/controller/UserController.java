@@ -66,12 +66,6 @@ public class UserController {
         return Result.success();
     }
 
-    @GetMapping("/menu")
-    public Result getMenus(){
-        List<Long> roleIds = CurrentProfileHolder.getProfile().getRoleIds();
-        return Result.success(userService.getMenus(roleIds));
-    }
-
     @PutMapping("/audit/{id}")
     public Result audit(@PathVariable("id") Long id){
         userService.audit(id);
