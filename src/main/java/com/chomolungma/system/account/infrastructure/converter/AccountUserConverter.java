@@ -12,12 +12,7 @@ import java.util.List;
 @Mapper
 public interface AccountUserConverter {
     AccountUserConverter INSTANCE = Mappers.getMapper(AccountUserConverter.class);
-
-    Page<Account> toIPage(IPage<AccountUserRoleDO> accountUsers);
-
     AccountUserRoleDO toDO(Account account);
-
     Account toEntity(AccountUserRoleDO accountUserRoleDO);
-
     List<Account> toEntity(List<AccountUserRoleDO> accountUserRoleDOS);
 }

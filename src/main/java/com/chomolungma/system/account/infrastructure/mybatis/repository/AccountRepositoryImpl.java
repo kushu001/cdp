@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 
 @Repository
 public class AccountRepositoryImpl implements IAccountRepository {
-    private AccountMapper accountMapper;
-    private AccountUserRoleMapper accountUserRoleMapper;
-    private StaffMapper staffMapper;
+    private final AccountMapper accountMapper;
+    private final AccountUserRoleMapper accountUserRoleMapper;
+    private final StaffMapper staffMapper;
 
 
     public AccountRepositoryImpl(AccountMapper accountMapper, AccountUserRoleMapper accountUserRoleMapper, StaffMapper staffMapper){
@@ -51,7 +51,6 @@ public class AccountRepositoryImpl implements IAccountRepository {
 
     @Override
     public Void remove(List<String> ids) {
-        //accountMapper.deleteBatchIds(ids);
         accountMapper.deleteBatchByIds(ids);
         return null;
     }
@@ -66,48 +65,30 @@ public class AccountRepositoryImpl implements IAccountRepository {
     }
 
     @Override
-    public Account queryAccountUser(String username, String password) {
-        AccountUserRoleDO accountUserRoleDO = accountUserRoleMapper.selectAccount(username, password);
-        List<RoleDTO> roles= accountMapper.selectRolesByAccountId(accountUserRoleDO.getId());
-        Account account = AccountUserConverter.INSTANCE.toEntity(accountUserRoleDO);
-        account.setRoles(AccountConverter.INSTANCE.toEntity(roles));
+    public Account findAccount(Long id) {
+        AccountDO accountDO = accountMapper.selectById(id);
+        List<Role> roles= accountMapper.selectRolesByAccountId(id);
+        StaffDO userDO = staffMapper.selectById(accountDO.getUserId());
+        Account account = AccountConverter.INSTANCE.toEntity(accountDO);
+        account.setRoles(roles);
+        account.setName(userDO != null ? userDO.getName():null);
         return account;
     }
 
     @Override
-    public AccountDTO queryAccount(Long id) {
-        AccountDO accountDO = accountMapper.selectById(id);
-        List<RoleDTO> roles= accountMapper.selectRolesByAccountId(id);
-        StaffDO userDO = staffMapper.selectById(accountDO.getUserId());
-        AccountDTO accountDTO = AccountAssembler.toDTO(accountDO);
-        accountDTO.setRoleIds(roles.stream().map(RoleDTO::getId).collect(Collectors.toList()));
-        accountDTO.setRoleName(roles.stream().map(RoleDTO::getName).collect(Collectors.joining(",")));
-        accountDTO.setName(userDO != null ? userDO.getName():null);
-        return accountDTO;
-    }
-
-    @Override
-    public Account queryAccount(String username) {
+    public Account findAccount(String username) {
         AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
         if (accountDO == null) {
             return null;
         }
-        List<RoleDTO> roles= accountMapper.selectRolesByAccountId(accountDO.getId());
+        List<Role> roles= accountMapper.selectRolesByAccountId(accountDO.getId());
         Account account = AccountConverter.INSTANCE.toEntity(accountDO);
-
-        List<Role> roleEntities = new ArrayList<>();
-        for (RoleDTO roleDto: roles) {
-            Role role = new Role();
-            role.setId(roleDto.getId());
-            role.setName(role.getName());
-            roleEntities.add(role);
-        }
-        account.setRoles(roleEntities);
+        account.setRoles(roles);
         return account;
     }
 
     @Override
-    public List<Account> queryAccounts(Account account) {
+    public List<Account> findAccounts(Account account) {
         AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(account);
         List<AccountUserRoleDO> accountUserRoleDOS = accountUserRoleMapper.selectList(accountUserRoleDO);
         return AccountUserConverter.INSTANCE.toEntity(accountUserRoleDOS);

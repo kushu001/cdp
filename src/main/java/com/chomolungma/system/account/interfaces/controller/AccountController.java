@@ -9,12 +9,16 @@ import com.chomolungma.system.account.application.service.AccountService;
 import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.domain.entity.Account;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
+import com.chomolungma.system.account.infrastructure.converter.AccountUserConverter;
+import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
 import com.chomolungma.system.account.infrastructure.listener.AccountExcelListener;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.staff.application.service.StaffService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,7 +76,8 @@ public class AccountController {
     @GetMapping("/{id}")
     // @PreAuthorize("hasAuthority('system:account:view')")
     public Result getAccount(@PathVariable("id") Long id){
-        return Result.success(iAccountRepository.queryAccount(id));
+        Account account = iAccountRepository.findAccount(id);
+        return Result.success(AccountAssembler.toDTO(account));
     }
 
     @PostMapping

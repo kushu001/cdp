@@ -23,7 +23,7 @@ public class SecurityServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询用户是否存在
-        Account account = iAccountRepository.queryAccount(username);
+        Account account = iAccountRepository.findAccount(username);
 
         if(Objects.isNull(account)){
             throw new BusinessRuntimeException("用户名或密码错误");

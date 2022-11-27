@@ -1,12 +1,10 @@
 package com.chomolungma.system.account.application.service;
 
 import com.chomolungma.common.exception.BusinessRuntimeException;
-import com.chomolungma.system.account.domain.assembler.AccountAssembler;
 import com.chomolungma.system.account.domain.entity.Account;
 import com.chomolungma.system.account.domain.entity.Role;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
 import com.chomolungma.system.account.domain.repository.IAccountRoleRepository;
-import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +23,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Void resetPassword(Long id) {
-        AccountDTO accountDTO = iAccountRepository.queryAccount(id);
-        Account account = AccountAssembler.toEntity(accountDTO);
+        Account account = iAccountRepository.findAccount(id);
         account.resetPassword();
         iAccountRepository.save(account);
         return null;
@@ -34,8 +31,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Void bindUser(Long id, Long userId) {
-        AccountDTO accountDTO = iAccountRepository.queryAccount(id);
-        Account account = AccountAssembler.toEntity(accountDTO);
+        Account account = iAccountRepository.findAccount(id);
         account.bindUser(userId);
         iAccountRepository.save(account);
         return null;
@@ -44,7 +40,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     @Transactional
     public Void createAccount(Account account) {
-        Account accountEntity = iAccountRepository.queryAccount(account.getUsername());
+        Account accountEntity = iAccountRepository.findAccount(account.getUsername());
         if (accountEntity != null){
             throw new BusinessRuntimeException("账号名称已存在，请重新尝试！");
         }
@@ -69,6 +65,6 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public List<Account> getAccounts(Account account) {
-        return iAccountRepository.queryAccounts(account);
+        return iAccountRepository.findAccounts(account);
     }
 }
