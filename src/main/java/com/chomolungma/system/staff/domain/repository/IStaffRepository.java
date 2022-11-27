@@ -6,7 +6,7 @@ import com.chomolungma.system.staff.interfaces.dto.StaffDTO;
 import java.util.List;
 
 public interface IStaffRepository {
-    List<StaffDTO> getStaffs(String code, Staff staff);
+    List<StaffDTO> findStaffs(String code, Staff staff);
     void save(Staff staff);
     void remove(List<Long> ids);
     Staff findStaff(String idNumber);

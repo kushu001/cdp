@@ -42,7 +42,7 @@ public class StaffServiceImpl implements StaffService {
         staff.setTel(tel);
         staff.setAddress(address);
         PageHelper.startPage(page, limit);
-        List<StaffDTO> userOrgDOS = iStaffRepository.getStaffs(code, staff);
+        List<StaffDTO> userOrgDOS = iStaffRepository.findStaffs(code, staff);
         PageInfo<StaffDTO> pageInfo = new PageInfo<>(userOrgDOS);
         return StaffAssembler.toPageUserDTO(pageInfo);
     }
@@ -83,7 +83,7 @@ public class StaffServiceImpl implements StaffService {
         staff.setPhone(phone);
         staff.setTel(tel);
         staff.setAddress(address);
-        return iStaffRepository.getStaffs(code, staff);
+        return iStaffRepository.findStaffs(code, staff);
     }
 
     @Override

@@ -82,12 +82,6 @@ public class StaffController {
                             @RequestParam(required = false) String phone,
                             @RequestParam(required = false) String tel,
                             @RequestParam(required = false) String address) throws IOException {
-        StaffSearchDTO staffSearchDTO = new StaffSearchDTO();
-        staffSearchDTO.setIdNumber(idNumber);
-        staffSearchDTO.setName(name);
-        staffSearchDTO.setPhone(phone);
-        staffSearchDTO.setTel(tel);
-        staffSearchDTO.setAddress(address);
         excelService.export(staffService.getStaffs(code, name, idNumber, phone, tel, address), StaffExcelDTO.class);
     }
 

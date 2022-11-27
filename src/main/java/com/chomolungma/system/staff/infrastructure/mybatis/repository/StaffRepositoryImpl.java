@@ -30,7 +30,7 @@ public class StaffRepositoryImpl implements IStaffRepository {
 
 
     @Override
-    public List<StaffDTO> getStaffs(String code, Staff staff) {
+    public List<StaffDTO> findStaffs(String code, Staff staff) {
         return staffMapper.selectStaffsByCondition(code, StaffConverter.INSTANCE.toDO(staff));
     }
 
