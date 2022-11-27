@@ -47,7 +47,7 @@ public class AccountAssembler {
     public static AccountDTO toDTO(Account account){
         AccountDTO accountDTO = AccountEntityMapStruct.INSTANCE.toDTO(account);
         accountDTO.setRoleIds(account.getRoles().stream().map(Role::getId).collect(Collectors.toList()));
-        accountDTO.setRoleName(account.getRoles().stream().map(Role::getName).collect(Collectors.joining()));
+        accountDTO.setRoleName(account.getRoles().stream().map(Role::getName).collect(Collectors.joining(",")));
         return accountDTO;
     }
 
