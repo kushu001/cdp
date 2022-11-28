@@ -5,6 +5,7 @@ import com.chomolungma.system.account.domain.entity.Account;
 import com.chomolungma.system.account.domain.entity.Role;
 import com.chomolungma.system.account.domain.repository.IAccountRepository;
 import com.chomolungma.system.account.domain.repository.IAccountRoleRepository;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +65,7 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public List<Account> getAccounts(Account account) {
+    public List<AccountDTO> getAccounts(Account account) {
         return iAccountRepository.findAccounts(account);
     }
 }

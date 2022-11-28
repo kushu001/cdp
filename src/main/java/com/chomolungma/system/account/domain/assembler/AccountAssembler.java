@@ -20,6 +20,10 @@ public class AccountAssembler {
         return AccountEntityMapStruct.INSTANCE.toAccountPageDTO(page);
     }
 
+    public static AccountPageDTO toAccountPageDTO2(PageInfo<AccountDTO> page){
+        return AccountEntityMapStruct.INSTANCE.toAccountPageDTO2(page);
+    }
+
     public static Account toEntity(AccountInDTO accountInDTO){
         Account account = AccountEntityMapStruct.INSTANCE.toEntity(accountInDTO);
         List<Role> roles = new ArrayList<>();

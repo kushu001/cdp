@@ -88,7 +88,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
     }
 
     @Override
-    public List<Account> findAccounts(Account account) {
+    public List<AccountDTO> findAccounts(Account account) {
         AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(account);
         List<AccountUserRoleDO> accountUserRoleDOS = accountUserRoleMapper.selectList(accountUserRoleDO);
         return AccountUserConverter.INSTANCE.toEntity(accountUserRoleDOS);

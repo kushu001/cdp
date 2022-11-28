@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
 import com.chomolungma.system.account.domain.entity.Account;
+import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,5 +15,5 @@ public interface AccountUserConverter {
     AccountUserConverter INSTANCE = Mappers.getMapper(AccountUserConverter.class);
     AccountUserRoleDO toDO(Account account);
     Account toEntity(AccountUserRoleDO accountUserRoleDO);
-    List<Account> toEntity(List<AccountUserRoleDO> accountUserRoleDOS);
+    List<AccountDTO> toEntity(List<AccountUserRoleDO> accountUserRoleDOS);
 }

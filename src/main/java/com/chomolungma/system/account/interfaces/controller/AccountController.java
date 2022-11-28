@@ -15,6 +15,7 @@ import com.chomolungma.system.account.infrastructure.listener.AccountExcelListen
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountExcelDTO;
 import com.chomolungma.system.account.interfaces.dto.AccountInDTO;
+import com.chomolungma.system.account.interfaces.dto.AccountPageDTO;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.staff.application.service.StaffService;
 import com.github.pagehelper.PageHelper;
@@ -128,7 +129,7 @@ public class AccountController {
     @GetMapping("/export")
    // @PreAuthorize("hasAuthority('system:account:export')")
     public void export(AccountDTO accountDTO) throws IOException {
-        List<Account> accountEntities = accountService.getAccounts(AccountAssembler.toEntity(accountDTO));
-        excelService.export(AccountAssembler.toExcelDTO(accountEntities), AccountExcelDTO.class);
+        List<AccountDTO> accountDTOS = accountService.getAccounts(AccountAssembler.toEntity(accountDTO));
+        excelService.export(accountDTOS, AccountExcelDTO.class);
     }
 }

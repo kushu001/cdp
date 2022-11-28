@@ -23,6 +23,11 @@ public interface AccountEntityMapStruct {
             @Mapping(target = "page", source = "pageNum")
     })
     AccountPageDTO toAccountPageDTO(PageInfo<AccountUserRoleDO> accountPage);
+    @Mappings({
+            @Mapping(target = "records", source = "list"),
+            @Mapping(target = "page", source = "pageNum")
+    })
+    AccountPageDTO toAccountPageDTO2(PageInfo<AccountDTO> accountPage);
 
     Account toEntity(AccountInDTO accountInDTO);
 
