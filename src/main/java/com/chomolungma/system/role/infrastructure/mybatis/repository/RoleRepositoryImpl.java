@@ -55,27 +55,27 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public List<MenuDO> query(List<Long> roleIds) {
+    public List<MenuDO> find(List<Long> roleIds) {
         return roleMapper.selectMenusByRoleIds(roleIds);
     }
 
     @Override
-    public List<RolePermissionDTO> queryMenus(Long roleId) {
+    public List<RolePermissionDTO> findMenus(Long roleId) {
         return roleMapper.selectMenusByRoleId(roleId);
     }
 
     @Override
-    public List<RolePermissionDTO> queryOperation(Long roleId) {
+    public List<RolePermissionDTO> findOperation(Long roleId) {
         return roleMapper.getOperations(roleId);
     }
 
     @Override
-    public List<Long> queryResources(Long roleId) {
+    public List<Long> findResources(Long roleId) {
         return roleMapper.getResources(roleId);
     }
 
     @Override
-    public PageInfo<RoleEntity> query(int current, int size, RoleEntity role) {
+    public PageInfo<RoleEntity> find(int current, int size, RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
         PageHelper.startPage(current,size);
         List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<RoleDO>().like(roleDO.getName() != null,"name", roleDO.getName()).like(roleDO.getCode() != null, "code", roleDO.getCode()).eq(roleDO.getStatus() != null, "status", roleDO.getStatus()));
@@ -83,13 +83,13 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public List<RoleEntity> queryAll() {
+    public List<RoleEntity> findAll() {
         List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<>());
         return RoleConverter.INSTANCE.toEntity(roleDOS);
     }
 
     @Override
-    public RoleEntity query(Long roleId) {
+    public RoleEntity find(Long roleId) {
         return RoleConverter.INSTANCE.toEntity(roleMapper.selectById(roleId));
     }
 

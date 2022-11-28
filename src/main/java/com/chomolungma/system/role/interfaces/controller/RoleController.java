@@ -37,17 +37,17 @@ public class RoleController {
         inRoleSearchDTO.setCode(code);
         inRoleSearchDTO.setStatus(status);
         RoleEntity role = RoleAssembler.toEntity(inRoleSearchDTO);
-        return Result.success(RoleAssembler.toDTO(iRoleRepository.query(pageDTO.getPage(), pageDTO.getLimit(), role)));
+        return Result.success(RoleAssembler.toDTO(iRoleRepository.find(pageDTO.getPage(), pageDTO.getLimit(), role)));
     }
 
     @GetMapping("/all")
     public Result list(){
-        return Result.success(iRoleRepository.queryAll());
+        return Result.success(iRoleRepository.findAll());
     }
 
     @GetMapping("/{id}")
     public Result info(@PathVariable("id") Long id){
-        return Result.success(iRoleRepository.query(id));
+        return Result.success(iRoleRepository.find(id));
     }
 
     @PostMapping

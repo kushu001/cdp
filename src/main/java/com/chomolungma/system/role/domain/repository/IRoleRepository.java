@@ -14,19 +14,19 @@ public interface IRoleRepository {
 
      void save(RoleEntity role);
 
-     List<MenuDO> query(List<Long> roleIds);
+     List<MenuDO> find(List<Long> roleIds);
 
-     List<RolePermissionDTO> queryMenus(Long roleId);
+     List<RolePermissionDTO> findMenus(Long roleId);
 
-     List<RolePermissionDTO> queryOperation(Long roleId);
+     List<RolePermissionDTO> findOperation(Long roleId);
 
-     List<Long> queryResources(Long roleId);
+     List<Long> findResources(Long roleId);
 
-     PageInfo<RoleEntity> query(int current, int size, RoleEntity role);
+     PageInfo<RoleEntity> find(int current, int size, RoleEntity role);
 
-     List<RoleEntity> queryAll();
+     List<RoleEntity> findAll();
 
-     RoleEntity query(Long roleId);
+     RoleEntity find(Long roleId);
 
      void remove(List<Long> ids);
 

@@ -40,17 +40,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RolePermissionDTO> menus(Long roleId) {
-        return iRoleRepository.queryMenus(roleId);
+        return iRoleRepository.findMenus(roleId);
     }
 
     @Override
     public List<RolePermissionDTO> operations(Long roleId) {
-        return iRoleRepository.queryOperation(roleId);
+        return iRoleRepository.findOperation(roleId);
     }
 
     @Override
     public List<Long> resources(Long roleId) {
-        return iRoleRepository.queryResources(roleId);
+        return iRoleRepository.findResources(roleId);
     }
 
 
