@@ -20,7 +20,7 @@ public class OrgRepositoryImpl implements IOrgRepository {
     }
 
     @Override
-    public OrgEntity findOne(Long id) {
+    public OrgEntity find(Long id) {
         OrgDO orgDo = orgMapper.selectById(id);
         return OrgConverter.INSTANCE.toEntity(orgDo);
     }
