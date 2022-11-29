@@ -7,7 +7,7 @@ import com.chomolungma.system.staff.interfaces.dto.*;
 import java.util.List;
 
 public interface StaffService {
-    PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer page, Integer limit);
+    PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit);
     List<StaffDTO> getStaffs(String code, String name, String idNumber, String phone, String tel, String address);
     StaffDTO getStaff(Long id);
     void createStaff(Long orgId, StaffFormDTO staffFormDTO);

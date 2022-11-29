@@ -35,13 +35,14 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer page, Integer limit) {
+    public PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit) {
         Staff staff = new Staff();
         staff.setName(name);
         staff.setIdNumber(idNumber);
         staff.setPhone(phone);
         staff.setTel(tel);
         staff.setAddress(address);
+        staff.setStatus(status);
         PageHelper.startPage(page, limit);
         List<StaffDTO> userOrgDOS = iStaffRepository.findStaffs(code, staff);
         PageInfo<StaffDTO> pageInfo = new PageInfo<>(userOrgDOS);

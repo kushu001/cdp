@@ -8,7 +8,6 @@ import com.chomolungma.system.staff.application.service.StaffService;
 import com.chomolungma.system.staff.interfaces.assembler.StaffAssembler;
 import com.chomolungma.system.staff.interfaces.dto.StaffExcelDTO;
 import com.chomolungma.system.staff.interfaces.dto.StaffFormDTO;
-import com.chomolungma.system.staff.interfaces.dto.StaffSearchDTO;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +33,7 @@ public class StaffController {
                            @RequestParam(required = false) String phone,
                            @RequestParam(required = false) String tel,
                            @RequestParam(required = false) String address){
-        return Result.success(staffService.getStaffs(null, name, idNumber, phone, tel, address, pageDTO.getPage(), pageDTO.getLimit()));
+        return Result.success(staffService.getStaffs(null, name, idNumber, phone, tel, address, 1, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/org/{code}")
@@ -45,7 +44,7 @@ public class StaffController {
                            @RequestParam(required = false) String tel,
                            @RequestParam(required = false) String address
     ){
-        return Result.success(staffService.getStaffs(code, name, idNumber, phone, tel, address, pageDTO.getPage(), pageDTO.getLimit()));
+        return Result.success(staffService.getStaffs(code, name, idNumber, phone, tel, address, null, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/{id}")

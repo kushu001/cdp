@@ -36,6 +36,10 @@
             <if test="staffDO.idNumber !=null and staffDO.idNumber !=''">
                 and su.id_number like concat('%', #{staffDO.idNumber, jdbcType=VARCHAR}, '%')
             </if>
+            <if test="staffDO.status !=null and staffDO.status !=''">
+                and su.status = #{staffDO.status, jdbcType=BIGINT}
+            </if>
+
         </where>
     </select>
 
