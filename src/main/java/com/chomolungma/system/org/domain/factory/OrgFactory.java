@@ -11,8 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrgFactory {
-    @Autowired
-    private OrgMapper orgMapper;
+    private final OrgMapper orgMapper;
+
+    public OrgFactory(OrgMapper orgMapper){
+        this.orgMapper = orgMapper;
+    }
 
     public OrgEntity createOrg(OrgParam orgParam){
         if (orgParam.getId() == null) {
@@ -25,6 +28,6 @@ public class OrgFactory {
             String parentCode  = parent == null ? "" : parent.getCode();
             orgParam.setCode(parentCode + String.format("%03d", num));
         }
-        return OrgEntityMapStruct.INSTANCE.orgParamToOrg(orgParam);
+        return OrgEntityMapStruct.INSTANCE.toEntity(orgParam);
     }
 }

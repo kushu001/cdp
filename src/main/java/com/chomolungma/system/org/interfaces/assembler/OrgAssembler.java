@@ -15,16 +15,5 @@ public final class OrgAssembler {
         return OrgEntityMapStruct.INSTANCE.toDTO(orgList);
     }
 
-    public static OrgEntity convertParamToEntity(OrgParam orgParam){
-        return OrgEntityMapStruct.INSTANCE.orgParamToOrg(orgParam);
-    }
-
-    public static OrgEntity convertParamToEntity(OrgSearchParam orgSearchParam){
-        return OrgEntityMapStruct.INSTANCE.orgParamToOrg(orgSearchParam);
-    }
-
-    public static OrgDO convertToDO(OrgParam orgParam){
-        return OrgEntityMapStruct.INSTANCE.toDO(orgParam);
-    }
 
 }

@@ -12,7 +12,7 @@ public interface StaffService {
     StaffDTO getStaff(Long id);
     void createStaff(Long orgId, StaffFormDTO staffFormDTO);
     void updateStaff(Staff user);
-    void deleteStaffs(String code, List<String> ids);
+    void deleteStaffs(List<String> ids);
     List<MenuDTO> getMenus(List<Long> roleIds);
     void audit(Long userId);
 }

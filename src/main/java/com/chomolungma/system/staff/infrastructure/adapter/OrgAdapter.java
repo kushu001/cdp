@@ -12,11 +12,10 @@ public class OrgAdapter {
         this.iOrgRepository = iOrgRepository;
     }
     public Org adapter(Long orgId){
-        OrgEntity org  = iOrgRepository.findOne(orgId);
+        OrgEntity org  = iOrgRepository.find(orgId);
         Org userOrg = new Org();
         userOrg.setId(org.getId());
         userOrg.setName(org.getName());
-
         return userOrg;
     }
 }

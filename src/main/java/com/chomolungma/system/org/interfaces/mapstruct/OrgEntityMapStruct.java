@@ -16,10 +16,7 @@ public interface OrgEntityMapStruct {
 
     List<OrgDTO> toDTO(List<OrgEntity> orgList);
 
-
-    OrgEntity orgParamToOrg(OrgParam orgParam);
-
-    OrgEntity orgParamToOrg(OrgSearchParam orgSearchParam);
+    OrgEntity toEntity(OrgParam orgParam);
 
     OrgDO toDO(OrgParam orgParam);
 }

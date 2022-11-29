@@ -60,16 +60,4 @@ public class OrgController {
         iOrgRepository.remove(id);
         return Result.success();
     }
-
-    @GetMapping("/{code}/user")
-    public Result getUsersByOrgId(@PathVariable("code") String code, StaffSearchDTO staffSearchDTO){
-        return Result.success();
-    }
-
-    @DeleteMapping("/{code}/user/{ids}")
-    public Result deleteUsers(@PathVariable("code") String code, @PathVariable("ids") String ids){
-        staffService.deleteStaffs(code, Arrays.asList(ids.split(",")));
-        return Result.success();
-    }
-
 }

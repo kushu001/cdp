@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -61,6 +62,12 @@ public class StaffController {
     @PutMapping
     public Result updateUser(@RequestBody StaffFormDTO staffFormDTO){
         staffService.updateStaff(StaffAssembler.toEntity(staffFormDTO));
+        return Result.success();
+    }
+
+    @DeleteMapping("/{ids}")
+    public Result deleteUser(@PathVariable("ids") String ids){
+        staffService.deleteStaffs(Arrays.asList(ids.split(",")));
         return Result.success();
     }
 

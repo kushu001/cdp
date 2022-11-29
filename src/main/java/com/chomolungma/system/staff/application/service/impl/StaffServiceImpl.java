@@ -68,7 +68,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public void deleteStaffs(String code, List<String> ids) {
+    public void deleteStaffs(List<String> ids) {
         iStaffRepository.remove(ids.stream().map(Long::valueOf).collect(Collectors.toList()));
     }
     @Override
