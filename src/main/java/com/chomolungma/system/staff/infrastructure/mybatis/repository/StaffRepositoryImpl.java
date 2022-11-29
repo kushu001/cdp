@@ -78,10 +78,14 @@ public class StaffRepositoryImpl implements IStaffRepository {
     @Override
     public Staff findStaff(Long id) {
         StaffDO staffDO = staffMapper.selectById(id);
-        OrgStaffDO orgStaffDO = orgStaffMapper.selectOne(new QueryWrapper<OrgStaffDO>().eq("user_id", staffDO.getId()));
-        Org org = orgAdapter.adapter(orgStaffDO.getOrgId());
         Staff staff = StaffConverter.INSTANCE.toEntity(staffDO);
-        staff.setOrg(org);
+        if (staffDO != null) {
+            OrgStaffDO orgStaffDO = orgStaffMapper.selectOne(new QueryWrapper<OrgStaffDO>().eq("user_id", staffDO.getId()));
+            if (orgStaffDO != null){
+                Org org = orgAdapter.adapter(orgStaffDO.getOrgId());
+                staff.setOrg(org);
+            }
+        }
         return staff;
     }
 }

@@ -15,5 +15,9 @@ public final class OrgAssembler {
         return OrgEntityMapStruct.INSTANCE.toDTO(orgList);
     }
 
+    public static OrgDTO toDTO(OrgEntity orgEntity){
+        return OrgEntityMapStruct.INSTANCE.toDTO(orgEntity);
+    }
+
 
 }

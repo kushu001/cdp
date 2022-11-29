@@ -40,7 +40,7 @@ public class OrgController {
 
     @GetMapping("/{id}")
     public Result getOrg(@PathVariable("id") Long id){
-        return Result.success(iOrgRepository.find(id));
+        return Result.success(OrgAssembler.toDTO(iOrgRepository.find(id)));
     }
 
     @PostMapping

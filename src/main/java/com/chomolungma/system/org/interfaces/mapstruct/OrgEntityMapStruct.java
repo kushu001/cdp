@@ -16,6 +16,8 @@ public interface OrgEntityMapStruct {
 
     List<OrgDTO> toDTO(List<OrgEntity> orgList);
 
+    OrgDTO toDTO(OrgEntity orgEntity);
+
     OrgEntity toEntity(OrgParam orgParam);
 
     OrgDO toDO(OrgParam orgParam);
