@@ -15,9 +15,6 @@ public interface RoleMapper extends BaseMapper<RoleDO> {
 
     void insertRoleOperationsPermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
 
-
-    List<MenuDO> selectMenusByRoleIds(List<Long> roleIds);
-
     void deleteMenusPermissionByRoleId(Long roleId);
 
     void deleteOperationsPermissionByRoleId(Long roleId);

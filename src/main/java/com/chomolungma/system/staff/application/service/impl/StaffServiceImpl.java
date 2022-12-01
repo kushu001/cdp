@@ -1,5 +1,6 @@
 package com.chomolungma.system.staff.application.service.impl;
 
+import com.chomolungma.system.menu.domain.repository.IMenuRepository;
 import com.chomolungma.system.menu.interfaces.assembler.MenuAssembler;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
@@ -26,12 +27,14 @@ public class StaffServiceImpl implements StaffService {
     private final IStaffRepository iStaffRepository;
     private final IStaffDomainService iStaffDomainService;
     private final OrgAdapter orgAdapter;
+    private final IMenuRepository iMenuRepository;
 
-    public StaffServiceImpl(IStaffRepository iStaffRepository, IStaffDomainService iStaffDomainService, OrgAdapter orgAdapter,IRoleRepository iRoleRepository) {
+    public StaffServiceImpl(IStaffRepository iStaffRepository, IStaffDomainService iStaffDomainService, OrgAdapter orgAdapter, IRoleRepository iRoleRepository, IMenuRepository iMenuRepository) {
         this.iStaffRepository = iStaffRepository;
         this.iStaffDomainService = iStaffDomainService;
         this.orgAdapter = orgAdapter;
         this.iRoleRepository = iRoleRepository;
+        this.iMenuRepository = iMenuRepository;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class StaffServiceImpl implements StaffService {
     }
     @Override
     public List<MenuDTO> getMenus(List<Long> roleIds) {
-        return MenuAssembler.convertToDto(iRoleRepository.find(roleIds));
+        return MenuAssembler.convertToDto(iMenuRepository.find(roleIds));
     }
 
     @Override

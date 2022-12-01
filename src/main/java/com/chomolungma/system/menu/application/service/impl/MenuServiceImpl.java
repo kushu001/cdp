@@ -34,7 +34,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDTO> permissions(String type) {
-        return iMenuRepository.query(type);
+        return iMenuRepository.find(type);
     }
 
 

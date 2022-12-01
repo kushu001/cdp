@@ -21,20 +21,13 @@ public class MenuController {
 
     @GetMapping
     public Result queryMenu(){
-        return Result.success(iMenuRepository.query());
+        return Result.success(iMenuRepository.find());
     }
 
     @GetMapping("/type/{type}")
     public Result queryMenuPermissions(@PathVariable("type") String type){
         return Result.success(menuService.permissions(type));
     }
-
-//
-//    @GetMapping("/all")
-//    public Result queryAll(){
-//        return Result.success(menuMapper.selectList(new QueryWrapper<>()));
-//    }
-
 
     @PostMapping
     public Result createMenu(@RequestBody MenuParam menuParam){

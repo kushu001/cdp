@@ -49,19 +49,6 @@
         </where>
     </delete>
 
-    <select id="selectMenusByRoleIds" resultType="com.chomolungma.system.menu.infrastructure.dataobject.MenuDO">
-        select sm.* from sys_role_menu srm
-            left join sys_menu sm on srm.menu_id = sm.id
-        <where>
-            role_id in
-            <foreach collection="list" item="roleId" index="index" open="(" close=")" separator=",">
-                #{roleId}
-            </foreach>
-            and sm.type = 0
-        </where>
-        group by srm.menu_id order by sm.sort
-    </select>
-
     <select id="selectMenusByRoleId" resultType="com.chomolungma.system.role.interfaces.dto.RolePermissionDTO">
         select
             sm.id,

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.menu//DTD Mapper 3.0//EN" "http://mybatis.menu/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper">
+    <select id="selectMenusByRoleIds" resultType="com.chomolungma.system.menu.infrastructure.dataobject.MenuDO">
+        select sm.* from sys_role_menu srm
+        left join sys_menu sm on srm.menu_id = sm.id
+        <where>
+            role_id in
+            <foreach collection="list" item="roleId" index="index" open="(" close=")" separator=",">
+                #{roleId}
+            </foreach>
+            and sm.type = 0
+        </where>
+        group by srm.menu_id order by sm.sort
+    </select>
+
     <delete id="deleteMenus" parameterType="java.lang.Long">
         delete from sys_menu where id in (
             select id from (

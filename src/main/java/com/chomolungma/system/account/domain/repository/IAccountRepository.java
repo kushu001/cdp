@@ -9,7 +9,7 @@ import java.util.List;
 public interface IAccountRepository {
     Void save(Account account);
     Void remove(List<String> ids);
-    AccountPageDTO queryPageList(Account account, int current, int size);
+    AccountPageDTO findPageList(Account account, int current, int size);
     Account findAccount(Long id);
     Account findAccount(String username);
     List<AccountDTO> findAccounts(Account account);

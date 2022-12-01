@@ -52,7 +52,7 @@ public class AccountRepositoryImpl implements IAccountRepository {
     }
 
     @Override
-    public AccountPageDTO queryPageList(Account account, int current, int size) {
+    public AccountPageDTO findPageList(Account account, int current, int size) {
         AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(account);
         PageHelper.startPage(current, size);
         List<AccountUserRoleDO> accountUsers = accountUserRoleMapper.selectList(accountUserRoleDO);

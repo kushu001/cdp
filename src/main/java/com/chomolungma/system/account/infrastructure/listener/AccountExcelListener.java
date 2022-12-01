@@ -14,9 +14,9 @@ import java.util.List;
 
 public class AccountExcelListener implements ReadListener<AccountExcelDTO> {
 
-    private IAccountRepository iAccountRepository;
+    private final IAccountRepository iAccountRepository;
 
-    private ExcelService excelService;
+    private final ExcelService excelService;
     List<AccountExcelDTO> results = new ArrayList<>();
     public AccountExcelListener(IAccountRepository iAccountRepository, ExcelService excelService) {
         this.iAccountRepository = iAccountRepository;

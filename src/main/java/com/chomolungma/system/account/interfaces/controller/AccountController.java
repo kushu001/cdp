@@ -71,7 +71,7 @@ public class AccountController {
         accountDTO.setName(name);
         accountDTO.setNickname(nickname);
         accountDTO.setEnabled(enabled);
-        return Result.success(iAccountRepository.queryPageList(AccountAssembler.toEntity(accountDTO),pageDTO.getPage(), pageDTO.getLimit()));
+        return Result.success(iAccountRepository.findPageList(AccountAssembler.toEntity(accountDTO),pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/{id}")

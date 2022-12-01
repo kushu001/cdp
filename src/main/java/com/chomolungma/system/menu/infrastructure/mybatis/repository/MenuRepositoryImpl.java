@@ -26,13 +26,18 @@ public class MenuRepositoryImpl implements IMenuRepository {
     }
 
     @Override
-    public List<MenuDTO> query() {
+    public List<MenuDO> find(List<Long> roleIds) {
+        return menuMapper.selectMenusByRoleIds(roleIds);
+    }
+
+    @Override
+    public List<MenuDTO> find() {
         List<MenuDO> menuList = menuMapper.selectList(new QueryWrapper<MenuDO>().orderByAsc("sort"));
         return MenuAssembler.convertToDto(menuList);
     }
 
     @Override
-    public List<MenuDTO> query(String type) {
+    public List<MenuDTO> find(String type) {
         List<MenuDO> results = new ArrayList<>();
         if (type.equals("0")){
             results = menuMapper.selectList(new QueryWrapper<MenuDO>().eq("type", type).orderByAsc("sort"));

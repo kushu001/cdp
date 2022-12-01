@@ -1,6 +1,7 @@
 package com.chomolungma.system.role.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chomolungma.system.menu.infrastructure.mybatis.repository.mapper.MenuMapper;
 import com.chomolungma.system.role.interfaces.dto.RoleDTO;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 @Repository
 public class RoleRepositoryImpl implements IRoleRepository {
     private final RoleMapper roleMapper;
+
 
     public RoleRepositoryImpl(RoleMapper roleMapper) {
         this.roleMapper = roleMapper;
@@ -54,11 +56,6 @@ public class RoleRepositoryImpl implements IRoleRepository {
             roleMapper.updateById(roleDO);
         }
 
-    }
-
-    @Override
-    public List<MenuDO> find(List<Long> roleIds) {
-        return roleMapper.selectMenusByRoleIds(roleIds);
     }
 
     @Override
