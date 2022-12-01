@@ -9,7 +9,6 @@ import com.chomolungma.system.account.infrastructure.converter.AccountConverter;
 import com.chomolungma.system.account.infrastructure.converter.AccountUserConverter;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountDO;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
-import com.chomolungma.system.account.infrastructure.dto.RoleDTO;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountMapper;
 import com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper;
 import com.chomolungma.system.account.interfaces.dto.AccountDTO;
@@ -20,10 +19,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class AccountRepositoryImpl implements IAccountRepository {

@@ -1,6 +1,7 @@
 package com.chomolungma.system.role.infrastructure.mybatis.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.chomolungma.system.role.interfaces.dto.RoleDTO;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
@@ -8,6 +9,7 @@ import com.chomolungma.system.role.infrastructure.converter.RoleConverter;
 import com.chomolungma.system.role.infrastructure.dataobject.RoleDO;
 import com.chomolungma.system.role.infrastructure.dataobject.RolePermissionDO;
 import com.chomolungma.system.role.infrastructure.mybatis.repository.mapper.RoleMapper;
+import com.chomolungma.system.role.interfaces.assembler.RoleAssembler;
 import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -75,17 +77,18 @@ public class RoleRepositoryImpl implements IRoleRepository {
     }
 
     @Override
-    public PageInfo<RoleEntity> find(int current, int size, RoleEntity role) {
+    public PageInfo<RoleDTO> find(int current, int size, RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
         PageHelper.startPage(current,size);
         List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<RoleDO>().like(roleDO.getName() != null,"name", roleDO.getName()).like(roleDO.getCode() != null, "code", roleDO.getCode()).eq(roleDO.getStatus() != null, "status", roleDO.getStatus()));
-        return new PageInfo<>(RoleConverter.INSTANCE.toEntity(roleDOS));
+        List<RoleEntity> roleEntities = RoleConverter.INSTANCE.toEntity(roleDOS);
+        return new PageInfo<>(RoleAssembler.toDTO(roleEntities));
     }
 
     @Override
-    public List<RoleEntity> findAll() {
+    public List<RoleDTO> findAll() {
         List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<>());
-        return RoleConverter.INSTANCE.toEntity(roleDOS);
+        return RoleAssembler.toDTO(RoleConverter.INSTANCE.toEntity(roleDOS));
     }
 
     @Override

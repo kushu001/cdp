@@ -1,10 +1,10 @@
 package com.chomolungma.system.role.interfaces.mapstruct;
 
+import com.chomolungma.system.role.interfaces.dto.RoleDTO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.interfaces.dto.InRoleFormDTO;
 import com.chomolungma.system.role.interfaces.dto.InRoleSearchDTO;
 import com.chomolungma.system.role.interfaces.dto.OutRoleSearchDTO;
-import com.chomolungma.system.role.interfaces.dto.Role;
 import com.github.pagehelper.PageInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,13 +21,12 @@ public interface RoleEntityMapStruct {
 
     RoleEntity fromFormDTO(InRoleFormDTO inRoleFormDTO);
 
-    List<Role> toList(List<RoleEntity> roles);
-
     @Mappings({
             @Mapping(target = "records", source = "list"),
             @Mapping(target = "page", source = "pageNum")
     })
-    OutRoleSearchDTO toDTO(PageInfo<RoleEntity> pageInfo);
+    OutRoleSearchDTO toDTO(PageInfo<RoleDTO> pageInfo);
 
+    List<RoleDTO> toDTO(List<RoleEntity> roleEntities);
 
 }

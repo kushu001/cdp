@@ -1,5 +1,6 @@
 package com.chomolungma.system.role.domain.repository;
 
+import com.chomolungma.system.role.interfaces.dto.RoleDTO;
 import com.chomolungma.system.menu.infrastructure.dataobject.MenuDO;
 import com.chomolungma.system.role.domain.enity.RoleEntity;
 import com.chomolungma.system.role.interfaces.dto.RolePermissionDTO;
@@ -22,9 +23,9 @@ public interface IRoleRepository {
 
      List<Long> findResources(Long roleId);
 
-     PageInfo<RoleEntity> find(int current, int size, RoleEntity role);
+     PageInfo<RoleDTO> find(int current, int size, RoleEntity role);
 
-     List<RoleEntity> findAll();
+     List<RoleDTO> findAll();
 
      RoleEntity find(Long roleId);
 

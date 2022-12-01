@@ -7,5 +7,5 @@ import java.util.List;
 
 @Data
 public class OutRoleSearchDTO extends PageDTO {
-    private List<Role> records;
+    private List<RoleDTO> records;
 }
