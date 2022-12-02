@@ -28,7 +28,7 @@ public class DictController{
 
     @GetMapping
     public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String param){
-        return Result.success(iDictRepository.query(pageDTO.getPage(), pageDTO.getLimit(), param));
+        return Result.success(iDictRepository.find(pageDTO.getPage(), pageDTO.getLimit(), param));
     }
 
     @GetMapping("/{id}")

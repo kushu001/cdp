@@ -29,7 +29,7 @@ public class DictItemRepositoryImpl implements IDictItemRepository {
         PageHelper.startPage(current, size);
         List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).like(!StringUtils.isEmpty(name), "name", name).or().like(!StringUtils.isEmpty(code), "code", code));
         PageInfo<DictItemDO> pageInfo = new PageInfo<>(dictItemDOS);
-        return DictItemConverter.INSTANCE.toDTO(pageInfo);
+        return DictItemAssembler.toDTO(pageInfo);
     }
 
     @Override

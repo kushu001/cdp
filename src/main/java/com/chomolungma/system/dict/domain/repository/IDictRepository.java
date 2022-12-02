@@ -6,7 +6,7 @@ import com.chomolungma.system.dict.interfaces.dto.DictPageDTO;
 import java.util.List;
 
 public interface IDictRepository {
-    DictPageDTO query(int current, int size, String param);
+    DictPageDTO find(int current, int size, String param);
 
     DictEntity find(Long id);
 

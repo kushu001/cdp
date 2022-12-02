@@ -15,12 +15,6 @@ import java.util.List;
 public interface DictItemConverter {
     DictItemConverter INSTANCE = Mappers.getMapper(DictItemConverter.class);
 
-    @Mappings({
-            @Mapping(target = "records", source = "list"),
-            @Mapping(target = "page", source = "pageNum")
-    })
-    DictItemPageDTO toDTO(PageInfo<DictItemDO> pageInfo);
-
     DictItemEntity toEntity(DictItemDO dictItemDO);
 
     List<DictItemEntity> toEntity(List<DictItemDO> dictItemDOS);

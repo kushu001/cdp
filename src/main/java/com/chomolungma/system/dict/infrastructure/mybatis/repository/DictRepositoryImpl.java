@@ -8,6 +8,7 @@ import com.chomolungma.system.dict.infrastructure.dataobject.DictDO;
 import com.chomolungma.system.dict.infrastructure.dataobject.DictItemDO;
 import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictItemMapper;
 import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictMapper;
+import com.chomolungma.system.dict.interfaces.assembler.DictAssembler;
 import com.chomolungma.system.dict.interfaces.dto.DictPageDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,11 +29,11 @@ public class DictRepositoryImpl implements IDictRepository {
     }
 
     @Override
-    public DictPageDTO query(int current, int size, String param) {
+    public DictPageDTO find(int current, int size, String param) {
         PageHelper.startPage(current, size);
         List<DictDO> dictDOS = dictMapper.selectList(new QueryWrapper<DictDO>().like(param != null, "name", param).or().like(param != null, "code", param));
         PageInfo<DictDO> pageInfo = new PageInfo<>(dictDOS);
-        return DictConverter.INSTANCE.toDTO(pageInfo);
+        return DictAssembler.toDTO(pageInfo);
     }
 
     @Override

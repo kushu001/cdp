@@ -13,12 +13,6 @@ import org.mapstruct.factory.Mappers;
 public interface DictConverter {
     DictConverter INSTANCE = Mappers.getMapper(DictConverter.class);
 
-    @Mappings({
-            @Mapping(target = "records", source = "list"),
-            @Mapping(target = "page", source = "pageNum")
-    })
-    DictPageDTO toDTO(PageInfo<DictDO> pageInfo);
-
     DictEntity toEntity(DictDO dictDO);
 
     DictDO toDO(DictEntity dictEntity);
