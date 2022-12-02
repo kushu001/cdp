@@ -25,12 +25,12 @@ public class DictItemController {
 
     @GetMapping("/{dictId}")
     public Result pageList(@PathVariable("dictId") Long dictId, PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){
-        return Result.success(iDictItemRepository.query(pageDTO.getPage(), pageDTO.getLimit(), dictId, name, code));
+        return Result.success(iDictItemRepository.find(pageDTO.getPage(), pageDTO.getLimit(), dictId, name, code));
     }
 
     @GetMapping("/{dictId}/{id}")
     public Result info(@PathVariable("dictId") Long dictId, @PathVariable("id") Long id){
-        return Result.success(DictItemAssembler.toDTO(iDictItemRepository.query(id)));
+        return Result.success(DictItemAssembler.toDTO(iDictItemRepository.find(id)));
     }
 
     @PostMapping("/{dictId}")
@@ -53,6 +53,6 @@ public class DictItemController {
     }
     @GetMapping("/dict/{dictCode}")
     public Result getItems(@PathVariable("dictCode") String dictCode){
-        return Result.success(iDictItemRepository.query(dictCode));
+        return Result.success(iDictItemRepository.find(dictCode));
     }
 }

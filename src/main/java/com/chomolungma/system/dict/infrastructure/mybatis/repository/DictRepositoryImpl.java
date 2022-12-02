@@ -36,7 +36,7 @@ public class DictRepositoryImpl implements IDictRepository {
     }
 
     @Override
-    public DictEntity query(Long id) {
+    public DictEntity find(Long id) {
         return DictConverter.INSTANCE.toEntity(dictMapper.selectById(id));
     }
 

@@ -34,7 +34,7 @@ public class DictController{
     @GetMapping("/{id}")
     //@PreAuthorize("hasAuthority('system:dict:get')")
     public Result info(@PathVariable("id") Long id){
-        return Result.success(iDictRepository.query(id));
+        return Result.success(DictAssembler.toDTO(iDictRepository.find(id)));
     }
 
     @PostMapping

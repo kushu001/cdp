@@ -6,6 +6,8 @@ import com.chomolungma.system.dict.domain.repository.IDictItemRepository;
 import com.chomolungma.system.dict.infrastructure.converter.DictItemConverter;
 import com.chomolungma.system.dict.infrastructure.dataobject.DictItemDO;
 import com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictItemMapper;
+import com.chomolungma.system.dict.interfaces.assembler.DictItemAssembler;
+import com.chomolungma.system.dict.interfaces.dto.DictItemDTO;
 import com.chomolungma.system.dict.interfaces.dto.DictItemPageDTO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,7 +25,7 @@ public class DictItemRepositoryImpl implements IDictItemRepository {
     }
 
     @Override
-    public DictItemPageDTO query(int current, int size,Long dictId, String name, String code) {
+    public DictItemPageDTO find(int current, int size,Long dictId, String name, String code) {
         PageHelper.startPage(current, size);
         List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).like(!StringUtils.isEmpty(name), "name", name).or().like(!StringUtils.isEmpty(code), "code", code));
         PageInfo<DictItemDO> pageInfo = new PageInfo<>(dictItemDOS);
@@ -31,13 +33,13 @@ public class DictItemRepositoryImpl implements IDictItemRepository {
     }
 
     @Override
-    public DictItemEntity query(Long id) {
+    public DictItemEntity find(Long id) {
         return DictItemConverter.INSTANCE.toEntity(dictItemMapper.selectById(id));
     }
 
     @Override
-    public List<DictItemEntity> query(String code) {
-        return DictItemConverter.INSTANCE.toEntity(dictItemMapper.selectListByDictCode(code));
+    public List<DictItemDTO> find(String code) {
+        return DictItemAssembler.toDTO(dictItemMapper.selectListByDictCode(code));
     }
 
     @Override

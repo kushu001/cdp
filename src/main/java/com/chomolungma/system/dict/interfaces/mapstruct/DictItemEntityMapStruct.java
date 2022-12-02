@@ -1,10 +1,13 @@
 package com.chomolungma.system.dict.interfaces.mapstruct;
 
 import com.chomolungma.system.dict.domain.entity.DictItemEntity;
+import com.chomolungma.system.dict.infrastructure.dataobject.DictItemDO;
 import com.chomolungma.system.dict.interfaces.dto.DictItemDTO;
 import com.chomolungma.system.dict.interfaces.param.DictItemParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface DictItemEntityMapStruct {
@@ -12,4 +15,6 @@ public interface DictItemEntityMapStruct {
     DictItemEntity covertToEntity(DictItemParam dictItemParam);
 
     DictItemDTO toDTO(DictItemEntity dictItemEntity);
+
+    List<DictItemDTO> toDTO(List<DictItemDO> dictItemDOS);
 }

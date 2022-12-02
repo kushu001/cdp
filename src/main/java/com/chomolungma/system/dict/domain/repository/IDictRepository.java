@@ -8,7 +8,7 @@ import java.util.List;
 public interface IDictRepository {
     DictPageDTO query(int current, int size, String param);
 
-    DictEntity query(Long id);
+    DictEntity find(Long id);
 
     void save(DictEntity dictEntity);
 
