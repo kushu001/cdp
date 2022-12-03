@@ -29,7 +29,7 @@ public class ResourceController {
 
     @GetMapping("/{id}")
     public Result getResource(@PathVariable Long id){
-        return Result.success(iResourceRepository.find(id));
+        return Result.success(ResourceAssembler.toDTO(iResourceRepository.find(id)));
     }
 
     @PostMapping
