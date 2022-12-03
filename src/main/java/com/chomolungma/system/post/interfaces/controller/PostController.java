@@ -20,7 +20,7 @@ public class PostController {
 
     @GetMapping
     public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){
-        return Result.success(iPostRepository.query(pageDTO.getPage(), pageDTO.getLimit(), name, code));
+        return Result.success(iPostRepository.find(pageDTO.getPage(), pageDTO.getLimit(), name, code));
     }
 
     @PostMapping
@@ -31,7 +31,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public Result getPost(@PathVariable("id") Long id){
-        return Result.success(iPostRepository.query(id));
+        return Result.success(PostEntityMapStruct.INSTANCE.toDTO(iPostRepository.find(id)));
     }
 
     @PutMapping

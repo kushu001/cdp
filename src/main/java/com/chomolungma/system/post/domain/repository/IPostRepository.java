@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IPostRepository {
     Void save(PostEntity postEntity);
-    PostPageDTO query(int current, int size, String name, String code);
-    PostEntity query(Long id);
+    PostPageDTO find(int current, int size, String name, String code);
+    PostEntity find(Long id);
 
     Void remove(List<String> ids);
 }

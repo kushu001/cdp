@@ -34,7 +34,7 @@ public class PostRepositoryImpl implements IPostRepository {
         return null;
     }
     @Override
-    public PostPageDTO query(int current, int size, String name, String code) {
+    public PostPageDTO find(int current, int size, String name, String code) {
         PageHelper.startPage(current, size);
         List<PostDO> postDOS = postMapper.selectList(new QueryWrapper<PostDO>().like(name !=null, "name", name).like(code != null, "code", code));
         PageInfo<PostDO> pageInfo = new PageInfo<>(postDOS);
@@ -42,7 +42,7 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
-    public PostEntity query(Long id) {
+    public PostEntity find(Long id) {
         return PostConverter.INSTANCE.toEntity(postMapper.selectById(id));
     }
 
