@@ -1,7 +1,10 @@
 # CDP（Chomolungma Development Platform）
 ## 介绍
-
-![image](https://user-images.githubusercontent.com/3797320/185794835-8fed3b7d-c401-4b8b-a7d4-ecba007d2d09.png)
+<p align="center">
+  <a href="https://github.com/kushu001/cdp">
+    <img width="100" src="https://user-images.githubusercontent.com/3797320/185794835-8fed3b7d-c401-4b8b-a7d4-ecba007d2d09.png">
+  </a>
+</p>
 
 cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
 
