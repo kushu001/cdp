@@ -12,8 +12,21 @@
 <div align="center">
   
   [![Chomolungma Deveopment Platform](https://img.shields.io/badge/Chomolungma%20Development%20Platform-2.0-orange)](https://github.com/kushu001/cdp)
+  [![cdp-web-vue](https://img.shields.io/badge/cdp--web--vue-1.0-orange)](https://github.com/kushu001/cdp-web-vue)
+  [![SpringBoot](https://img.shields.io/badge/SpringBoot-2.1.17.RELEASE-green)](https://spring.io/)
+  [![MySQL](https://img.shields.io/badge/MySQL-8.0.31-green)](https://www.mysql.com/)
+  [![Mybatis-Plus](https://img.shields.io/badge/Mybatis--Plus-3.5.2-green)](https://baomidou.com/pages/24112f/)
+  [![OpenJDK](https://img.shields.io/badge/OpenJDK-1.8.0__312-green)](https://www.azul.com/downloads/)
+  [![PageHelper](https://img.shields.io/badge/PageHelper-1.4.6-green)](https://pagehelper.github.io/)
+  [![EasyExcel](https://img.shields.io/badge/EasyExcel-3.1.3-green)](https://easyexcel.opensource.alibaba.com/)
+  [![jwt](https://img.shields.io/badge/jwt-4.2.1-green)](https://jwt.io/)
+  [![fastjson](https://img.shields.io/badge/fastjson-2.0.20-green)](https://alibaba.github.io/fastjson2/)
+  [![mapstruct](https://img.shields.io/badge/mapstruct-1.5.3.Final-green)](https://mapstruct.org/)
+  [![lombok](https://img.shields.io/badge/lombok-1.18.24-green)](https://projectlombok.org/)
+  [![vue-element-admin](https://img.shields.io/badge/vue--element--admin-4.4.0-green)](https://github.com/PanJiaChen/vue-element-admin)
   [![Apache License 2.0](https://img.shields.io/badge/License-Apache2.0-brightgreen)](https://github.com/kushu001/cdp/blob/main/LICENSE)
-
+  [![kushu001](https://img.shields.io/badge/author-kushu001-orange)](https://github.com/kushu001)
+  
 </div>
 
 ## 介绍
