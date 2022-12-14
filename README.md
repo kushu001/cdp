@@ -1,12 +1,23 @@
-# CDP（Chomolungma Development Platform）
-## 介绍
+
+
 <p align="center">
   <a href="https://github.com/kushu001/cdp">
     <img width="100" src="https://user-images.githubusercontent.com/3797320/185794835-8fed3b7d-c401-4b8b-a7d4-ecba007d2d09.png">
   </a>
 </p>
 
-cdp是Chomolungma Development Platform（珠峰开发平台）的缩写
+
+<h1 align="center">Chomolungma Development Platform</h1>
+
+<div align="center">
+  
+  [![Chomolungma Deveopment Platform](https://img.shields.io/badge/Chomolungma%20Development%20Platform-2.0-orange)](https://github.com/kushu001/cdp)
+  [![Apache License 2.0](https://img.shields.io/badge/License-Apache2.0-brightgreen)](https://github.com/kushu001/cdp/blob/main/LICENSE)
+
+</div>
+
+## 介绍
+CDP是Chomolungma Development Platform（珠峰开发平台）的缩写
 
 本项目开发平台是以DDD为指导思想，努力以DDD驱动框架的设计开发，争取使业务代码和技术代码做到高内聚，低耦合
 
