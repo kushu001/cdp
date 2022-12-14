@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.account.infrastructure.mybatis.repository.mapper.AccountUserRoleMapper">
+    <resultMap id="accountUserResultMap" type="com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+        <result column="avatar" property="avatar" jdbcType="CHAR" />
+        <result column="enabled" property="enabled" jdbcType="TINYINT" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+    </resultMap>
+
+    <!-- 根据条件查询账户信息 -->
+    <select id="selectPageList" parameterType="com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO" resultMap="accountUserResultMap">
+        select
+            sa.id ,
+            sa.create_time ,
+            sa.create_user ,
+            sa.update_time ,
+            sa.update_user ,
+            sa.username ,
+            su.name ,
+            group_concat(sr.name) as role_name,
+            sa.nickname ,
+            sa.avatar ,
+            sa.status
+        from
+        sys_account sa left join sys_user su on sa.user_id = su.id
+                       left join sys_account_role sar on sa.id = sar.account_id
+                       left join sys_role sr on sar.role_id = sr.id
+        <where>
+            <if test="accountUserRole.username != null and accountUserRole.username !=''">
+                and sa.username like  CONCAT('%',#{accountUserRole.username,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.name != null and accountUserRole.name !=''">
+                and su.name like  CONCAT('%',#{accountUserRole.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.nickname != null and accountUserRole.nickname !=''">
+                and sa.nickname like  CONCAT('%',#{accountUserRole.nickname,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.status != null and accountUserRole.status !=''">
+                and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
+            </if>
+        </where>
+        group by sa.id
+    </select>
+
+    <!-- 根据条件查询账户信息 -->
+    <select id="selectList" parameterType="com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO" resultMap="accountUserResultMap">
+        select
+        sa.id ,
+        sa.create_time ,
+        sa.create_user ,
+        sa.update_time ,
+        sa.update_user ,
+        sa.username ,
+        sa.enabled,
+        su.name ,
+        group_concat(sr.name ORDER by sr.name DESC) as role_name,
+        sa.nickname ,
+        sa.avatar ,
+        sa.status
+        from
+        sys_account sa left join sys_user su on sa.user_id = su.id
+        left join sys_account_role sar on sa.id = sar.account_id
+        left join sys_role sr on sar.role_id = sr.id
+        <where>
+            sa.deleted = 0
+            <if test="accountUserRole.username != null and accountUserRole.username !=''">
+                and sa.username like  CONCAT('%',#{accountUserRole.username,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.name != null and accountUserRole.name !=''">
+                and su.name like  CONCAT('%',#{accountUserRole.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.nickname != null and accountUserRole.nickname !=''">
+                and sa.nickname like  CONCAT('%',#{accountUserRole.nickname,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountUserRole.status != null and accountUserRole.status !=''">
+                and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
+            </if>
+            <if test="accountUserRole.enabled != null">
+                and sa.enabled = #{accountUserRole.enabled,jdbcType=TINYINT}
+            </if>
+        </where>
+        group by sa.id
+    </select>
+
+
+    <!--  根据用户名密码查询用户信息  -->
+    <select id="selectAccount" parameterType="com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO" resultMap="accountUserResultMap">
+        select
+            sa.id ,
+            sa.create_time ,
+            sa.create_user ,
+            sa.update_time ,
+            sa.update_user ,
+            sa.username ,
+            su.name ,
+            sa.nickname ,
+            sa.avatar ,
+            sa.status
+        from
+            sys_account sa left join
+            sys_user su on sa.user_id = su.id
+        <where>
+            <if test="username != null or username !=''">
+                and sa.username = #{username, jdbcType=VARCHAR}
+            </if>
+            <if test="password != null or password !=''">
+                and sa.password = #{password, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

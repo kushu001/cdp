@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.staff.infrastructure.mybatis.repository.mapper.StaffMapper">
+<!--  查询部门人员  -->
+    <select id="selectStaffsByCondition" parameterType="com.chomolungma.system.staff.infrastructure.dataobject.StaffDO" resultType="com.chomolungma.system.staff.interfaces.dto.StaffDTO">
+        select
+            su.*,
+            so.id as dept_id,
+            so.name as dept_name
+        from
+            sys_org so
+        left join sys_org_user sou on
+            so.id = sou.org_id
+        left join sys_user su on
+            sou.user_id = su.id
+        <where>
+            sou.user_id is not null
+            <if test="code != null and code != ''">
+                and so.code like concat(#{code, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.name !=null and staffDO.name !=''">
+                and su.name like concat('%', #{staffDO.name, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.phone !=null and staffDO.phone !=''">
+                and su.phone like concat('%', #{staffDO.phone, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.tel !=null and staffDO.tel !=''">
+                and su.tel like concat('%', #{staffDO.tel, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.address !=null and staffDO.address !=''">
+                and su.address like concat('%', #{staffDO.address, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.gender !=null and staffDO.gender !=''">
+                and su.gender =  #{staffDO.gender, jdbcType=VARCHAR}
+            </if>
+            <if test="staffDO.idNumber !=null and staffDO.idNumber !=''">
+                and su.id_number like concat('%', #{staffDO.idNumber, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="staffDO.status !=null and staffDO.status !=''">
+                and su.status = #{staffDO.status, jdbcType=BIGINT}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="noDeleteCount" parameterType="list" resultType="Boolean">
+        select count(1) from sys_user
+            <where>
+                status = 1 and
+                id in
+                <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                    #{item, jdbcType=BIGINT}
+                </foreach>
+            </where>
+
+    </select>
+</mapper>

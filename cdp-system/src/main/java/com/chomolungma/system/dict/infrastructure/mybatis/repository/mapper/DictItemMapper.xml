@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.dict.infrastructure.mybatis.repository.mapper.DictItemMapper">
+    <select id="selectListByDictCode" resultType="com.chomolungma.system.dict.infrastructure.dataobject.DictItemDO">
+        select
+            sdi.*
+        from
+            sys_dict sd
+        left join sys_dict_item sdi on
+            sd.id = sdi.dict_id
+        where
+            sd.code = #{dictCode,jdbcType=VARCHAR}
+        order by sdi.sort asc
+    </select>
+</mapper>
