@@ -17,4 +17,5 @@ public class MenuDTO extends BaseDTO {
     private String sort;
     private String type;
     private Boolean enabled;
+    private Boolean isHidden;
 }

@@ -14,5 +14,6 @@ public class MenuParam {
     private String type;
     private String permission;
     private Boolean enabled;
+    private Boolean isHidden;
     private String status;
 }

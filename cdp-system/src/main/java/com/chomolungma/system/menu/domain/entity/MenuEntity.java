@@ -15,6 +15,7 @@ public class MenuEntity extends BaseEntity {
     private String sort;
     private String permission;
     private Boolean hasLeaf = false;
+    private Boolean isHidden;
     private String type;
     private Boolean enabled;
 }
