@@ -1,8 +1,5 @@
 /target/
-/cdp-auth/target/
-/cdp-common/target/
-/cdp-core/target/
-/cdp-system/target/
+/**/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
