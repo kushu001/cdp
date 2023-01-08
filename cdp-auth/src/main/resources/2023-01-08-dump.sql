@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.27, for macos12.0 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Linux (aarch64)
 --
 -- Host: localhost    Database: cdp
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,19 +25,19 @@ DROP TABLE IF EXISTS `sys_account`;
 CREATE TABLE `sys_account` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `user_id` int DEFAULT NULL COMMENT '用户ID',
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '账户名',
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '账户密码',
+  `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '账户名',
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '账户密码',
   `nickname` varchar(100) DEFAULT NULL COMMENT '昵称',
-  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像',
+  `avatar` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '头像',
   `enabled` tinyint DEFAULT NULL COMMENT '是否启用',
   `deleted` tinyint DEFAULT '0' COMMENT '是否删除',
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0' COMMENT '状态',
+  `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='账户表';
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='账户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `sys_account` (
 
 LOCK TABLES `sys_account` WRITE;
 /*!40000 ALTER TABLE `sys_account` DISABLE KEYS */;
-INSERT INTO `sys_account` VALUES (38,'2022-05-19 01:28:31',NULL,'2022-11-14 09:35:44',NULL,29,'admin','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','admin',NULL,1,0,'2'),(39,'2022-05-18 14:55:15',NULL,'2022-11-14 03:43:59',NULL,29,'taoyj','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','kushu001',NULL,1,0,'2'),(73,'2022-07-13 13:56:19',NULL,'2022-11-15 03:19:48',NULL,NULL,'jiangsl','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','jiangjiang',NULL,1,0,'2'),(74,'2022-07-13 13:57:06',NULL,'2022-11-15 03:19:48',NULL,NULL,'tanyc','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','tantan',NULL,1,0,'2'),(88,'2022-11-14 02:55:10',NULL,'2022-11-14 03:42:11',NULL,38,'hef',NULL,'hefei',NULL,1,1,'0');
+INSERT INTO `sys_account` VALUES (38,'2022-05-19 01:28:31',NULL,'2022-12-27 02:46:16',NULL,29,'admin','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','admin',NULL,1,0,'2'),(39,'2022-05-18 14:55:15',NULL,'2023-01-06 14:32:33',NULL,29,'taoyj','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','kushu001',NULL,1,0,'2'),(73,'2022-07-13 13:56:19',NULL,'2023-01-06 15:16:48',NULL,29,'jiangsl','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','jiangjiang',NULL,0,0,'2'),(74,'2022-07-13 13:57:06',NULL,'2022-11-21 04:00:14',NULL,NULL,'tanyc','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','tantan',NULL,1,1,'2'),(89,'2022-11-27 11:55:33',NULL,'2022-12-27 12:30:10',NULL,NULL,'jtadmin','$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK','',NULL,1,1,'0');
 /*!40000 ALTER TABLE `sys_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,14 +60,14 @@ DROP TABLE IF EXISTS `sys_account_role`;
 CREATE TABLE `sys_account_role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `account_id` int DEFAULT NULL COMMENT '账号ID',
   `role_id` int DEFAULT NULL COMMENT '角色ID',
   `status` char(1) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `sys_account_role` (
 
 LOCK TABLES `sys_account_role` WRITE;
 /*!40000 ALTER TABLE `sys_account_role` DISABLE KEYS */;
-INSERT INTO `sys_account_role` VALUES (1,NULL,NULL,NULL,NULL,4,1,NULL),(2,NULL,NULL,'2019-10-28 14:04:07',NULL,1,2,NULL),(3,NULL,NULL,NULL,NULL,33,1,NULL),(4,NULL,NULL,NULL,NULL,33,2,NULL),(5,NULL,NULL,NULL,NULL,34,2,NULL),(6,NULL,NULL,NULL,NULL,34,1,NULL),(7,NULL,NULL,NULL,NULL,34,21,NULL),(8,NULL,NULL,NULL,NULL,35,21,NULL),(9,NULL,NULL,NULL,NULL,35,2,NULL),(10,NULL,NULL,NULL,NULL,36,1,NULL),(11,NULL,NULL,NULL,NULL,36,2,NULL),(12,NULL,NULL,NULL,NULL,36,21,NULL),(13,NULL,NULL,NULL,NULL,37,1,NULL),(14,NULL,NULL,NULL,NULL,37,2,NULL),(31,NULL,NULL,NULL,NULL,41,1,NULL),(33,NULL,NULL,NULL,NULL,42,1,NULL),(38,NULL,NULL,NULL,NULL,43,22,NULL),(39,NULL,NULL,NULL,NULL,43,21,NULL),(40,NULL,NULL,NULL,NULL,43,2,NULL),(41,NULL,NULL,NULL,NULL,43,1,NULL),(44,NULL,NULL,NULL,NULL,40,21,NULL),(47,NULL,NULL,NULL,NULL,48,1,NULL),(49,NULL,NULL,NULL,NULL,47,1,NULL),(51,'2022-07-07 14:43:22',NULL,'2022-07-07 14:43:41',NULL,33,1,NULL),(52,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,1,NULL),(53,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,2,NULL),(54,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,21,NULL),(55,'2022-07-08 00:19:58',NULL,'2022-07-08 00:19:58',NULL,50,1,NULL),(56,'2022-07-08 00:24:32',NULL,'2022-07-08 00:24:32',NULL,51,2,NULL),(57,'2022-07-08 00:29:56',NULL,'2022-07-08 00:29:56',NULL,52,21,NULL),(59,'2022-07-08 00:33:29',NULL,'2022-07-08 00:33:29',NULL,54,2,NULL),(60,'2022-07-08 00:33:48',NULL,'2022-07-08 00:33:48',NULL,55,1,NULL),(63,'2022-07-08 13:46:06',NULL,'2022-07-08 13:46:06',NULL,56,1,NULL),(64,'2022-07-08 13:46:55',NULL,'2022-07-08 13:46:55',NULL,57,1,NULL),(65,'2022-07-08 13:48:06',NULL,'2022-07-08 13:48:06',NULL,58,1,NULL),(67,'2022-07-08 14:01:26',NULL,'2022-07-08 14:01:26',NULL,60,2,NULL),(68,'2022-07-08 14:03:08',NULL,'2022-07-08 14:03:08',NULL,61,1,NULL),(69,'2022-07-08 14:07:35',NULL,'2022-07-08 14:07:35',NULL,62,1,NULL),(70,'2022-07-08 14:07:45',NULL,'2022-07-08 14:07:45',NULL,59,1,NULL),(72,'2022-07-13 04:58:52',NULL,'2022-07-13 04:58:52',NULL,53,1,NULL),(108,'2022-11-08 03:41:54',NULL,'2022-11-08 03:41:54',NULL,39,2,NULL),(109,'2022-11-08 03:41:54',NULL,'2022-11-08 03:41:54',NULL,39,21,NULL),(110,'2022-11-08 03:41:57',NULL,'2022-11-08 03:41:57',NULL,73,1,NULL),(112,'2022-11-08 03:42:02',NULL,'2022-11-08 03:42:02',NULL,75,22,NULL),(144,'2022-11-14 02:54:02',NULL,'2022-11-14 02:54:02',NULL,87,22,NULL),(153,'2022-11-14 03:18:23',NULL,'2022-11-14 03:18:23',NULL,88,22,NULL),(154,'2022-11-14 09:35:44',NULL,'2022-11-14 09:35:44',NULL,38,1,NULL),(155,'2022-11-14 09:35:44',NULL,'2022-11-14 09:35:44',NULL,38,22,NULL),(156,'2022-11-14 09:35:44',NULL,'2022-11-14 09:35:44',NULL,38,21,NULL),(157,'2022-11-14 09:35:44',NULL,'2022-11-14 09:35:44',NULL,38,2,NULL),(158,'2022-11-14 09:35:51',NULL,'2022-11-14 09:35:51',NULL,74,1,NULL);
+INSERT INTO `sys_account_role` VALUES (1,NULL,NULL,NULL,NULL,4,1,NULL),(2,NULL,NULL,'2019-10-28 14:04:07',NULL,1,2,NULL),(3,NULL,NULL,NULL,NULL,33,1,NULL),(4,NULL,NULL,NULL,NULL,33,2,NULL),(5,NULL,NULL,NULL,NULL,34,2,NULL),(6,NULL,NULL,NULL,NULL,34,1,NULL),(7,NULL,NULL,NULL,NULL,34,21,NULL),(8,NULL,NULL,NULL,NULL,35,21,NULL),(9,NULL,NULL,NULL,NULL,35,2,NULL),(10,NULL,NULL,NULL,NULL,36,1,NULL),(11,NULL,NULL,NULL,NULL,36,2,NULL),(12,NULL,NULL,NULL,NULL,36,21,NULL),(13,NULL,NULL,NULL,NULL,37,1,NULL),(14,NULL,NULL,NULL,NULL,37,2,NULL),(31,NULL,NULL,NULL,NULL,41,1,NULL),(33,NULL,NULL,NULL,NULL,42,1,NULL),(38,NULL,NULL,NULL,NULL,43,22,NULL),(39,NULL,NULL,NULL,NULL,43,21,NULL),(40,NULL,NULL,NULL,NULL,43,2,NULL),(41,NULL,NULL,NULL,NULL,43,1,NULL),(44,NULL,NULL,NULL,NULL,40,21,NULL),(47,NULL,NULL,NULL,NULL,48,1,NULL),(49,NULL,NULL,NULL,NULL,47,1,NULL),(51,'2022-07-07 14:43:22',NULL,'2022-07-07 14:43:41',NULL,33,1,NULL),(52,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,1,NULL),(53,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,2,NULL),(54,'2022-07-07 15:12:24',NULL,'2022-07-07 15:12:24',NULL,49,21,NULL),(55,'2022-07-08 00:19:58',NULL,'2022-07-08 00:19:58',NULL,50,1,NULL),(56,'2022-07-08 00:24:32',NULL,'2022-07-08 00:24:32',NULL,51,2,NULL),(57,'2022-07-08 00:29:56',NULL,'2022-07-08 00:29:56',NULL,52,21,NULL),(59,'2022-07-08 00:33:29',NULL,'2022-07-08 00:33:29',NULL,54,2,NULL),(60,'2022-07-08 00:33:48',NULL,'2022-07-08 00:33:48',NULL,55,1,NULL),(63,'2022-07-08 13:46:06',NULL,'2022-07-08 13:46:06',NULL,56,1,NULL),(64,'2022-07-08 13:46:55',NULL,'2022-07-08 13:46:55',NULL,57,1,NULL),(65,'2022-07-08 13:48:06',NULL,'2022-07-08 13:48:06',NULL,58,1,NULL),(67,'2022-07-08 14:01:26',NULL,'2022-07-08 14:01:26',NULL,60,2,NULL),(68,'2022-07-08 14:03:08',NULL,'2022-07-08 14:03:08',NULL,61,1,NULL),(69,'2022-07-08 14:07:35',NULL,'2022-07-08 14:07:35',NULL,62,1,NULL),(70,'2022-07-08 14:07:45',NULL,'2022-07-08 14:07:45',NULL,59,1,NULL),(72,'2022-07-13 04:58:52',NULL,'2022-07-13 04:58:52',NULL,53,1,NULL),(112,'2022-11-08 03:42:02',NULL,'2022-11-08 03:42:02',NULL,75,22,NULL),(144,'2022-11-14 02:54:02',NULL,'2022-11-14 02:54:02',NULL,87,22,NULL),(153,'2022-11-14 03:18:23',NULL,'2022-11-14 03:18:23',NULL,88,22,NULL),(158,'2022-11-14 09:35:51',NULL,'2022-11-14 09:35:51',NULL,74,1,NULL),(186,'2022-11-27 11:55:54',NULL,'2022-11-27 11:55:54',NULL,89,1,NULL),(187,'2022-11-28 03:18:50',NULL,'2022-11-28 03:18:50',NULL,90,2,NULL),(188,'2022-11-28 03:18:57',NULL,'2022-11-28 03:18:57',NULL,91,21,NULL),(189,'2022-11-28 03:19:03',NULL,'2022-11-28 03:19:03',NULL,92,2,NULL),(190,'2022-11-28 03:19:11',NULL,'2022-11-28 03:19:11',NULL,93,2,NULL),(191,'2022-11-28 03:19:23',NULL,'2022-11-28 03:19:23',NULL,94,2,NULL),(192,'2022-11-28 03:19:29',NULL,'2022-11-28 03:19:29',NULL,95,2,NULL),(193,'2022-11-28 03:19:36',NULL,'2022-11-28 03:19:36',NULL,96,21,NULL),(194,'2022-11-28 03:19:50',NULL,'2022-11-28 03:19:50',NULL,97,2,NULL),(195,'2022-11-29 07:03:31',NULL,'2022-11-29 07:03:31',NULL,38,1,NULL),(196,'2022-11-29 07:03:31',NULL,'2022-11-29 07:03:31',NULL,38,22,NULL),(197,'2022-11-29 07:03:31',NULL,'2022-11-29 07:03:31',NULL,38,21,NULL),(198,'2022-11-29 07:03:31',NULL,'2022-11-29 07:03:31',NULL,38,2,NULL),(207,'2022-12-27 12:32:06',NULL,'2022-12-27 12:32:06',NULL,98,1,NULL),(211,'2023-01-04 08:40:28',NULL,'2023-01-04 08:40:28',NULL,99,21,NULL),(212,'2023-01-04 09:34:38',NULL,'2023-01-04 09:34:38',NULL,100,1,NULL),(213,'2023-01-04 09:34:38',NULL,'2023-01-04 09:34:38',NULL,100,2,NULL),(214,'2023-01-04 09:34:45',NULL,'2023-01-04 09:34:45',NULL,101,21,NULL),(215,'2023-01-04 09:34:45',NULL,'2023-01-04 09:34:45',NULL,101,22,NULL),(219,'2023-01-05 14:03:44',NULL,'2023-01-05 14:03:44',NULL,108,1,NULL),(220,'2023-01-05 14:03:44',NULL,'2023-01-05 14:03:44',NULL,108,21,NULL),(221,'2023-01-05 14:03:44',NULL,'2023-01-05 14:03:44',NULL,108,2,NULL),(222,'2023-01-06 14:32:33',NULL,'2023-01-06 14:32:33',NULL,39,21,NULL),(223,'2023-01-06 14:32:33',NULL,'2023-01-06 14:32:33',NULL,39,2,NULL),(224,'2023-01-06 15:16:48',NULL,'2023-01-06 15:16:48',NULL,73,1,NULL),(225,'2023-01-06 15:16:48',NULL,'2023-01-06 15:16:48',NULL,73,22,NULL),(226,'2023-01-06 15:16:48',NULL,'2023-01-06 15:16:48',NULL,73,21,NULL);
 /*!40000 ALTER TABLE `sys_account_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,11 +90,11 @@ DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编码',
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典项名称',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '编码',
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '字典项名称',
   `sort` varchar(100) DEFAULT NULL COMMENT '排序',
   `status` varchar(100) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
@@ -107,7 +107,7 @@ CREATE TABLE `sys_dict` (
 
 LOCK TABLES `sys_dict` WRITE;
 /*!40000 ALTER TABLE `sys_dict` DISABLE KEYS */;
-INSERT INTO `sys_dict` VALUES (3,'2022-05-25 14:20:16',NULL,'2022-05-25 14:20:16',NULL,'ZFFS','支付方式','0',NULL),(4,'2022-05-25 14:23:55',NULL,'2022-05-25 14:23:55',NULL,'XB','性别','0',NULL),(6,'2022-05-26 12:09:37',NULL,'2022-05-26 12:09:37',NULL,'ZT','状态','0',NULL);
+INSERT INTO `sys_dict` VALUES (3,'2022-05-25 14:20:16',NULL,'2022-05-25 14:20:16',NULL,'ZFFS','支付方式','1',NULL),(4,'2022-05-25 14:23:55',NULL,'2022-05-25 14:23:55',NULL,'XB','性别','2',NULL),(6,'2022-05-26 12:09:37',NULL,'2022-05-26 12:09:37',NULL,'ZT','状态','3',NULL);
 /*!40000 ALTER TABLE `sys_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,14 +121,14 @@ DROP TABLE IF EXISTS `sys_dict_item`;
 CREATE TABLE `sys_dict_item` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编码',
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典项名称',
-  `value` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典值',
-  `sort` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '排序',
-  `status` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '编码',
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '字典项名称',
+  `value` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '字典值',
+  `sort` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '排序',
+  `status` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   `dict_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '字典ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
@@ -154,13 +154,13 @@ DROP TABLE IF EXISTS `sys_login_log`;
 CREATE TABLE `sys_login_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `ip` varchar(100) DEFAULT NULL COMMENT 'IP地址',
-  `user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '登录人',
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '登录地',
-  `client` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '终端平台',
+  `user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '登录人',
+  `address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '登录地',
+  `client` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '终端平台',
   `os` varchar(100) DEFAULT NULL COMMENT '操作系统',
   `status` char(1) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
@@ -187,24 +187,25 @@ DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编码',
-  `p_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父编码',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '编码',
+  `p_code` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '父编码',
   `pid` int DEFAULT NULL COMMENT '父ID',
   `title` varchar(100) DEFAULT NULL COMMENT '菜单名称',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '属性名称',
-  `icon` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '图标',
-  `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '地址',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '属性名称',
+  `icon` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '图标',
+  `url` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '地址',
   `permission` varchar(100) DEFAULT NULL COMMENT '权限标识',
-  `type` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '类型(0.菜单 1.操作)',
+  `type` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '类型(0.菜单 1.操作)',
   `has_leaf` tinyint DEFAULT NULL COMMENT '是否有子级',
+  `is_hidden` tinyint DEFAULT '0' COMMENT '是否隐藏',
   `sort` int DEFAULT NULL COMMENT '排序',
   `enabled` tinyint DEFAULT NULL COMMENT '是否启用',
-  `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `status` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='菜单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +214,7 @@ CREATE TABLE `sys_menu` (
 
 LOCK TABLES `sys_menu` WRITE;
 /*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
-INSERT INTO `sys_menu` VALUES (51,'2022-05-06 03:43:57',NULL,'2022-11-05 11:53:58',NULL,NULL,NULL,0,'系统管理','system','el-icon-s-tools','/system',NULL,'0',0,1,1,NULL),(123,'2022-05-22 14:32:37',NULL,'2022-11-05 11:53:56',NULL,NULL,NULL,51,'账户管理','account','el-icon-user-solid','/system/account',NULL,'0',0,1,1,NULL),(124,'2022-05-22 14:32:45',NULL,'2022-11-05 11:54:07',NULL,NULL,NULL,51,'用户管理','user','iconfont cdp-icon-user-group-fill','/system/user',NULL,'0',1,2,1,NULL),(125,'2022-05-22 14:32:54',NULL,'2022-11-05 11:58:11',NULL,NULL,NULL,51,'角色管理','role','user-role','/system/role',NULL,'0',0,3,1,NULL),(127,'2022-05-22 14:33:02',NULL,'2022-11-05 11:58:19',NULL,NULL,NULL,51,'部门管理','org','org','/system/org',NULL,'0',0,4,1,NULL),(128,'2022-05-22 14:33:09',NULL,'2022-11-05 11:58:32',NULL,NULL,NULL,51,'菜单管理','menu','el-icon-menu','/system/menu',NULL,'0',0,5,1,NULL),(129,'2022-05-22 14:33:19',NULL,'2022-11-05 11:58:36',NULL,NULL,NULL,51,'字典管理','dict','el-icon-notebook-2','/system/dict',NULL,'0',0,6,1,NULL),(134,'2022-05-07 02:23:58',NULL,'2022-11-05 11:58:22',NULL,NULL,NULL,127,'新增','新增',NULL,NULL,'system:org:add','1',0,1,1,NULL),(135,'2022-05-22 14:33:42',NULL,'2022-11-05 11:59:02',NULL,NULL,NULL,51,'岗位管理','岗位管理','iconfont cdp-icon-star-circle','/system/post',NULL,'0',0,7,1,NULL),(136,'2022-05-22 14:33:59',NULL,'2022-11-05 11:59:05',NULL,NULL,NULL,51,'日志管理','log','log','/system/log',NULL,'0',0,8,1,NULL),(137,NULL,NULL,'2022-11-05 11:58:25',NULL,NULL,NULL,127,'批量删除','org',NULL,NULL,'system:org:delete','1',0,1,1,NULL),(159,NULL,NULL,'2022-11-05 11:59:19',NULL,NULL,NULL,0,'开发者选项','development','el-icon-s-platform','/development',NULL,'0',0,2,1,NULL),(160,NULL,NULL,'2022-11-05 11:59:22',NULL,NULL,NULL,159,'菜单管理','menu','el-icon-menu','/development/menu',NULL,'0',0,1,1,NULL),(161,NULL,NULL,'2022-11-05 11:59:27',NULL,NULL,NULL,159,'测试页面','test','el-icon-hot-water','/development/test',NULL,'0',0,3,1,NULL),(162,'2022-07-14 00:40:09',NULL,'2022-11-05 11:59:25',NULL,NULL,NULL,159,'错误日志','errorLog','el-icon-s-platform','/development/error-log',NULL,'0',0,2,1,NULL),(163,'2022-08-08 12:59:56',NULL,'2022-11-05 11:59:09',NULL,NULL,NULL,136,'登录日志','login-log','iconfont cdp-icon-times-circle','/system/log/login-log',NULL,'0',0,1,1,NULL),(164,'2022-08-08 13:00:27',NULL,'2022-11-05 11:59:12',NULL,NULL,NULL,136,'操作日志','operate-log','log','/system/log/operate-log',NULL,'0',0,2,1,NULL),(179,'2022-10-10 02:40:45',NULL,'2022-11-05 11:53:50',NULL,NULL,NULL,123,'新增','account','iconfont cdp-icon-plus','','system:account:add','1',0,3,1,NULL),(180,'2022-10-10 02:41:30',NULL,'2022-11-05 11:53:39',NULL,NULL,NULL,123,'更新','account','iconfont cdp-icon-edit','','system:account:edit','1',0,2,1,NULL),(181,'2022-10-10 02:44:45',NULL,'2022-11-05 11:53:53',NULL,NULL,NULL,123,'删除','account','iconfont cdp-icon-delete-fill','','system:account:delete','1',0,4,1,NULL),(182,'2022-10-10 03:27:09',NULL,'2022-11-05 11:53:48',NULL,NULL,NULL,123,'查看','account','iconfont cdp-icon-eye-fill','','system:account:view','1',0,1,1,NULL),(183,'2022-10-10 06:01:18',NULL,'2022-11-05 11:54:04',NULL,NULL,NULL,124,'新增','user','','','system:user:add','1',0,0,1,NULL),(187,'2022-10-11 02:53:42',NULL,'2022-11-05 11:58:16',NULL,NULL,NULL,125,'新增','role','','','system:role:add','1',0,0,1,NULL),(188,'2022-10-19 07:38:09',NULL,'2022-11-05 11:58:39',NULL,NULL,NULL,51,'资源管理','system','el-icon-s-promotion','/system/resource',NULL,'0',0,6,1,NULL),(189,'2022-10-19 07:39:56',NULL,'2022-11-05 11:58:51',NULL,NULL,NULL,188,'新增','system','','','system:resources:add','1',0,1,1,NULL),(190,'2022-10-19 08:17:36',NULL,'2022-11-05 11:58:56',NULL,NULL,NULL,188,'更新','system','','','system:resources:edit','1',0,2,1,NULL);
+INSERT INTO `sys_menu` VALUES (51,'2022-05-06 03:43:57',NULL,'2022-12-15 02:49:01',NULL,NULL,NULL,0,'系统管理','system','el-icon-s-tools','/system',NULL,'0',1,0,1,1,NULL),(123,'2022-05-22 14:32:37',NULL,'2022-11-05 11:53:56',NULL,NULL,NULL,51,'账户管理','account','el-icon-user-solid','/system/account',NULL,'0',1,0,1,1,NULL),(124,'2022-05-22 14:32:45',NULL,'2022-11-18 06:22:49',NULL,NULL,NULL,51,'人员管理','user','iconfont cdp-icon-user-group-fill','/system/staff',NULL,'0',1,0,2,1,NULL),(125,'2022-05-22 14:32:54',NULL,'2023-01-07 15:06:51',NULL,NULL,NULL,51,'角色管理','role','el-icon-s-custom','/system/role',NULL,'0',1,0,3,1,NULL),(127,'2022-05-22 14:33:02',NULL,'2023-01-08 08:54:59',NULL,NULL,NULL,51,'部门管理','org','iconfont cdp-icon-border-top','/system/org',NULL,'0',0,0,4,1,NULL),(129,'2022-05-22 14:33:19',NULL,'2022-11-05 11:58:36',NULL,NULL,NULL,51,'字典管理','dict','el-icon-notebook-2','/system/dict',NULL,'0',0,0,6,1,NULL),(134,'2022-05-07 02:23:58',NULL,'2023-01-08 08:13:34',NULL,NULL,NULL,127,'新增','新增','iconfont cdp-icon-plus',NULL,'system:org:add','1',0,0,0,1,NULL),(135,'2022-05-22 14:33:42',NULL,'2022-11-05 11:59:02',NULL,NULL,NULL,51,'岗位管理','岗位管理','iconfont cdp-icon-star-circle','/system/post',NULL,'0',0,0,7,1,NULL),(136,'2022-05-22 14:33:59',NULL,'2022-11-05 11:59:05',NULL,NULL,NULL,51,'日志管理','log','log','/system/log',NULL,'0',0,0,8,1,NULL),(137,NULL,NULL,'2023-01-08 08:12:24',NULL,NULL,NULL,127,'批量删除','org','iconfont cdp-icon-delete-fill',NULL,'system:org:batchDelete','1',0,0,1,1,NULL),(159,NULL,NULL,'2022-11-05 11:59:19',NULL,NULL,NULL,0,'开发者选项','development','el-icon-s-platform','/development',NULL,'0',0,0,2,1,NULL),(160,NULL,NULL,'2023-01-08 08:26:27',NULL,NULL,NULL,159,'菜单管理','menu','iconfont cdp-icon-Directory-tree','/development/menu',NULL,'0',1,0,1,1,NULL),(161,NULL,NULL,'2022-11-05 11:59:27',NULL,NULL,NULL,159,'测试页面','test','el-icon-hot-water','/development/test',NULL,'0',0,0,3,1,NULL),(162,'2022-07-14 00:40:09',NULL,'2022-12-15 03:35:46',NULL,NULL,NULL,159,'错误日志','errorLog','el-icon-s-platform','/development/error-log',NULL,'0',0,0,2,1,NULL),(163,'2022-08-08 12:59:56',NULL,'2022-11-05 11:59:09',NULL,NULL,NULL,136,'登录日志','login-log','iconfont cdp-icon-times-circle','/system/log/login-log',NULL,'0',0,0,1,1,NULL),(164,'2022-08-08 13:00:27',NULL,'2022-11-05 11:59:12',NULL,NULL,NULL,136,'操作日志','operate-log','log','/system/log/operate-log',NULL,'0',0,0,2,1,NULL),(179,'2022-10-10 02:40:45',NULL,'2023-01-07 14:57:06',NULL,NULL,NULL,123,'新增','account','iconfont cdp-icon-plus','','system:account:add','1',0,0,0,1,NULL),(180,'2022-10-10 02:41:30',NULL,'2022-11-05 11:53:39',NULL,NULL,NULL,123,'更新','account','iconfont cdp-icon-edit','','system:account:edit','1',0,0,2,1,NULL),(181,'2022-10-10 02:44:45',NULL,'2023-01-07 15:05:03',NULL,NULL,NULL,123,'删除','account','iconfont cdp-icon-delete-fill','','system:account:delete','1',0,0,7,1,NULL),(182,'2022-10-10 03:27:09',NULL,'2023-01-07 15:04:46',NULL,NULL,NULL,123,'查看','account','iconfont cdp-icon-eye-fill','','system:account:view','1',0,0,5,1,NULL),(183,'2022-10-10 06:01:18',NULL,'2023-01-07 14:17:41',NULL,NULL,NULL,124,'新增','user','iconfont cdp-icon-plus','','system:user:add','1',0,0,0,1,NULL),(187,'2022-10-11 02:53:42',NULL,'2023-01-07 15:06:17',NULL,NULL,NULL,125,'新增','role','iconfont cdp-icon-plus','','system:role:add','1',0,0,0,1,NULL),(188,'2022-10-19 07:38:09',NULL,'2023-01-05 12:13:14',NULL,NULL,NULL,51,'资源管理','resource','el-icon-s-promotion','/system/resource',NULL,'0',0,0,6,1,NULL),(189,'2022-10-19 07:39:56',NULL,'2023-01-08 08:36:27',NULL,NULL,NULL,188,'新增','system','iconfont cdp-icon-plus','','system:resources:add','1',0,0,1,1,NULL),(190,'2022-10-19 08:17:36',NULL,'2023-01-08 08:36:33',NULL,NULL,NULL,188,'更新','system','iconfont cdp-icon-edit','','system:resources:edit','1',0,0,2,1,NULL),(217,'2022-12-15 15:38:38',NULL,'2023-01-07 15:05:07',NULL,NULL,NULL,123,'重置密码','account','iconfont cdp-icon-undo',NULL,'system:account:resetPassword','1',0,0,8,1,NULL),(218,'2023-01-07 14:16:26',NULL,'2023-01-07 14:46:58',NULL,NULL,NULL,124,'批量删除','user','iconfont cdp-icon-delete-fill',NULL,'system:user:batchDelete','1',0,0,1,NULL,NULL),(219,'2023-01-07 14:45:51',NULL,'2023-01-07 14:48:25',NULL,NULL,NULL,124,'导入','user','iconfont cdp-icon-upload',NULL,'system:user:import','1',0,0,2,1,NULL),(220,'2023-01-07 14:47:44',NULL,'2023-01-07 14:48:28',NULL,NULL,NULL,124,'导出','user','iconfont cdp-icon-download',NULL,'system:user:export','1',0,0,3,1,NULL),(221,'2023-01-07 14:51:33',NULL,'2023-01-07 14:51:33',NULL,NULL,NULL,124,'查看','user','iconfont cdp-icon-eye',NULL,'system:user:view','1',0,0,4,1,NULL),(222,'2023-01-07 14:52:19',NULL,'2023-01-07 14:52:19',NULL,NULL,NULL,124,'编辑','user','iconfont cdp-icon-edit',NULL,'system:user:edit','1',0,0,5,1,NULL),(223,'2023-01-07 14:53:06',NULL,'2023-01-07 14:53:06',NULL,NULL,NULL,124,'删除','user','iconfont cdp-icon-delete',NULL,'system:user:delete','1',0,0,6,1,NULL),(224,'2023-01-07 14:55:20',NULL,'2023-01-07 14:55:20',NULL,NULL,NULL,124,'审核','user','iconfont cdp-icon-process',NULL,'system:user:audit','1',0,0,7,1,NULL),(225,'2023-01-07 14:58:49',NULL,'2023-01-07 14:58:49',NULL,NULL,NULL,123,'批量删除','account','iconfont cdp-icon-delete-fill',NULL,'system:account:batchDelete','1',0,0,1,1,NULL),(226,'2023-01-07 14:59:18',NULL,'2023-01-07 14:59:18',NULL,NULL,NULL,123,'导入','account','iconfont cdp-icon-upload',NULL,'system:account:import','1',0,0,2,1,NULL),(227,'2023-01-07 15:02:35',NULL,'2023-01-07 15:02:35',NULL,NULL,NULL,123,'导出','account','iconfont cdp-icon-download',NULL,'system:account:export','1',0,0,4,1,NULL),(229,'2023-01-07 15:05:36',NULL,'2023-01-07 15:05:36',NULL,NULL,NULL,123,'编辑','account','iconfont cdp-icon-edit',NULL,'system:account:edit','1',0,0,6,1,NULL),(230,'2023-01-08 08:01:29',NULL,'2023-01-08 08:01:29',NULL,NULL,NULL,125,'批量删除','role','iconfont cdp-icon-delete-fill',NULL,'system:role:batchDelete','1',0,0,1,1,NULL),(231,'2023-01-08 08:02:14',NULL,'2023-01-08 08:02:14',NULL,NULL,NULL,125,'导入','role','iconfont cdp-icon-upload',NULL,'system:role:import','1',0,0,2,1,NULL),(232,'2023-01-08 08:02:50',NULL,'2023-01-08 08:02:50',NULL,NULL,NULL,125,'导出','role','iconfont cdp-icon-download',NULL,'system:role:export','1',0,0,3,1,NULL),(233,'2023-01-08 08:03:47',NULL,'2023-01-08 08:03:47',NULL,NULL,NULL,125,'查看','role','iconfont cdp-icon-eye-fill',NULL,'system:role:view','1',0,0,4,1,NULL),(234,'2023-01-08 08:04:27',NULL,'2023-01-08 08:04:27',NULL,NULL,NULL,125,'编辑','role','iconfont cdp-icon-edit',NULL,'system:role:edit','1',0,0,5,1,NULL),(235,'2023-01-08 08:05:18',NULL,'2023-01-08 08:05:18',NULL,NULL,NULL,125,'删除','role','iconfont cdp-icon-delete',NULL,'system:role:delete','1',0,0,6,1,NULL),(236,'2023-01-08 08:08:24',NULL,'2023-01-08 08:08:24',NULL,NULL,NULL,125,'授权','role','iconfont cdp-icon-supervise',NULL,'system:role:authorize','1',0,0,7,1,NULL),(237,'2023-01-08 08:13:14',NULL,'2023-01-08 08:13:29',NULL,NULL,NULL,127,'导入','org','iconfont cdp-icon-upload',NULL,'system:org:import','1',0,0,2,1,NULL),(238,'2023-01-08 08:14:35',NULL,'2023-01-08 08:14:35',NULL,NULL,NULL,127,'导出','org','iconfont cdp-icon-download',NULL,'system:org:export','1',0,0,3,1,NULL),(239,'2023-01-08 08:15:30',NULL,'2023-01-08 08:15:30',NULL,NULL,NULL,127,'查看','org','iconfont cdp-icon-eye-fill',NULL,'system:org:view','1',0,0,4,1,NULL),(240,'2023-01-08 08:15:58',NULL,'2023-01-08 08:15:58',NULL,NULL,NULL,127,'编辑','org','iconfont cdp-icon-edit',NULL,'system:org:edit','1',0,0,5,1,NULL),(241,'2023-01-08 08:21:22',NULL,'2023-01-08 08:21:22',NULL,NULL,NULL,127,'删除','org','iconfont cdp-icon-delete',NULL,'system:org:delete','1',0,0,6,1,NULL),(242,'2023-01-08 08:27:37',NULL,'2023-01-08 08:28:59',NULL,NULL,NULL,160,'新建','menu','iconfont cdp-icon-plus',NULL,'development:menu:add','1',0,0,0,1,NULL),(243,'2023-01-08 08:28:49',NULL,'2023-01-08 08:28:49',NULL,NULL,NULL,160,'新建子级','menu','iconfont cdp-icon-plus',NULL,'development:menu:addSub','1',0,0,1,1,NULL);
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,16 +228,16 @@ DROP TABLE IF EXISTS `sys_operate_log`;
 CREATE TABLE `sys_operate_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '操作人',
-  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求地址',
-  `request_method` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求方法',
-  `resource_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '资源名称',
-  `path_payload` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '地址参数',
-  `payload` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '载荷数据',
-  `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '操作人',
+  `url` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '请求地址',
+  `request_method` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '请求方法',
+  `resource_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '资源名称',
+  `path_payload` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci COMMENT '地址参数',
+  `payload` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci COMMENT '载荷数据',
+  `status` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3588 DEFAULT CHARSET=utf8mb3 COMMENT='操作日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -261,14 +262,14 @@ DROP TABLE IF EXISTS `sys_org`;
 CREATE TABLE `sys_org` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `pid` int DEFAULT NULL COMMENT '父ID',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '机构名称',
-  `code` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '机构代码',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '机构名称',
+  `code` varchar(90) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '机构代码',
   `manager_id` bigint DEFAULT NULL COMMENT '负责人ID',
-  `manager` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '部门负责人',
+  `manager` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '部门负责人',
   `tel` varchar(100) DEFAULT NULL COMMENT '部门电话',
   `order` varchar(100) DEFAULT NULL COMMENT '排序',
   `status` char(1) DEFAULT NULL COMMENT '状态',
@@ -296,16 +297,16 @@ DROP TABLE IF EXISTS `sys_org_user`;
 CREATE TABLE `sys_org_user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `org_id` int DEFAULT NULL COMMENT '部门ID',
   `org_name` varchar(100) DEFAULT NULL COMMENT '部门名称',
   `user_id` int DEFAULT NULL COMMENT '用户ID',
   `user_name` varchar(100) DEFAULT NULL COMMENT '用户名称',
-  `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `status` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COMMENT='部门用户关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3 COMMENT='部门用户关系表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +315,7 @@ CREATE TABLE `sys_org_user` (
 
 LOCK TABLES `sys_org_user` WRITE;
 /*!40000 ALTER TABLE `sys_org_user` DISABLE KEYS */;
-INSERT INTO `sys_org_user` VALUES (1,NULL,NULL,'2022-05-22 14:10:16',NULL,1,NULL,17,NULL,NULL),(2,NULL,NULL,NULL,NULL,2,NULL,17,NULL,NULL),(3,'2022-05-24 15:53:50',NULL,NULL,NULL,50,NULL,29,NULL,NULL),(5,'2022-05-24 15:55:43',NULL,NULL,NULL,51,NULL,31,NULL,NULL),(7,'2022-05-25 00:29:30',NULL,NULL,NULL,51,NULL,33,NULL,NULL),(12,NULL,NULL,NULL,NULL,69,NULL,38,NULL,NULL);
+INSERT INTO `sys_org_user` VALUES (3,'2022-05-24 15:53:50',NULL,NULL,NULL,50,NULL,29,NULL,NULL),(37,NULL,NULL,NULL,NULL,50,NULL,64,NULL,NULL);
 /*!40000 ALTER TABLE `sys_org_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,11 +332,11 @@ CREATE TABLE `sys_post` (
   `create_user` int DEFAULT NULL COMMENT '创建人',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `update_user` int DEFAULT NULL COMMENT '修改人',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '姓名',
-  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '编码',
-  `type` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '类别',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '姓名',
+  `code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '编码',
+  `type` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '类别',
   `sort` int DEFAULT NULL COMMENT '排序',
-  `status` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `status` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COMMENT='岗位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -360,13 +361,13 @@ DROP TABLE IF EXISTS `sys_privilege`;
 CREATE TABLE `sys_privilege` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '名称',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL COMMENT '名称',
   `pid` int DEFAULT NULL COMMENT '父ID',
-  `type` char(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '类型（0.菜单 1.操作）',
-  `status` char(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '0' COMMENT '状态（0.无效 1.有效）',
+  `type` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL COMMENT '类型（0.菜单 1.操作）',
+  `status` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT '0' COMMENT '状态（0.无效 1.有效）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -390,13 +391,13 @@ DROP TABLE IF EXISTS `sys_resource`;
 CREATE TABLE `sys_resource` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `name` varchar(100) DEFAULT NULL COMMENT '资源名称',
   `sign` varchar(100) DEFAULT NULL COMMENT '标识',
   `url` varchar(100) DEFAULT NULL COMMENT '接口地址',
-  `status` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `status` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COMMENT='资源表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -421,14 +422,14 @@ DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '角色名称',
-  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '角色编码',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL COMMENT '角色名称',
+  `code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL COMMENT '角色编码',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `enabled` tinyint DEFAULT NULL COMMENT '是否启用',
-  `status` char(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态',
+  `status` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='角色表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -453,14 +454,14 @@ DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `role_id` int DEFAULT NULL COMMENT '角色ID',
   `menu_id` int DEFAULT NULL COMMENT '菜单ID',
   `is_half_key` tinyint DEFAULT NULL COMMENT '是否halfKey',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1703 DEFAULT CHARSET=utf8mb3 COMMENT='角色菜单权限';
+) ENGINE=InnoDB AUTO_INCREMENT=1718 DEFAULT CHARSET=utf8mb3 COMMENT='角色菜单权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -469,7 +470,7 @@ CREATE TABLE `sys_role_menu` (
 
 LOCK TABLES `sys_role_menu` WRITE;
 /*!40000 ALTER TABLE `sys_role_menu` DISABLE KEYS */;
-INSERT INTO `sys_role_menu` VALUES (1685,NULL,NULL,NULL,NULL,1,51,NULL),(1686,NULL,NULL,NULL,NULL,1,123,NULL),(1687,NULL,NULL,NULL,NULL,1,124,NULL),(1688,NULL,NULL,NULL,NULL,1,125,NULL),(1689,NULL,NULL,NULL,NULL,1,127,NULL),(1690,NULL,NULL,NULL,NULL,1,128,NULL),(1691,NULL,NULL,NULL,NULL,1,129,NULL),(1692,NULL,NULL,NULL,NULL,1,188,NULL),(1693,NULL,NULL,NULL,NULL,1,135,NULL),(1694,NULL,NULL,NULL,NULL,1,136,NULL),(1695,NULL,NULL,NULL,NULL,1,163,NULL),(1696,NULL,NULL,NULL,NULL,1,164,NULL),(1697,NULL,NULL,NULL,NULL,1,159,NULL),(1698,NULL,NULL,NULL,NULL,1,160,NULL),(1699,NULL,NULL,NULL,NULL,1,162,NULL),(1700,NULL,NULL,NULL,NULL,1,161,NULL),(1701,NULL,NULL,NULL,NULL,2,135,NULL),(1702,NULL,NULL,NULL,NULL,2,51,NULL);
+INSERT INTO `sys_role_menu` VALUES (1701,NULL,NULL,NULL,NULL,2,135,NULL),(1702,NULL,NULL,NULL,NULL,2,51,NULL),(1703,NULL,NULL,NULL,NULL,1,123,NULL),(1704,NULL,NULL,NULL,NULL,1,124,NULL),(1705,NULL,NULL,NULL,NULL,1,125,NULL),(1706,NULL,NULL,NULL,NULL,1,127,NULL),(1707,NULL,NULL,NULL,NULL,1,129,NULL),(1708,NULL,NULL,NULL,NULL,1,188,NULL),(1709,NULL,NULL,NULL,NULL,1,135,NULL),(1710,NULL,NULL,NULL,NULL,1,136,NULL),(1711,NULL,NULL,NULL,NULL,1,163,NULL),(1712,NULL,NULL,NULL,NULL,1,164,NULL),(1713,NULL,NULL,NULL,NULL,1,159,NULL),(1714,NULL,NULL,NULL,NULL,1,160,NULL),(1715,NULL,NULL,NULL,NULL,1,162,NULL),(1716,NULL,NULL,NULL,NULL,1,161,NULL),(1717,NULL,NULL,NULL,NULL,1,51,NULL);
 /*!40000 ALTER TABLE `sys_role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,13 +484,13 @@ DROP TABLE IF EXISTS `sys_role_operation`;
 CREATE TABLE `sys_role_operation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `role_id` int DEFAULT NULL COMMENT '角色ID',
   `operation_id` int DEFAULT NULL COMMENT '操作ID[即菜单表中的id]',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb3 COMMENT='角色操作权限';
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb3 COMMENT='角色操作权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -498,7 +499,7 @@ CREATE TABLE `sys_role_operation` (
 
 LOCK TABLES `sys_role_operation` WRITE;
 /*!40000 ALTER TABLE `sys_role_operation` DISABLE KEYS */;
-INSERT INTO `sys_role_operation` VALUES (70,NULL,NULL,NULL,NULL,1,51),(71,NULL,NULL,NULL,NULL,1,123),(72,NULL,NULL,NULL,NULL,1,179),(73,NULL,NULL,NULL,NULL,1,180),(74,NULL,NULL,NULL,NULL,1,181),(75,NULL,NULL,NULL,NULL,1,182),(76,NULL,NULL,NULL,NULL,1,124),(77,NULL,NULL,NULL,NULL,1,183),(78,NULL,NULL,NULL,NULL,1,125),(79,NULL,NULL,NULL,NULL,1,187),(80,NULL,NULL,NULL,NULL,1,127),(81,NULL,NULL,NULL,NULL,1,134),(82,NULL,NULL,NULL,NULL,1,137);
+INSERT INTO `sys_role_operation` VALUES (83,NULL,NULL,NULL,NULL,2,123),(84,NULL,NULL,NULL,NULL,2,179),(85,NULL,NULL,NULL,NULL,2,180),(86,NULL,NULL,NULL,NULL,2,181),(87,NULL,NULL,NULL,NULL,2,182),(88,NULL,NULL,NULL,NULL,2,124),(89,NULL,NULL,NULL,NULL,2,183),(90,NULL,NULL,NULL,NULL,2,188),(91,NULL,NULL,NULL,NULL,2,189),(92,NULL,NULL,NULL,NULL,2,190),(93,NULL,NULL,NULL,NULL,2,51),(108,NULL,NULL,NULL,NULL,1,123),(109,NULL,NULL,NULL,NULL,1,179),(110,NULL,NULL,NULL,NULL,1,180),(111,NULL,NULL,NULL,NULL,1,181),(112,NULL,NULL,NULL,NULL,1,182),(113,NULL,NULL,NULL,NULL,1,217),(114,NULL,NULL,NULL,NULL,1,124),(115,NULL,NULL,NULL,NULL,1,183),(116,NULL,NULL,NULL,NULL,1,125),(117,NULL,NULL,NULL,NULL,1,187),(118,NULL,NULL,NULL,NULL,1,127),(119,NULL,NULL,NULL,NULL,1,134),(120,NULL,NULL,NULL,NULL,1,137),(121,NULL,NULL,NULL,NULL,1,51);
 /*!40000 ALTER TABLE `sys_role_operation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,9 +513,9 @@ DROP TABLE IF EXISTS `sys_role_resource`;
 CREATE TABLE `sys_role_resource` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
+  `create_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `update_user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '修改人',
+  `update_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '修改人',
   `role_id` int DEFAULT NULL COMMENT '角色ID',
   `resource_id` int DEFAULT NULL COMMENT '接口ID[即资源表中的id]',
   PRIMARY KEY (`id`)
@@ -543,17 +544,17 @@ CREATE TABLE `sys_user` (
   `create_user` int DEFAULT NULL COMMENT '创建人',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `update_user` int DEFAULT NULL COMMENT '修改人',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '姓名',
-  `gender` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '性别',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '姓名',
+  `gender` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '性别',
   `id_number` varchar(100) DEFAULT NULL COMMENT '身份证号',
-  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '座机',
-  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '手机',
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '住址',
-  `company` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '公司',
+  `tel` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '座机',
+  `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '手机',
+  `address` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '住址',
+  `company` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '公司',
   `deleted` tinyint DEFAULT NULL COMMENT '是否删除',
-  `status` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态',
+  `status` char(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=COMPACT COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -562,13 +563,9 @@ CREATE TABLE `sys_user` (
 
 LOCK TABLES `sys_user` WRITE;
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-INSERT INTO `sys_user` VALUES (29,'2022-05-25 10:22:36',NULL,'2022-11-15 06:54:03',NULL,'张三',NULL,'333333333333333334',NULL,'112312312','珠峰科技集团1','珠峰科技集团',0,'0'),(38,'2022-07-14 00:35:57',NULL,'2022-11-15 06:54:03',NULL,'赵六',NULL,'888888888888888888',NULL,NULL,'','睦团工作室',0,'0');
+INSERT INTO `sys_user` VALUES (29,'2022-05-25 10:22:36',NULL,'2022-11-18 03:18:44',NULL,'张三',NULL,'333333333333333334',NULL,'112312312','珠峰科技集团1','珠峰科技集团',0,'1'),(38,'2022-07-14 00:35:57',NULL,'2022-11-18 03:18:44',NULL,'赵六',NULL,'888888888888888888',NULL,NULL,'','睦团工作室',0,'0'),(49,'2022-11-18 13:48:06',NULL,'2022-11-24 10:08:06',NULL,'李四',NULL,'321488198812235777',NULL,'111','',NULL,NULL,'1'),(58,'2022-11-25 09:47:31',NULL,'2022-11-25 09:47:31',NULL,'aaa',NULL,'123123123123123',NULL,'','',NULL,NULL,'1'),(60,'2022-11-25 09:48:13',NULL,'2022-11-25 09:48:13',NULL,'xxc',NULL,'122211231123123',NULL,'','',NULL,NULL,'1'),(64,'2022-11-29 06:32:29',NULL,'2022-11-29 06:32:29',NULL,'1232',NULL,'123123123123122',NULL,'','',NULL,NULL,'0');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'cdp'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -579,4 +576,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-16 11:41:51
+-- Dump completed on 2023-01-08 10:47:10
