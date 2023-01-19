@@ -13,6 +13,7 @@ public class MenuParam {
     private String sort;
     private String type;
     private String permission;
+    private Boolean affix;
     private Boolean enabled;
     private Boolean isHidden;
     private String status;

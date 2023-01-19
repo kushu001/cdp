@@ -13,6 +13,7 @@ public class MenuDTO extends BaseDTO {
     private String url;
     private String icon;
     private String permission;
+    private Boolean affix;
     private Boolean hasLeaf;
     private String sort;
     private String type;
