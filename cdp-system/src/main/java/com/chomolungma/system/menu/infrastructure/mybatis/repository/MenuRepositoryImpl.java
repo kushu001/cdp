@@ -83,7 +83,10 @@ public class MenuRepositoryImpl implements IMenuRepository {
     @Transactional
     public void remove(Long id) {
         MenuDO menu = menuMapper.selectById(id);
-        // 先删除当前菜单节点
+
+        // 先删除角色关联菜单的记录
+        menuMapper.deleteRoleMenuRelByMenuId(id);
+        // 删除当前菜单节点
         menuMapper.deleteMenus(id);
         // 查询当前菜单节点的父节点是否还有子节点
         List<MenuDO> menuDOS = menuMapper.selectList(new QueryWrapper<MenuDO>().eq("pid", menu.getPid()));
@@ -96,8 +99,6 @@ public class MenuRepositoryImpl implements IMenuRepository {
             }
         }
 
-        // 删除角色关联菜单的记录
-        menuMapper.deleteRoleMenuRelByMenuId(id);
     }
 
     private void fuc(Map<Long, MenuDO> result, Map<Long, MenuDO> allMap, MenuDO menuDO){

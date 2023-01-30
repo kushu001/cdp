@@ -26,6 +26,11 @@
     </delete>
 
     <delete id="deleteRoleMenuRelByMenuId" parameterType="java.lang.Long">
-        delete from sys_role_menu where menu_id = #{menuId, jdbcType=BIGINT}
+        delete from sys_role_menu where menu_id in (select id from (
+            select t1.id,
+                if(find_in_set(pid, @pids) > 0, @pids := concat(@pids, ',', id), 0) as ischild
+            from ( select id,pid from sys_menu t  order by pid, id ) t1,
+            (select @pids := #{id,jdbcType=BIGINT} ) t2
+        ) t3 where ischild != 0 or id = #{id,jdbcType=BIGINT})
     </delete>
 </mapper>
