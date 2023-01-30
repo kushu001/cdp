@@ -15,6 +15,10 @@ public final class MenuAssembler {
     }
 
     public static MenuEntity convertParamToEntity(MenuParam menuParam){
-        return MenuEntityMapStruct.INSTANCE.toMenuEntity(menuParam);
+        MenuEntity menuEntity = MenuEntityMapStruct.INSTANCE.toMenuEntity(menuParam);
+        if (menuParam.getType().equals("0")){
+            menuEntity.setName(menuParam.getUrl().substring(1).replaceAll("/","-"));
+        }
+        return menuEntity;
     }
 }
