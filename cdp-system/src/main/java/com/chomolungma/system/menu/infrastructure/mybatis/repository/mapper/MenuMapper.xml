@@ -11,7 +11,8 @@
             </foreach>
             and sm.type = 0
         </where>
-        group by srm.menu_id order by sm.sort
+        group by sm.id, sm.create_time, sm.create_user, sm.update_time, sm.update_user, sm.code, sm.p_code, sm.affix, sm.enabled, sm.enabled, sm.has_leaf, sm.icon, sm.is_hidden, sm.name, sm.permission, sm.pid, sm.sort, sm.status, sm.title, sm.type, sm.url
+        order by sm.sort
     </select>
 
     <delete id="deleteMenus" parameterType="java.lang.Long">

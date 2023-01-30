@@ -47,7 +47,17 @@
                 and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
             </if>
         </where>
-        group by sa.id
+        group by
+            sa.id,
+            sa.create_time ,
+            sa.create_user ,
+            sa.update_time ,
+            sa.update_user ,
+            sa.username ,
+            su.name ,
+            sa.nickname ,
+            sa.avatar ,
+            sa.status
     </select>
 
     <!-- 根据条件查询账户信息 -->
@@ -87,7 +97,18 @@
                 and sa.enabled = #{accountUserRole.enabled,jdbcType=TINYINT}
             </if>
         </where>
-        group by sa.id
+        group by
+            sa.id,
+            sa.create_time ,
+            sa.create_user ,
+            sa.update_time ,
+            sa.update_user ,
+            sa.username ,
+            sa.enabled,
+            su.name ,
+            sa.nickname ,
+            sa.avatar ,
+            sa.status
     </select>
 
 
