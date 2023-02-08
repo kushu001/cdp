@@ -16,5 +16,6 @@ public class MenuParam {
     private Boolean affix;
     private Boolean enabled;
     private Boolean isHidden;
+    private Boolean isHome;
     private String status;
 }

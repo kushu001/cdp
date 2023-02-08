@@ -20,5 +20,6 @@ public class MenuDO extends BaseDO {
     private String type;
     private Boolean enabled;
     private Boolean isHidden;
+    private Boolean isHome;
     private Integer sort;
 }
