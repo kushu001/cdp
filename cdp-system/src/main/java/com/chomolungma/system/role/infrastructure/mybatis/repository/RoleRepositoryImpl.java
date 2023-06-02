@@ -75,7 +75,7 @@ public class RoleRepositoryImpl implements IRoleRepository {
     public PageInfo<RoleDTO> find(int current, int size, RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
         PageHelper.startPage(current,size);
-        List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<RoleDO>().like(roleDO.getName() != null,"name", roleDO.getName()).like(roleDO.getCode() != null, "code", roleDO.getCode()).eq(roleDO.getStatus() != null, "status", roleDO.getStatus()));
+        List<RoleDO> roleDOS = roleMapper.selectList(new QueryWrapper<RoleDO>().like(roleDO.getName() != null,"name", roleDO.getName()).like(roleDO.getCode() != null, "code", roleDO.getCode()).eq(roleDO.getEnabled() != null, "enabled", roleDO.getEnabled()));
         List<RoleEntity> roleEntities = RoleConverter.INSTANCE.toEntity(roleDOS);
         return new PageInfo<>(RoleAssembler.toDTO(roleEntities));
     }

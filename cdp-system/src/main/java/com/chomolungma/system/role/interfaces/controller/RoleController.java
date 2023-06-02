@@ -32,11 +32,11 @@ public class RoleController {
     public Result pageList(PageDTO pageDTO,
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String code,
-                           @RequestParam(required = false) Integer status){
+                           @RequestParam(required = false) Boolean enabled){
         InRoleSearchDTO inRoleSearchDTO = new InRoleSearchDTO();
         inRoleSearchDTO.setName(name);
         inRoleSearchDTO.setCode(code);
-        inRoleSearchDTO.setStatus(status);
+        inRoleSearchDTO.setEnabled(enabled);
         RoleEntity role = RoleAssembler.toEntity(inRoleSearchDTO);
         return Result.success(RoleAssembler.toDTO(iRoleRepository.find(pageDTO.getPage(), pageDTO.getLimit(), role)));
     }
