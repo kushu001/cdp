@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.operation.infrastructure.mybatis.repository.mapper.OperationMapper">
+    <select id="selectLists" parameterType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO" resultType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO">
+        select * from sys_operation
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like concat('%', #{name, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="code != null and code != ''">
+                and `code` like concat('%', #{code, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="path != null and path != ''">
+                and `path` like concat('%', #{path, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="group != null and group != ''">
+                and `group` like concat('%', #{group, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="level != null and level != ''">
+                and `level` like concat('%', #{level, jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!--根据ID查询-->
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO">
+        select * from sys_operation where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!--批量删除-->
+    <select id="deleteBatchIds" parameterType="java.util.List" resultType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO">
+        delete from sys_operation
+        <where>
+            id in
+            <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                #{item, jdbcType=NUMERIC}
+            </foreach>
+        </where>
+    </select>
+
+    <!--  新增记录  -->
+    <insert id="insert" parameterType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO">
+        insert into sys_operation
+        (
+           `name`,
+           `code`,
+           `path`,
+           `group`,
+           `level`
+        ) values (
+           #{name, jdbcType=VARCHAR},
+           #{code, jdbcType=VARCHAR},
+           #{path, jdbcType=VARCHAR},
+           #{group, jdbcType=VARCHAR},
+           #{level, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--  更新记录  -->
+    <insert id="updateById" parameterType="com.chomolungma.system.operation.infrastructure.dataobject.OperationDO">
+        update sys_operation
+        <set>
+           `name` = #{name, jdbcType=VARCHAR},
+           `code` = #{code, jdbcType=VARCHAR},
+           `path` = #{path, jdbcType=VARCHAR},
+           `group` = #{group, jdbcType=VARCHAR},
+           `level` = #{level, jdbcType=VARCHAR}
+        </set>
+        <where>
+            id = #{id, jdbcType=NUMERIC}
+        </where>
+    </insert>
+</mapper>
