@@ -1,5 +1,6 @@
 package com.chomolungma.system.dict.infrastructure.mybatis.repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chomolungma.system.dict.infrastructure.converter.DictItemConverter;
 import com.chomolungma.system.dict.infrastructure.dataobject.DictItemDO;
@@ -27,7 +28,11 @@ public class DictItemRepositoryImpl implements IDictItemRepository {
     @Override
     public DictItemPageDTO find(int current, int size,Long dictId, String name, String code) {
         PageHelper.startPage(current, size);
-        List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).like(!StringUtils.isEmpty(name), "name", name).or().like(!StringUtils.isEmpty(code), "code", code));
+        List<DictItemDO> dictItemDOS = dictItemMapper.selectList(new QueryWrapper<DictItemDO>().eq("dict_id", dictId).and(!StringUtils.isEmpty(name),wrapper -> {
+            wrapper.like( "name", name);
+        }).and(!StringUtils.isEmpty(code), wrapper -> {
+            wrapper.like("code", code);
+        }));
         PageInfo<DictItemDO> pageInfo = new PageInfo<>(dictItemDOS);
         return DictItemAssembler.toDTO(pageInfo);
     }
