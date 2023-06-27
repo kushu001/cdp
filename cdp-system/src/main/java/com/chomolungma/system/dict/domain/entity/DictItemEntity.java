@@ -10,4 +10,5 @@ public class DictItemEntity extends BaseEntity {
     private String name;
     private String value;
     private Integer sort;
+    private Boolean enabled;
 }

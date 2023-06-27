@@ -13,4 +13,5 @@ public class DictItemParam extends PageDTO {
     private String desc;
     private Integer sort;
     private Integer status;
+    private Boolean enabled;
 }

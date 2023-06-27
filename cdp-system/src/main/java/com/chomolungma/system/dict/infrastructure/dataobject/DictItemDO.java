@@ -12,4 +12,5 @@ public class DictItemDO extends BaseDO {
     private String value;
     private String code;
     private Integer sort;
+    private Boolean enabled;
 }

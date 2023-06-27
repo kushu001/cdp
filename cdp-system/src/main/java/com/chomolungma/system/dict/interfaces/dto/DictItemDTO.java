@@ -10,4 +10,5 @@ public class DictItemDTO extends BaseDTO {
     private String name;
     private String value;
     private String sort;
+    private Boolean enabled;
 }
