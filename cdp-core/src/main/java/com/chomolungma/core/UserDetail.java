@@ -44,7 +44,7 @@ public class UserDetail implements UserDetails {
         if(authorities!=null){
             return authorities;
         }
-        //把permissions中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中
+        //把resources中字符串类型的权限信息转换成GrantedAuthority对象存入authorities中
         authorities = resources.stream().
                 map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
