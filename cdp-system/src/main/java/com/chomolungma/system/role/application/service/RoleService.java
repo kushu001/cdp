@@ -15,6 +15,8 @@ public interface RoleService {
 
     void authorizedOperations(Long roleId, List<Long> permissions);
 
+    void authorizedResources(Long roleId, List<Long> permissions);
+
     List<RolePermissionDTO> menus(Long roleId);
 
     List<RolePermissionDTO> operations(Long roleId);

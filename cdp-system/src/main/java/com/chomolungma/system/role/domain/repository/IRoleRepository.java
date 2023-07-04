@@ -12,6 +12,8 @@ public interface IRoleRepository {
 
      void saveOperations(Long roleId, List<Long> permissions);
 
+     void saveResources(Long roleId, List<Long> permissions);
+
      void save(RoleEntity role);
 
      List<RolePermissionDTO> findMenus(Long roleId);

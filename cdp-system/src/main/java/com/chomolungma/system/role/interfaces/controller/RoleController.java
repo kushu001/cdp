@@ -83,6 +83,12 @@ public class RoleController {
         return Result.success();
     }
 
+    @PostMapping("/{roleId}/authorizedResources")
+    public Result authorizedResources(@PathVariable("roleId") Long roleId, @RequestBody InPermissionDTO inPermissionDTO){
+        roleService.authorizedResources(roleId, inPermissionDTO.getPermissions());
+        return Result.success();
+    }
+
     @GetMapping("/{roleId}/menus")
     public Result menus(@PathVariable("roleId") Long roleId){
         return Result.success(roleService.menus(roleId));

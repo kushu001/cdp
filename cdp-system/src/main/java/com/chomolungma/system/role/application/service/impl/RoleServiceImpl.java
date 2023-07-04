@@ -39,6 +39,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public void authorizedResources(Long roleId, List<Long> permissions) {
+        iRoleRepository.saveResources(roleId, permissions);
+    }
+
+    @Override
     public List<RolePermissionDTO> menus(Long roleId) {
         return iRoleRepository.findMenus(roleId);
     }

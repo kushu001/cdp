@@ -12,8 +12,10 @@ import java.util.List;
 public interface RoleMapper extends BaseMapper<RoleDO> {
     void insertRoleMenusPermission(@Param("rolePermissionDO") RolePermissionDO rolePermissionDO);
     void insertRoleOperationsPermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
+    void insertRoleResourcesPermission(@Param("rolePermissionDO")RolePermissionDO rolePermissionDO);
     void deleteMenusPermissionByRoleId(Long roleId);
     void deleteOperationsPermissionByRoleId(Long roleId);
+    void deleteResourcesPermissionByRoleId(Long roleId);
     List<RolePermissionDTO> selectMenusByRoleId(Long roleId);
     void deletePermissionByBatchRoleIds(List<Long> ids);
     void deleteAccountRoleByBatchRoleIds(List<Long> ids);

@@ -45,6 +45,18 @@ public class RoleRepositoryImpl implements IRoleRepository {
             roleMapper.insertRoleOperationsPermission(permissionDO);
         }
     }
+
+    @Override
+    public void saveResources(Long roleId, List<Long> permissions) {
+        roleMapper.deleteResourcesPermissionByRoleId(roleId);
+        RolePermissionDO permissionDO = new RolePermissionDO();
+        permissionDO.setRoleId(roleId);
+        permissionDO.setPermissions(permissions);
+        if (permissions.size() > 0) {
+            roleMapper.insertRoleResourcesPermission(permissionDO);
+        }
+    }
+
     @Override
     public void save(RoleEntity role) {
         RoleDO roleDO = RoleConverter.INSTANCE.toDO(role);
