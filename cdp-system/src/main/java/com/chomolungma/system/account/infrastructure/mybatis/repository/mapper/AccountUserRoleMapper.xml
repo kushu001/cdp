@@ -76,7 +76,46 @@
         sa.avatar ,
         sa.status
         from
-        sys_account sa left join sys_user su on sa.user_id = su.id
+        (select
+        sac.id ,
+        sac.user_id,
+        sac.create_time ,
+        sac.create_user ,
+        sac.update_time ,
+        sac.update_user ,
+        sac.username ,
+        sac.enabled,
+        sac.nickname ,
+        sac.avatar ,
+        sac.status,
+        sac.deleted
+        from
+        sys_account sac
+        left join sys_account_role sar2 on
+        sac.id = sar2.account_id
+        left join sys_role sr2 on
+        sar2.role_id = sr2.id
+        where
+        sac.deleted = 0
+        <if test="accountUserRole.roleIds !=null">
+            and sr2.id in
+            <foreach item="item" collection="accountUserRole.roleIds" separator="," open="(" close=")" index="">
+                #{item, jdbcType=BIGINT}
+            </foreach>
+        </if>
+        group by
+        sac.id ,
+        sac.user_id,
+        sac.create_time ,
+        sac.create_user ,
+        sac.update_time ,
+        sac.update_user ,
+        sac.username ,
+        sac.enabled,
+        sac.nickname ,
+        sac.avatar ,
+        sac.status,
+        sac.deleted ) sa left join sys_user su on sa.user_id = su.id
         left join sys_account_role sar on sa.id = sar.account_id
         left join sys_role sr on sar.role_id = sr.id
         <where>

@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AccountRepositoryImpl implements IAccountRepository {
@@ -54,6 +55,10 @@ public class AccountRepositoryImpl implements IAccountRepository {
     @Override
     public AccountPageDTO findPageList(Account account, int current, int size) {
         AccountUserRoleDO accountUserRoleDO = AccountUserConverter.INSTANCE.toDO(account);
+        if (account.getRoles() != null){
+            List<Long> roleIds = account.getRoles().stream().map(Role::getId).collect(Collectors.toList());
+            accountUserRoleDO.setRoleIds(roleIds);
+        }
         PageHelper.startPage(current, size);
         List<AccountUserRoleDO> accountUsers = accountUserRoleMapper.selectList(accountUserRoleDO);
         PageInfo<AccountUserRoleDO> pageInfo = new PageInfo<>(accountUsers);

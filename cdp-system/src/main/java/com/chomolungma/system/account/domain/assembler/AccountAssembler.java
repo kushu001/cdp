@@ -37,7 +37,17 @@ public class AccountAssembler {
     }
 
     public static Account toEntity(AccountDTO accountDTO){
-        return AccountEntityMapStruct.INSTANCE.toEntity(accountDTO);
+        Account account = AccountEntityMapStruct.INSTANCE.toEntity(accountDTO);
+        List<Long> roleIds = accountDTO.getRoleIds();
+        if (roleIds != null){
+            List<Role> roles = roleIds.stream().map(item-> {
+                Role role = new Role();
+                role.setId(item);
+                return role;
+            }).collect(Collectors.toList());
+            account.setRoles(roles);
+        }
+        return account;
     }
 
     public static Account toEntity(AccountExcelDTO accountExcelDTO){

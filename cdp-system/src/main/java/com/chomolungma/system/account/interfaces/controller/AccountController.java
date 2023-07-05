@@ -60,12 +60,14 @@ public class AccountController {
                                   @RequestParam(required = false) String username,
                                   @RequestParam(required = false) String name,
                                   @RequestParam(required = false) String nickname,
+                                  @RequestParam(required = false, value = "role_ids") List<Long> roleIds,
                                   @RequestParam(required = false) Boolean enabled){
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setUsername(username);
         accountDTO.setName(name);
         accountDTO.setNickname(nickname);
         accountDTO.setEnabled(enabled);
+        accountDTO.setRoleIds(roleIds);
         return Result.success(iAccountRepository.findPageList(AccountAssembler.toEntity(accountDTO),pageDTO.getPage(), pageDTO.getLimit()));
     }
 
