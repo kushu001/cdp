@@ -8,7 +8,7 @@ import java.util.List;
 public interface IResourceRepository {
     void save(ResourceEntity resourceEntity);
 
-    ResourcePageDTO find(int current, int size, String name);
+    ResourcePageDTO find(int current, int size, String name, String sign, String url, String method);
 
     ResourceEntity find(Long id);
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chomolungma.system.resource.infrastructure.mybatis.repository.mapper.ResourceMapper">
+    <select id="selectList" resultType="com.chomolungma.system.resource.infrastructure.dataobject.ResourceDO">
+        select id, create_time, update_time, `name`, sign, url, `method`, status from sys_resource
+        <where>
+            <if test="name != null and name != ''">
+                `name` like concat('%', #{name, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="sign != null and sign != ''">
+                and sign like concat('%', #{sign, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="url != null and url != ''">
+                and url like concat('%', #{url, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="method != null and method != ''">
+                and `method` = #{method, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

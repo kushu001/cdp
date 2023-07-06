@@ -8,4 +8,5 @@ public class ResourceParam {
     private String name;
     private String sign;
     private String url;
+    private String method;
 }

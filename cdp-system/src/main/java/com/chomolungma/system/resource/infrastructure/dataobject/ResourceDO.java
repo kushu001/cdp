@@ -10,4 +10,5 @@ public class ResourceDO extends BaseDO {
     private String name;
     private String sign;
     private String url;
+    private String method;
 }

@@ -23,8 +23,13 @@ public class ResourceController {
         this.resourceService = resourceService;
     }
     @GetMapping
-    public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){
-        return Result.success(iResourceRepository.find(pageDTO.getPage(), pageDTO.getLimit(), name));
+    public Result pageList(PageDTO pageDTO,
+                           @RequestParam(required = false) String name,
+                           @RequestParam(required = false) String sign,
+                           @RequestParam(required = false) String url,
+                           @RequestParam(required = false) String method
+                           ){
+        return Result.success(iResourceRepository.find(pageDTO.getPage(), pageDTO.getLimit(), name, sign, url, method));
     }
 
     @GetMapping("/{id}")

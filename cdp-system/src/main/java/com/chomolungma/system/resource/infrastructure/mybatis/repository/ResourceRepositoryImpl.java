@@ -32,9 +32,14 @@ public class ResourceRepositoryImpl implements IResourceRepository {
     }
 
     @Override
-    public ResourcePageDTO find(int current, int size, String name) {
+    public ResourcePageDTO find(int current, int size, String name, String sign, String url, String method) {
         PageHelper.startPage(current, size);
-        List<ResourceDO> resourceDOS = resourceMapper.selectList(new QueryWrapper<ResourceDO>().like(name != null, "name", name));
+        ResourceDO resourceDO = new ResourceDO();
+        resourceDO.setName(name);
+        resourceDO.setSign(sign);
+        resourceDO.setUrl(url);
+        resourceDO.setMethod(method);
+        List<ResourceDO> resourceDOS = resourceMapper.selectList(resourceDO);
         PageInfo<ResourceDO> pageInfo = new PageInfo<>(resourceDOS);
         return ResourceConverter.INSTANCE.toDTO(pageInfo);
     }
