@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface OrgMapper extends BaseMapper<OrgDO> {
     List<OrgDO> selectVo(OrgDO orgDO);
+
+    OrgDO selectById(Long id);
 }
