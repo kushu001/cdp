@@ -29,4 +29,11 @@ public class LoginController {
         response.addHeader("Authorization","Bearer " + token);
         return Result.success();
     }
+
+
+    @PostMapping("/logout")
+    public Result logout(){
+        response.addHeader("Authorization",null);
+        return Result.success();
+    }
 }
