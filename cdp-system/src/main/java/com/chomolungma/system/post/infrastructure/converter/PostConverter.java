@@ -9,12 +9,16 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface PostConverter {
     PostConverter INSTANCE = Mappers.getMapper(PostConverter.class);
     PostDO toDO(PostEntity postEntity);
 
     PostEntity toEntity(PostDO postDO);
+
+    List<PostEntity> toEntity(List<PostDO> postDO);
     @Mappings({
             @Mapping(target = "records", source = "list"),
             @Mapping(target = "page", source = "pageNum")

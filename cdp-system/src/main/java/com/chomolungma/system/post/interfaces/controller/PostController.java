@@ -23,7 +23,10 @@ public class PostController {
     public Result pageList(PageDTO pageDTO, @RequestParam(required = false) String name, @RequestParam(required = false) String code){
         return Result.success(iPostRepository.find(pageDTO.getPage(), pageDTO.getLimit(), name, code));
     }
-
+    @GetMapping("/all")
+    public Result list(){
+        return Result.success(PostEntityMapStruct.INSTANCE.toDTO(iPostRepository.findAll()));
+    }
     @PostMapping
     public Result createPost(@RequestBody PostParam postParam){
         iPostRepository.save(PostEntityMapStruct.INSTANCE.toEntity(postParam));

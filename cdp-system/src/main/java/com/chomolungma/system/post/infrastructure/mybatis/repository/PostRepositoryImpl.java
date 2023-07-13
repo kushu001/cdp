@@ -42,6 +42,12 @@ public class PostRepositoryImpl implements IPostRepository {
     }
 
     @Override
+    public List<PostEntity> findAll() {
+        List<PostDO> postDOS = postMapper.selectList(new QueryWrapper<>());
+        return PostConverter.INSTANCE.toEntity(postDOS);
+    }
+
+    @Override
     public PostEntity find(Long id) {
         return PostConverter.INSTANCE.toEntity(postMapper.selectById(id));
     }
