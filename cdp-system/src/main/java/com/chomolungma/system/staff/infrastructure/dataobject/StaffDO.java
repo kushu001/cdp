@@ -7,11 +7,14 @@ import lombok.Data;
 @TableName(value = "sys_user")
 @Data
 public class StaffDO extends BaseDO {
+    private String code;
     private String name;
     private String gender;
     private String tel;
     private String phone;
+    private String email;
     private String idNumber;
     private String address;
+    private String homeAddress;
     private String company;
 }

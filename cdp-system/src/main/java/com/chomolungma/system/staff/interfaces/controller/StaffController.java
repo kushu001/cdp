@@ -27,6 +27,7 @@ public class StaffController {
 
     @GetMapping
     public Result pageList(PageDTO pageDTO,
+                           @RequestParam(required = false) String code,
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "id_number", required = false) String idNumber,
                            @RequestParam(required = false) String phone,
