@@ -9,11 +9,11 @@ import com.chomolungma.system.staff.interfaces.dto.StaffFormDTO;
 import java.util.List;
 
 public interface StaffService {
-    PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit);
-    List<StaffDTO> getStaffs(String code, String name, String idNumber, String phone, String tel, String address);
+    PageStaffDTO getStaffs(Long orgId, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit);
+    List<StaffDTO> getStaffs(Long orgId, String name, String idNumber, String phone, String tel, String address);
     StaffDTO getStaff(Long id);
     void createStaff(Long orgId, StaffFormDTO staffFormDTO);
-    void updateStaff(Staff user);
+    void updateStaff(StaffFormDTO staffFormDTO);
     void deleteStaffs(List<String> ids);
     List<MenuDTO> getMenus(List<Long> roleIds);
     void audit(Long userId);

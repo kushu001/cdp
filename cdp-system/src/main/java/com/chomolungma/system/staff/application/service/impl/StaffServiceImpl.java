@@ -3,8 +3,10 @@ package com.chomolungma.system.staff.application.service.impl;
 import com.chomolungma.system.menu.domain.repository.IMenuRepository;
 import com.chomolungma.system.menu.interfaces.assembler.MenuAssembler;
 import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
+import com.chomolungma.system.post.domain.repository.IPostRepository;
 import com.chomolungma.system.role.domain.repository.IRoleRepository;
 import com.chomolungma.system.staff.application.service.StaffService;
+import com.chomolungma.system.staff.domain.factory.StaffFactory;
 import com.chomolungma.system.staff.infrastructure.adapter.OrgAdapter;
 import com.chomolungma.system.staff.domain.entity.Org;
 import com.chomolungma.system.staff.domain.entity.Staff;
@@ -23,22 +25,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class StaffServiceImpl implements StaffService {
-    private final IRoleRepository iRoleRepository;
     private final IStaffRepository iStaffRepository;
     private final IStaffDomainService iStaffDomainService;
-    private final OrgAdapter orgAdapter;
     private final IMenuRepository iMenuRepository;
+    private final StaffFactory staffFactory;
 
-    public StaffServiceImpl(IStaffRepository iStaffRepository, IStaffDomainService iStaffDomainService, OrgAdapter orgAdapter, IRoleRepository iRoleRepository, IMenuRepository iMenuRepository) {
+    public StaffServiceImpl(IStaffRepository iStaffRepository, IStaffDomainService iStaffDomainService, IMenuRepository iMenuRepository, StaffFactory staffFactory) {
         this.iStaffRepository = iStaffRepository;
         this.iStaffDomainService = iStaffDomainService;
-        this.orgAdapter = orgAdapter;
-        this.iRoleRepository = iRoleRepository;
         this.iMenuRepository = iMenuRepository;
+        this.staffFactory = staffFactory;
     }
 
     @Override
-    public PageStaffDTO getStaffs(String code, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit) {
+    public PageStaffDTO getStaffs(Long orgId, String name, String idNumber, String phone, String tel, String address, Integer status, Integer page, Integer limit) {
         Staff staff = new Staff();
         staff.setName(name);
         staff.setIdNumber(idNumber);
@@ -47,7 +47,7 @@ public class StaffServiceImpl implements StaffService {
         staff.setAddress(address);
         staff.setStatus(status);
         PageHelper.startPage(page, limit);
-        List<StaffDTO> userOrgDOS = iStaffRepository.findStaffs(code, staff);
+        List<StaffDTO> userOrgDOS = iStaffRepository.findStaffs(orgId, staff);
         PageInfo<StaffDTO> pageInfo = new PageInfo<>(userOrgDOS);
         return StaffAssembler.toPageUserDTO(pageInfo);
     }
@@ -60,14 +60,13 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void createStaff(Long orgId, StaffFormDTO staffFormDTO) {
-        Staff staff = StaffAssembler.toEntity(staffFormDTO);
-        Org org = orgAdapter.adapter(orgId);
-        staff.setOrg(org);
+        Staff staff = staffFactory.createStaff(staffFormDTO);
         iStaffDomainService.addStaff(staff);
     }
 
     @Override
-    public void updateStaff(Staff staff) {
+    public void updateStaff(StaffFormDTO staffFormDTO) {
+        Staff staff = staffFactory.createStaff(staffFormDTO);
         iStaffDomainService.modifyStaff(staff);
     }
 
@@ -81,14 +80,14 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<StaffDTO> getStaffs(String code, String name, String idNumber, String phone, String tel, String address) {
+    public List<StaffDTO> getStaffs(Long orgId, String name, String idNumber, String phone, String tel, String address) {
         Staff staff = new Staff();
         staff.setName(name);
         staff.setIdNumber(idNumber);
         staff.setPhone(phone);
         staff.setTel(tel);
         staff.setAddress(address);
-        return iStaffRepository.findStaffs(code, staff);
+        return iStaffRepository.findStaffs(orgId, staff);
     }
 
     @Override

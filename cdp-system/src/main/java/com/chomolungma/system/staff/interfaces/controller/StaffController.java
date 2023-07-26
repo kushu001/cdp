@@ -27,7 +27,7 @@ public class StaffController {
 
     @GetMapping
     public Result pageList(PageDTO pageDTO,
-                           @RequestParam(required = false) String code,
+                           @RequestParam(required = false) Long orgId,
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "id_number", required = false) String idNumber,
                            @RequestParam(required = false) String phone,
@@ -36,15 +36,15 @@ public class StaffController {
         return Result.success(staffService.getStaffs(null, name, idNumber, phone, tel, address, 1, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
-    @GetMapping("/org/{code}")
-    public Result pageList(@PathVariable("code") String code, PageDTO pageDTO,
+    @GetMapping("/org/{orgId}")
+    public Result pageList(@PathVariable("orgId") Long orgId, PageDTO pageDTO,
                            @RequestParam(required = false) String name,
                            @RequestParam(value = "id_number", required = false) String idNumber,
                            @RequestParam(required = false) String phone,
                            @RequestParam(required = false) String tel,
                            @RequestParam(required = false) String address
     ){
-        return Result.success(staffService.getStaffs(code, name, idNumber, phone, tel, address, null, pageDTO.getPage(), pageDTO.getLimit()));
+        return Result.success(staffService.getStaffs(orgId, name, idNumber, phone, tel, address, null, pageDTO.getPage(), pageDTO.getLimit()));
     }
 
     @GetMapping("/{id}")
@@ -60,7 +60,7 @@ public class StaffController {
 
     @PutMapping
     public Result updateUser(@RequestBody StaffFormDTO staffFormDTO){
-        staffService.updateStaff(StaffAssembler.toEntity(staffFormDTO));
+        staffService.updateStaff(staffFormDTO);
         return Result.success();
     }
 
@@ -81,14 +81,14 @@ public class StaffController {
         System.out.println(file.getOriginalFilename());
     }
 
-    @GetMapping("/org/{code}/export")
-    public void exportExcel(@PathVariable("code") String code,
+    @GetMapping("/org/{orgId}/export")
+    public void exportExcel(@PathVariable("orgId") Long orgId,
                             @RequestParam(required = false) String name,
                             @RequestParam(value = "id_number", required = false) String idNumber,
                             @RequestParam(required = false) String phone,
                             @RequestParam(required = false) String tel,
                             @RequestParam(required = false) String address) throws IOException {
-        excelService.export(staffService.getStaffs(code, name, idNumber, phone, tel, address), StaffExcelDTO.class);
+        excelService.export(staffService.getStaffs(orgId, name, idNumber, phone, tel, address), StaffExcelDTO.class);
     }
 
 }

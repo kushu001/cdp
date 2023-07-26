@@ -4,43 +4,58 @@
 <!--  查询部门人员  -->
     <select id="selectStaffsByCondition" parameterType="com.chomolungma.system.staff.infrastructure.dataobject.StaffDO" resultType="com.chomolungma.system.staff.interfaces.dto.StaffDTO">
         select
-            su.*,
-            so.id as dept_id,
-            so.name as dept_name
+            t.*,
+            GROUP_CONCAT(sp.name SEPARATOR ',') as post_names
         from
-            sys_org so
-        left join sys_org_user sou on
-            so.id = sou.org_id
-        left join sys_user su on
-            sou.user_id = su.id
+        (
+            select
+                su.*,
+                GROUP_CONCAT(so.name SEPARATOR ',') as org_names
+            from
+                sys_user su
+            left join sys_org_user sou on
+                su.id = sou.user_id
+            left join sys_org so on
+                sou.org_id = so.id
+            where
+            su.id in (
+                select
+                    sou.user_id
+                from
+                    sys_org_user sou where sou.org_id = #{orgId, jdbcType=BIGINT}
+                )
+            group by
+                su.id
+        )t
+        left join sys_user_post sup on
+            t.id = sup.pk_user_id
+        left join sys_post sp on
+            sup.pk_post_id = sp.id
         <where>
-            sou.user_id is not null
-            <if test="code != null and code != ''">
-                and so.code like concat(#{code, jdbcType=VARCHAR}, '%')
-            </if>
             <if test="staffDO.name !=null and staffDO.name !=''">
-                and su.name like concat('%', #{staffDO.name, jdbcType=VARCHAR}, '%')
+                and t.name like concat('%', #{staffDO.name, jdbcType=VARCHAR}, '%')
             </if>
             <if test="staffDO.phone !=null and staffDO.phone !=''">
-                and su.phone like concat('%', #{staffDO.phone, jdbcType=VARCHAR}, '%')
+                and t.phone like concat('%', #{staffDO.phone, jdbcType=VARCHAR}, '%')
             </if>
             <if test="staffDO.tel !=null and staffDO.tel !=''">
-                and su.tel like concat('%', #{staffDO.tel, jdbcType=VARCHAR}, '%')
+                and t.tel like concat('%', #{staffDO.tel, jdbcType=VARCHAR}, '%')
             </if>
             <if test="staffDO.address !=null and staffDO.address !=''">
-                and su.address like concat('%', #{staffDO.address, jdbcType=VARCHAR}, '%')
+                and t.address like concat('%', #{staffDO.address, jdbcType=VARCHAR}, '%')
             </if>
             <if test="staffDO.gender !=null and staffDO.gender !=''">
-                and su.gender =  #{staffDO.gender, jdbcType=VARCHAR}
+                and t.gender =  #{staffDO.gender, jdbcType=VARCHAR}
             </if>
             <if test="staffDO.idNumber !=null and staffDO.idNumber !=''">
-                and su.id_number like concat('%', #{staffDO.idNumber, jdbcType=VARCHAR}, '%')
+                and t.id_number like concat('%', #{staffDO.idNumber, jdbcType=VARCHAR}, '%')
             </if>
             <if test="staffDO.status !=null and staffDO.status !=''">
-                and su.status = #{staffDO.status, jdbcType=BIGINT}
+                and t.status = #{staffDO.status, jdbcType=BIGINT}
             </if>
-
         </where>
+        GROUP BY
+            t.id
     </select>
 
     <select id="noDeleteCount" parameterType="list" resultType="Boolean">
@@ -52,6 +67,78 @@
                     #{item, jdbcType=BIGINT}
                 </foreach>
             </where>
-
     </select>
+
+    <!-- 查询员工的职位信息 -->
+    <select id="selectPostWithStaff" parameterType="list" resultType="com.chomolungma.system.staff.infrastructure.dataobject.PostWithStaffDO">
+        select id, name, code from sys_post
+        <where>
+            id in
+            <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                #{item, jdbcType=BIGINT}
+            </foreach>
+        </where>
+    </select>
+    <!-- 查询员工的部门信息 -->
+    <select id="selectOrgWithStaff" parameterType="list" resultType="com.chomolungma.system.staff.infrastructure.dataobject.OrgWithStaffDO">
+        select id, name, code from sys_org
+        <where>
+            id in
+            <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+                #{item, jdbcType=BIGINT}
+            </foreach>
+        </where>
+    </select>
+
+    <!-- 根据员工ID查询员工的部门信息 -->
+    <select id="selectOrgByStaffId" resultType="com.chomolungma.system.staff.infrastructure.dataobject.OrgWithStaffDO">
+        select
+            so.id,
+            so.code,
+            so.name
+        from
+            sys_org_user sou,
+            sys_org so
+        where
+            sou.org_id = so.id
+          and sou.user_id = #{userId, jdbcType=BIGINT}
+    </select>
+
+
+    <!-- 根据员工ID查询员工的职位信息 -->
+    <select id="selectPostByStaffId" resultType="com.chomolungma.system.staff.infrastructure.dataobject.PostWithStaffDO">
+        select
+            sp.id,
+            sp.code,
+            sp.name
+        from
+            sys_user_post sup,
+            sys_post sp
+        where
+            sup.pk_post_id = sp.id
+          and sup.pk_user_id = #{userId, jdbcType=BIGINT}
+    </select>
+
+    <!-- 新增人员与职位关系 -->
+    <insert id="saveStaffAndPosts">
+        insert into sys_user_post (pk_user_id, pk_post_id) values
+        <foreach collection="posts" index="index" item="item"  separator=",">
+            (#{pkUserId,jdbcType=BIGINT}, #{item.id,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+    <!-- 新增人员与部门关系 -->
+    <insert id="saveStaffAndOrgs">
+        insert into sys_org_user (user_id, org_id) values
+        <foreach collection="orgs" index="index" item="item"  separator=",">
+            (#{pkUserId,jdbcType=BIGINT}, #{item.id,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+    <!--删除人员职位关系-->
+    <delete id="deleteStaffAndPosts">
+        delete from sys_user_post where pk_user_id = #{pkUserId, jdbcType=BIGINT}
+    </delete>
+    <!--删除人员部门关系-->
+    <delete id="deleteStaffAndOrgs">
+        delete from sys_org_user where user_id = #{pkUserId, jdbcType=BIGINT}
+    </delete>
 </mapper>

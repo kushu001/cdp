@@ -2,6 +2,8 @@ package com.chomolungma.system.staff.interfaces.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class StaffFormDTO {
     private Long id;
@@ -15,4 +17,6 @@ public class StaffFormDTO {
     private String address;
     private String homeAddress;
     private String company;
+    private List<Long> postIds;
+    private List<Long> orgIds;
 }

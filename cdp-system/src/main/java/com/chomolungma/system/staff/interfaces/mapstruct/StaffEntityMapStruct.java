@@ -24,10 +24,6 @@ public interface StaffEntityMapStruct {
     PageStaffDTO toPageUserDTO(PageInfo<StaffDTO> pageUsers);
     Staff toEntity(StaffFormDTO staffFormDTO);
     Staff toEntity(StaffSearchDTO staffSearchDTO);
-    @Mappings({
-            @Mapping(target = "deptId", source = "org.id"),
-            @Mapping(target = "deptName", source = "org.name")
-    })
     StaffDTO toDTO(Staff staff);
 
 }

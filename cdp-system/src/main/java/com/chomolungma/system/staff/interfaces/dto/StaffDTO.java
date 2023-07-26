@@ -3,6 +3,8 @@ package com.chomolungma.system.staff.interfaces.dto;
 import com.chomolungma.core.dto.BaseDTO;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class StaffDTO extends BaseDTO {
     private String code;
@@ -15,6 +17,8 @@ public class StaffDTO extends BaseDTO {
     private String address;
     private String homeAddress;
     private String company;
-    private Long deptId;
-    private String deptName;
+    private List<Long> orgIds;
+    private String orgNames;
+    private List<Long> postIds;
+    private String postNames;
 }
