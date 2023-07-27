@@ -22,7 +22,12 @@
                 select
                     sou.user_id
                 from
-                    sys_org_user sou where sou.org_id = #{orgId, jdbcType=BIGINT}
+                    sys_org_user sou
+                    <where>
+                        <if test="orgId != null and orgId != ''">
+                            sou.org_id = #{orgId, jdbcType=BIGINT}
+                        </if>
+                    </where>
                 )
             group by
                 su.id
