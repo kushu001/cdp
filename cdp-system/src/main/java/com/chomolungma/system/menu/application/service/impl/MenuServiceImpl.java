@@ -7,6 +7,7 @@ import com.chomolungma.system.menu.interfaces.dto.MenuDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -34,7 +35,8 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDTO> permissions(String type) {
-        return iMenuRepository.find(type);
+        List<MenuDTO> menuDTOS = iMenuRepository.find(type);
+        return menuDTOS.stream().peek(item -> item.setDisabled(item.getIsHome())).collect(Collectors.toList());
     }
 
 

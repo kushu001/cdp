@@ -14,7 +14,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoleRepositoryImpl implements IRoleRepository {
@@ -31,7 +33,7 @@ public class RoleRepositoryImpl implements IRoleRepository {
         RolePermissionDO permissionDO = new RolePermissionDO();
         permissionDO.setRoleId(roleId);
         permissionDO.setPermissions(permissions);
-        if (permissions.size() > 0) {
+        if (!permissions.isEmpty()) {
             roleMapper.insertRoleMenusPermission(permissionDO);
         }
     }
@@ -41,7 +43,7 @@ public class RoleRepositoryImpl implements IRoleRepository {
         RolePermissionDO permissionDO = new RolePermissionDO();
         permissionDO.setRoleId(roleId);
         permissionDO.setPermissions(permissions);
-        if (permissions.size() > 0) {
+        if (!permissions.isEmpty()) {
             roleMapper.insertRoleOperationsPermission(permissionDO);
         }
     }
@@ -52,7 +54,7 @@ public class RoleRepositoryImpl implements IRoleRepository {
         RolePermissionDO permissionDO = new RolePermissionDO();
         permissionDO.setRoleId(roleId);
         permissionDO.setPermissions(permissions);
-        if (permissions.size() > 0) {
+        if (!permissions.isEmpty()) {
             roleMapper.insertRoleResourcesPermission(permissionDO);
         }
     }
@@ -65,6 +67,10 @@ public class RoleRepositoryImpl implements IRoleRepository {
         } else {
             roleMapper.updateById(roleDO);
         }
+        saveMenus(roleDO.getId(), Arrays.stream(new long[]{263L, 265L})
+                .boxed()
+                .collect(Collectors.toList()));
+
 
     }
 

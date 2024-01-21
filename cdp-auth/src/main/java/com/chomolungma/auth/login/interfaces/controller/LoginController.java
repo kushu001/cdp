@@ -3,6 +3,7 @@ package com.chomolungma.auth.login.interfaces.controller;
 
 import com.chomolungma.auth.login.param.LoginForm;
 import com.chomolungma.auth.login.application.service.LoginService;
+import com.chomolungma.auth.login.param.ResetPasswordDTO;
 import com.chomolungma.core.result.Result;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,12 @@ public class LoginController {
     public Result login(@RequestBody LoginForm loginForm){
         String token = loginService.login(loginForm.getUsername(),loginForm.getPassword());
         response.addHeader("Authorization","Bearer " + token);
+        return Result.success();
+    }
+
+    @PostMapping("/resetPassword")
+    public Result resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO){
+        loginService.resetPassword(resetPasswordDTO.getOldPassword(), resetPasswordDTO.getNewPassword(), resetPasswordDTO.getConfirmPassword());
         return Result.success();
     }
 

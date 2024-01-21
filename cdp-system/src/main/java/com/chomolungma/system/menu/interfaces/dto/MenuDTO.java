@@ -20,4 +20,5 @@ public class MenuDTO extends BaseDTO {
     private Boolean enabled;
     private Boolean isHidden;
     private Boolean isHome;
+    private Boolean disabled;
 }

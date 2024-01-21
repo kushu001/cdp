@@ -56,7 +56,7 @@ public class AccountController {
     }
 
     @GetMapping
-        public Result getPageList(PageDTO pageDTO,
+    public Result getPageList(PageDTO pageDTO,
                                   @RequestParam(required = false) String username,
                                   @RequestParam(required = false) String name,
                                   @RequestParam(required = false) String nickname,

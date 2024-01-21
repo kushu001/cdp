@@ -12,7 +12,7 @@
 
     <groupId>com.chomolungma</groupId>
     <artifactId>cdp</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>cdp-common</module>
@@ -156,6 +156,38 @@
 <!--                <groupId>org.springframework.boot</groupId>-->
 <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
 <!--            </plugin>-->
+            <!--   自动生成代码插件   -->
+            <plugin>
+                <groupId>com.chomolungma</groupId>
+                <artifactId>cdp-generator</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <!--        <executions>-->
+                <!--          <execution>-->
+                <!--            <id>generator</id>-->
+                <!--            <goals>-->
+                <!--              <goal>generator</goal>-->
+                <!--            </goals>-->
+                <!--            <configuration>-->
+                <!--              <url>jdbc:mysql://127.0.0.1:3306/cdp_wms?serverTimezone=GMT%2B8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>-->
+                <!--              <username>root</username>-->
+                <!--              <password>12345678</password>-->
+                <!--              <tableName>sys_role</tableName>-->
+                <!--              <tablePrefix>sys_</tablePrefix>-->
+                <!--              <outDir>/Users/taoyj/Documents/1-项目管理/1-程序管理/1-开发项目管理/1-珠峰开发管理平台/3-仓库管理系统项目/c-wms-server/src/main/java/</outDir>-->
+                <!--            </configuration>-->
+                <!--          </execution>-->
+                <!--        </executions>-->
+                <configuration>
+                    <url>jdbc:mysql://127.0.0.1:3306/cdp?serverTimezone=GMT%2B8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>
+                    <tableSchema>cdp</tableSchema>
+                    <packageName>com.chomolungma.system</packageName>
+                    <username>root</username>
+                    <password>12345678</password>
+                    <tableName>sys_operation</tableName>
+                    <tablePrefix>sys_</tablePrefix>
+                    <outDir>/Users/taoyj/Documents/1-项目管理/1-程序管理/1-开发项目管理/1-珠峰开发管理平台/cdp/cdp-system/src/main/java/</outDir>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
