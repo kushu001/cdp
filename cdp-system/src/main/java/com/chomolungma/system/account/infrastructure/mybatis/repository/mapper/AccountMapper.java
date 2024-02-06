@@ -3,7 +3,10 @@ package com.chomolungma.system.account.infrastructure.mybatis.repository.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chomolungma.system.account.infrastructure.dataobject.AccountDO;
 import com.chomolungma.system.account.domain.entity.Role;
+import com.chomolungma.system.account.infrastructure.dataobject.AccountUserRoleDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 @Mapper
 public interface AccountMapper extends BaseMapper<AccountDO> {
@@ -11,4 +14,7 @@ public interface AccountMapper extends BaseMapper<AccountDO> {
     List<String> getPermissions(Long accountId);
     List<String> getResources(Long accountId);
     void deleteBatchByIds(List<String> ids);
+    AccountDO selectAccountById(@Param("id") Long id);
+
+    AccountDO selectAccountByName(String name);
 }

@@ -34,6 +34,6 @@ public class SecurityServiceImpl implements UserDetailsService {
         List<String> permissions = iAccountRepository.findPermissions(account.getId());
 
         List<String> resources = iAccountRepository.findResources(account.getId());
-        return new UserDetail(account.getId(), account.getUsername(), account.getPassword(), account.getRoles().stream().map(Role::getId).collect(Collectors.toList()), permissions, resources);
+        return new UserDetail(account.getId(), account.getUsername(), account.getPassword(),account.getName(), account.getType(), account.getRoles().stream().map(Role::getId).collect(Collectors.toList()), permissions, resources);
     }
 }

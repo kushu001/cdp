@@ -21,6 +21,10 @@ public class UserDetail implements UserDetails {
 
     private String password;
 
+    private String name;
+
+    private String type;
+
     private List<Long> roleIds;
 
     private List<String> permissions;
@@ -31,10 +35,12 @@ public class UserDetail implements UserDetails {
     @JSONField(serialize = false)
     private List<GrantedAuthority> authorities;
 
-    public UserDetail(Long accountId, String username, String password, List<Long> roleIds, List<String> permissions, List<String> resources) {
+    public UserDetail(Long accountId, String username, String password, String name, String type, List<Long> roleIds, List<String> permissions, List<String> resources) {
         this.accountId = accountId;
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.type = type;
         this.permissions = permissions;
         this.resources = resources;
         this.roleIds = roleIds;

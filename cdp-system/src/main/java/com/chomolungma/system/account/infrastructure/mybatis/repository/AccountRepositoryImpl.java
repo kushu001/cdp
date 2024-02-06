@@ -67,18 +67,19 @@ public class AccountRepositoryImpl implements IAccountRepository {
 
     @Override
     public Account findAccount(Long id) {
-        AccountDO accountDO = accountMapper.selectById(id);
+        AccountDO accountDO = accountMapper.selectAccountById(id);
         List<Role> roles= accountMapper.selectRolesByAccountId(id);
-        StaffDO userDO = staffMapper.selectById(accountDO.getUserId());
+        //StaffDO userDO = staffMapper.selectById(accountDO.getUserId());
         Account account = AccountConverter.INSTANCE.toEntity(accountDO);
         account.setRoles(roles);
-        account.setName(userDO != null ? userDO.getName():null);
+       // account.setName(userDO != null ? userDO.getName():null);
         return account;
     }
 
     @Override
     public Account findAccount(String username) {
-        AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>().eq("username", username));
+        AccountDO accountDO = accountMapper.selectAccountByName(username);
+
         if (accountDO == null) {
             return null;
         }

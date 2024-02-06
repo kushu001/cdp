@@ -11,6 +11,7 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="nickname" property="nickname" jdbcType="VARCHAR" />
         <result column="avatar" property="avatar" jdbcType="CHAR" />
+        <result column="type" property="type" jdbcType="CHAR" />
         <result column="enabled" property="enabled" jdbcType="TINYINT" />
         <result column="status" property="status" jdbcType="TINYINT" />
     </resultMap>
@@ -24,13 +25,20 @@
             sa.update_time ,
             sa.update_user ,
             sa.username ,
-            su.name ,
+            CASE
+                WHEN sa.type = '1' THEN su.name
+                WHEN sa.type = '2' THEN bh.name
+                WHEN sa.type = '3' THEN ba.name
+            END AS name,
             group_concat(sr.name) as role_name,
             sa.nickname ,
             sa.avatar ,
+            sa.type,
             sa.status
         from
-        sys_account sa left join sys_user su on sa.user_id = su.id
+        sys_account sa left join sys_user su on sa.user_id = su.id  AND sa.type = '1'
+                       left join biz_hotel bh on sa.user_id = bh.id  AND sa.type = '2'
+                       left join biz_agent ba on sa.user_id = ba.id  AND sa.type = '3'
                        left join sys_account_role sar on sa.id = sar.account_id
                        left join sys_role sr on sar.role_id = sr.id
         <where>
@@ -43,6 +51,9 @@
             <if test="accountUserRole.nickname != null and accountUserRole.nickname !=''">
                 and sa.nickname like  CONCAT('%',#{accountUserRole.nickname,jdbcType=VARCHAR},'%')
             </if>
+            <if test="accountUserRole.type != null and accountUserRole.type !=''">
+                and sa.type = #{accountUserRole.type,jdbcType=VARCHAR}
+            </if>
             <if test="accountUserRole.status != null and accountUserRole.status !=''">
                 and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
             </if>
@@ -54,9 +65,9 @@
             sa.update_time ,
             sa.update_user ,
             sa.username ,
-            su.name ,
             sa.nickname ,
             sa.avatar ,
+            sa.type ,
             sa.status
     </select>
 
@@ -70,31 +81,37 @@
         sa.update_user ,
         sa.username ,
         sa.enabled,
-        su.name ,
+        CASE
+            WHEN sa.type = '1' THEN su.name
+            WHEN sa.type = '2' THEN bh.name
+            WHEN sa.type = '3' THEN ba.name
+        END AS name,
         group_concat(sr.name ORDER by sr.name DESC) as role_name,
         sa.nickname ,
         sa.avatar ,
+        sa.type,
         sa.status
         from
         (select
-        sac.id ,
-        sac.user_id,
-        sac.create_time ,
-        sac.create_user ,
-        sac.update_time ,
-        sac.update_user ,
-        sac.username ,
-        sac.enabled,
-        sac.nickname ,
-        sac.avatar ,
-        sac.status,
-        sac.deleted
+            sac.id ,
+            sac.user_id,
+            sac.create_time ,
+            sac.create_user ,
+            sac.update_time ,
+            sac.update_user ,
+            sac.username ,
+            sac.enabled,
+            sac.nickname ,
+            sac.avatar ,
+            sac.status,
+            sac.type,
+            sac.deleted
         from
-        sys_account sac
-        left join sys_account_role sar2 on
-        sac.id = sar2.account_id
-        left join sys_role sr2 on
-        sar2.role_id = sr2.id
+            sys_account sac
+            left join sys_account_role sar2 on
+            sac.id = sar2.account_id
+            left join sys_role sr2 on
+            sar2.role_id = sr2.id
         where
         sac.deleted = 0
         <if test="accountUserRole.roleIds !=null">
@@ -104,20 +121,23 @@
             </foreach>
         </if>
         group by
-        sac.id ,
-        sac.user_id,
-        sac.create_time ,
-        sac.create_user ,
-        sac.update_time ,
-        sac.update_user ,
-        sac.username ,
-        sac.enabled,
-        sac.nickname ,
-        sac.avatar ,
-        sac.status,
-        sac.deleted ) sa left join sys_user su on sa.user_id = su.id
-        left join sys_account_role sar on sa.id = sar.account_id
-        left join sys_role sr on sar.role_id = sr.id
+            sac.id ,
+            sac.user_id,
+            sac.create_time ,
+            sac.create_user ,
+            sac.update_time ,
+            sac.update_user ,
+            sac.username ,
+            sac.enabled,
+            sac.nickname ,
+            sac.avatar ,
+            sac.type,
+            sac.status,
+            sac.deleted ) sa left join sys_user su on sa.user_id = su.id  AND sa.type = '1'
+                             left join biz_hotel bh on sa.user_id = bh.id  AND sa.type = '2'
+                             left join biz_agent ba on sa.user_id = ba.id  AND sa.type = '3'
+                             left join sys_account_role sar on sa.id = sar.account_id
+                             left join sys_role sr on sar.role_id = sr.id
         <where>
             sa.deleted = 0
             <if test="accountUserRole.username != null and accountUserRole.username !=''">
@@ -132,6 +152,9 @@
             <if test="accountUserRole.status != null and accountUserRole.status !=''">
                 and sa.status = #{accountUserRole.status,jdbcType=TINYINT}
             </if>
+            <if test="accountUserRole.type != null and accountUserRole.type !=''">
+                and sa.type = #{accountUserRole.type,jdbcType=CHAR}
+            </if>
             <if test="accountUserRole.enabled != null">
                 and sa.enabled = #{accountUserRole.enabled,jdbcType=TINYINT}
             </if>
@@ -144,9 +167,9 @@
             sa.update_user ,
             sa.username ,
             sa.enabled,
-            su.name ,
             sa.nickname ,
             sa.avatar ,
+            sa.type,
             sa.status
     </select>
 
@@ -160,13 +183,19 @@
             sa.update_time ,
             sa.update_user ,
             sa.username ,
-            su.name ,
+            CASE
+                WHEN sa.type = '1' THEN su.name
+                WHEN sa.type = '2' THEN bh.name
+                WHEN sa.type = '3' THEN ba.name
+            END AS name,
             sa.nickname ,
             sa.avatar ,
+            sa.type,
             sa.status
         from
-            sys_account sa left join
-            sys_user su on sa.user_id = su.id
+            sys_account sa left join sys_user su on sa.user_id = su.id  AND sa.type = '1'
+                           left join biz_hotel bh on sa.user_id = bh.id  AND sa.type = '2'
+                           left join biz_agent ba on sa.user_id = ba.id  AND sa.type = '3'
         <where>
             <if test="username != null or username !=''">
                 and sa.username = #{username, jdbcType=VARCHAR}

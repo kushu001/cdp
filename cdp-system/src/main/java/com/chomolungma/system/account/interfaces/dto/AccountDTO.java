@@ -16,5 +16,6 @@ public class AccountDTO extends PageDTO {
     private String name;
     private String nickname;
     private String avatar;
+    private String type;
     private Boolean enabled;
 }

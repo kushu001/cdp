@@ -13,5 +13,6 @@ public class AccountUserRoleDO extends BaseDO {
     private String roleName;
     private List<Long> roleIds;
     private String avatar;
+    private String type;
     private Boolean enabled;
 }

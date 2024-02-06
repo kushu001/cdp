@@ -14,4 +14,5 @@ public interface AccountUserRoleMapper extends BaseMapper<AccountUserRoleDO> {
     AccountUserRoleDO selectAccount(@Param("username") String username, @Param("password") String password);
 
     List<AccountUserRoleDO> selectList(@Param("accountUserRole") AccountUserRoleDO accountUserRoleDO);
+
 }

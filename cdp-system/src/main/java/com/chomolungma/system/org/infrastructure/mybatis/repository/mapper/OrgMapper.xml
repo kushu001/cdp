@@ -18,10 +18,6 @@
 
     <select id="selectById" parameterType="java.lang.Long" resultType="com.chomolungma.system.org.infrastructure.dataobject.OrgDO">
         select 	so.id, so.create_time, so.pid, so.name, so.code, so.manager_id, so.status, su.name as manager, su.tel  from sys_org so left join sys_user su  on so.manager_id = su.id
-        <where>
-            <if test="name != null and name !=''">
-                and so.id = #{id,jdbcType=BIGINT}
-            </if>
-        </where>
+        where so.id = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

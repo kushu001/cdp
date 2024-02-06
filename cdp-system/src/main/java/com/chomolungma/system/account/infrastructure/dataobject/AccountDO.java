@@ -12,8 +12,11 @@ public class AccountDO extends BaseDO {
     private String username;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long userId;
+    @TableField(exist = false)
+    private String name;
     private String nickname;
     private String password;
     private String avatar;
+    private String type;
     private Boolean enabled;
 }

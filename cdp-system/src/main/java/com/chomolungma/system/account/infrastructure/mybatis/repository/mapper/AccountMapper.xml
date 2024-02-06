@@ -63,4 +63,41 @@
             </foreach>
         </where>
     </update>
+
+
+    <!--  根据ID查询账户  -->
+    <select id="selectAccountById" resultType="com.chomolungma.system.account.infrastructure.dataobject.AccountDO">
+        select
+            sa.*,
+            CASE
+                WHEN sa.type = '1' THEN su.name
+                WHEN sa.type = '2' THEN bh.name
+                WHEN sa.type = '3' THEN ba.name
+            END AS name
+        from
+        sys_account sa left join sys_user su on sa.user_id = su.id  AND sa.type = '1'
+                        left join biz_hotel bh on sa.user_id = bh.id  AND sa.type = '2'
+                        left join biz_agent ba on sa.user_id = ba.id  AND sa.type = '3'
+        <where>
+            sa.id = #{id, jdbcType=BIGINT}
+        </where>
+    </select>
+
+    <!--  根据Name查询账户  -->
+    <select id="selectAccountByName" resultType="com.chomolungma.system.account.infrastructure.dataobject.AccountDO">
+        select
+        sa.*,
+        CASE
+        WHEN sa.type = '1' THEN su.name
+        WHEN sa.type = '2' THEN bh.name
+        WHEN sa.type = '3' THEN ba.name
+        END AS name
+        from
+        sys_account sa left join sys_user su on sa.user_id = su.id  AND sa.type = '1'
+        left join biz_hotel bh on sa.user_id = bh.id  AND sa.type = '2'
+        left join biz_agent ba on sa.user_id = ba.id  AND sa.type = '3'
+        <where>
+            sa.username = #{name, jdbcType=VARCHAR}
+        </where>
+    </select>
 </mapper>

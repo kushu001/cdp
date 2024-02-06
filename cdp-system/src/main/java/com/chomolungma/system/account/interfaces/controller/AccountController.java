@@ -49,8 +49,9 @@ public class AccountController {
         map.put("roles", CurrentProfileHolder.getProfile().getPermissions());
         map.put("introduction","I am a super administrator");
         map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map.put("name","Super Admin");
+        map.put("name",CurrentProfileHolder.getProfile().getName());
         map.put("menus", menuDTOS);
+        map.put("type", CurrentProfileHolder.getProfile().getType());
         map.put("code",200);
         return map;
     }
@@ -60,6 +61,7 @@ public class AccountController {
                                   @RequestParam(required = false) String username,
                                   @RequestParam(required = false) String name,
                                   @RequestParam(required = false) String nickname,
+                                  @RequestParam(required = false) String type,
                                   @RequestParam(required = false, value = "role_ids") List<Long> roleIds,
                                   @RequestParam(required = false) Boolean enabled){
         AccountDTO accountDTO = new AccountDTO();
@@ -68,6 +70,7 @@ public class AccountController {
         accountDTO.setNickname(nickname);
         accountDTO.setEnabled(enabled);
         accountDTO.setRoleIds(roleIds);
+        accountDTO.setType(type);
         return Result.success(iAccountRepository.findPageList(AccountAssembler.toEntity(accountDTO),pageDTO.getPage(), pageDTO.getLimit()));
     }
 

@@ -12,6 +12,7 @@ public class AccountInDTO {
     private String username;
     private String nickname;
     private String avatar;
+    private String type;
     private Boolean enabled;
     private Integer status;
 }

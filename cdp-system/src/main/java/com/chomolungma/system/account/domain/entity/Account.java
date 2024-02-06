@@ -14,6 +14,7 @@ public class Account extends BaseEntity {
     private String name;
     private String nickname;
     private String avatar;
+    private String type;
     private List<Role> roles;
     private Boolean enabled;
 
