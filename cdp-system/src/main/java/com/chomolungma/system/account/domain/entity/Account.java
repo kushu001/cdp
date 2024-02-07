@@ -19,7 +19,7 @@ public class Account extends BaseEntity {
     private Boolean enabled;
 
     public void resetPassword(){
-        this.password = "$2a$10$G8C2EAQk7audou2Niau8luZnNUin6DR1eVGhRpQ5Dmo.Ke1cpxMhK";
+        this.password = "$2a$10$T7rdEA1tYiC9WndRG7PBPuYZvTNRIzcIq9UYU/cCI/8n5DRkqRBvG";
     }
 
     public void bindUser(Long userId){
